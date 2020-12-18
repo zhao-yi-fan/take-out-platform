@@ -1,4 +1,4 @@
-<!-- 首页 -->
+<!-- 商品详情 -->
 <template>
   <div >
 
@@ -6,7 +6,9 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive, toRefs } from 'vue'
+// import { useRouter } from 'vue-router'
+// import { watch } from 'vue'
 
 export default {
   name: '',
@@ -15,6 +17,11 @@ export default {
     const model = reactive(
       {}
     )
+
+    // watch(()=>route.path,(newValue)=>{
+
+    // })
+
 
     return { model }
   }
