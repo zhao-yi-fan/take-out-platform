@@ -1,6 +1,6 @@
 <!-- 商品详情 -->
 <template>
-  <div class="wsw-top-Commodity">
+  <div class="wsw-top-Commodity" v-if="currentShopInfo">
     <van-nav-bar :title="currentShopInfo.shopsName" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
       <template #right>
         <van-icon name="star" size="18" />
@@ -184,13 +184,12 @@ export default {
 
     // })
     const init = (shopsId) => {
-      debugger;
       for (let i = 0; i < model.shopsList.length; i++) {
         let item = model.shopsList[i];
         if (shopsId === item.shopsId) {
 
           model.currentShopInfo = item;
-          console.log(model,'a')
+          console.log(model, 'a')
         }
       }
     }
