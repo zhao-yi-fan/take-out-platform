@@ -8,7 +8,7 @@
         <van-field v-model="password" type="password" name="password" label="密码" placeholder="请输入密码" :rules="[{ required: true, message: '请填写密码' }]" />
         <div>
           <router-link to="/Register" tag="a">还没有注册？</router-link>
-          <router-link to="/" tag="a" class="wsw-r">忘记密码？</router-link>
+          <router-link to="/ForgetPwd" tag="a" class="wsw-r">忘记密码？</router-link>
         </div>
         <van-button round block plain type="info" native-type="submit" color="#ed9428">登录</van-button>
       </van-form>

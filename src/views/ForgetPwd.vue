@@ -4,10 +4,10 @@
     <span class="wsw-login-title">饿了么</span>
     <div class="wsw-login-body">
       <van-form @submit="onSubmit">
-        <van-field v-model="username" name="账号" label="账号" placeholder="请输入账号" :rules="[{ required: true, message: '请填写账号' }]" />
-        <van-field v-model="secret" type="secret" name="暗号" label="暗号" placeholder="请输入暗号" :rules="[{ required: true, message: '请填写暗号' }]" />
-        <van-field v-model="password" type="password" name="新密码" label="新密码" placeholder="请输入新密码" :rules="[{ required: true, message: '请填写新密码' }]" />
-        <van-field v-model="passwordAgain" name="新密码确认" label="新密码确认" placeholder="再次输入新密码" :rules="[
+        <van-field v-model="username" name="username" label="账号" placeholder="请输入账号" :rules="[{ required: true, message: '请填写账号' }]" />
+        <van-field v-model="secret" type="secret" name="secret" label="暗号" placeholder="请输入暗号" :rules="[{ required: true, message: '请填写暗号' }]" />
+        <van-field v-model="password" type="password" name="password" label="新密码" placeholder="请输入新密码" :rules="[{ required: true, message: '请填写新密码' }]" />
+        <van-field v-model="passwordAgain" type="password" name="passwordAgain" label="新密码确认" placeholder="再次输入新密码" :rules="[
             { required: true, message: '请确认新密码' },
             { validator: Validator, message: '请输入正确新密码' },
           ]" />
@@ -23,18 +23,41 @@
 
 <script>
 import { reactive, toRefs } from "vue";
+import { useStore } from 'vuex';
+import { Notify, Toast } from 'vant';
+import { useRouter } from 'vue-router'
 
 export default {
   name: "",
   components: {},
   setup (propes, { root }) {
+    const router = useRouter()
+    const store = useStore();
     const model = reactive({
       username: "",
       password: "",
       passwordAgain: "",
+      secret:""
     });
-    const onSubmit = (values) => {
+    const onSubmit = async (values) => {
       console.log("submit", values);
+      let resObj = await store.dispatch('forgetPwd', values);
+      Toast.loading({
+        message: '修改密码中...',
+        forbidClick: true,
+      });
+      setTimeout(() => {
+        Toast.clear();
+        if (resObj.code == 1) {
+          Toast.success('修改成功，请登录');
+          router.push({
+            path:'/Login'
+          })
+          console.log(store.state.userList);
+        } else {
+          Toast.fail(resObj.msg);
+        }
+      }, 1000);
     };
     const Validator = (val) => {
       if (val == model.password) {
