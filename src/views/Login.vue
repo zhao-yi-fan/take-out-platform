@@ -4,34 +4,13 @@
     <span class="wsw-login-title">饿了么</span>
     <div class="wsw-login-body">
       <van-form @submit="onSubmit">
-        <van-field
-          v-model="username"
-          name="账号"
-          label="账号"
-          placeholder="请输入账号"
-          :rules="[{ required: true, message: '请填写账号' }]"
-        />
-        <van-field
-          v-model="password"
-          type="password"
-          name="密码"
-          label="密码"
-          placeholder="请输入密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
-        />
+        <van-field v-model="username" name="username" label="账号" placeholder="请输入账号" :rules="[{ required: true, message: '请填写账号' }]" />
+        <van-field v-model="password" type="password" name="password" label="密码" placeholder="请输入密码" :rules="[{ required: true, message: '请填写密码' }]" />
         <div>
           <router-link to="/Register" tag="a">还没有注册？</router-link>
           <router-link to="/" tag="a" class="wsw-r">忘记密码？</router-link>
         </div>
-        <van-button
-          round
-          block
-          plain
-          type="info"
-          native-type="submit"
-          color="#ed9428"
-          >登录</van-button
-        >
+        <van-button round block plain type="info" native-type="submit" color="#ed9428">登录</van-button>
       </van-form>
     </div>
     <div class="wsw-login-footer">Copyright © 移应2018-1-21吴尚尉</div>
@@ -39,18 +18,39 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
 import { reactive, toRefs } from "vue";
+import { Notify, Toast } from 'vant';
+import {useRouter} from 'vue-router'
 
 export default {
   name: "",
   components: {},
-  setup(propes, { root }) {
+  setup (propes, { root }) {
+    const router = useRouter()
+    const store = useStore();
     const model = reactive({
       username: "",
       password: "",
     });
-    const onSubmit = (values) => {
+    const onSubmit = async (values) => {
       console.log("submit", values);
+      let isExist = await store.dispatch('login', values);
+      Toast.loading({
+        message: '登录中...',
+        forbidClick: true,
+      });
+      setTimeout(() => {
+        Toast.clear();
+        if (isExist) {
+          Toast.success('登录成功');
+          router.push({
+            path:'/Home/Index'
+          })
+        } else {
+          Toast.fail('用户名或密码错误，请重试后登录！');
+        }
+      }, 1000);
     };
 
     return {

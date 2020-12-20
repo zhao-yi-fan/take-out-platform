@@ -4,13 +4,13 @@
     <span class="wsw-login-title">饿了么</span>
     <div class="wsw-login-body">
       <van-form @submit="onSubmit">
-        <van-field v-model="username" name="账号" label="账号" placeholder="请输入账号" :rules="[{ required: true, message: '请填写账号' }]" />
-        <van-field v-model="password" type="password" name="新密码" label="新密码" placeholder="请输入新密码" :rules="[{ required: true, message: '请填写新密码' }]" />
-        <van-field v-model="passwordAgain" name="密码确认" label="密码确认" placeholder="再次输入密码" :rules="[
+        <van-field v-model="username" name="username" label="账号" placeholder="请输入账号" :rules="[{ required: true, message: '请填写账号' }]" />
+        <van-field v-model="password" type="password" name="password" label="新密码" placeholder="请输入新密码" :rules="[{ required: true, message: '请填写新密码' }]" />
+        <van-field v-model="passwordAgain" type="password" name="passwordAgain" label="密码确认" placeholder="再次输入密码" :rules="[
             { required: true, message: '请确认密码' },
             { validator: Validator, message: '请输入正确密码' },
           ]" />
-        <van-field v-model="secret" type="secret" name="暗号" label="暗号" placeholder="请输入暗号" :rules="[{ required: true, message: '请填写暗号' }]" />
+        <van-field v-model="secret" type="secret" name="secret" label="暗号" placeholder="请输入暗号" :rules="[{ required: true, message: '请填写暗号' }]" />
         <div>
           <router-link to="/Login" tag="a" class="wsw-r">返回</router-link>
         </div>
@@ -23,19 +23,41 @@
 
 <script>
 import { reactive, toRefs } from "vue";
+import { Notify, Toast } from 'vant';
+import {useRouter} from 'vue-router'
+import { useStore } from 'vuex'
 
 export default {
   name: "",
   components: {},
   setup (propes, { root }) {
+    const router = useRouter()
+    const store = useStore();
     const model = reactive({
       username: "",
       password: "",
       secret: "",
       passwordAgain: "",
     });
-    const onSubmit = (values) => {
+    const onSubmit = async(values) => {
       console.log("submit", values);
+      let isSuccess = await store.dispatch('register', values);
+      Toast.loading({
+        message: '注册中...',
+        forbidClick: true,
+      });
+      setTimeout(() => {
+        Toast.clear();
+        if (isSuccess) {
+          Toast.success('注册成功，请登录');
+          router.push({
+            path:'/Login'
+          })
+          console.log(store.state.userList);
+        } else {
+          Toast.fail('用户名已存在，请修改后重新提交！');
+        }
+      }, 1000);
     };
     const Validator = (val) => {
       if (val == model.password) {
