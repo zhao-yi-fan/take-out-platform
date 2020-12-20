@@ -22,7 +22,7 @@
     <div class="wsw-top-home-List">
       <van-grid :column-num="2" :gutter="10">
         <van-grid-item v-for="value in 6" :key="value" text="文字">
-          <router-link to="/Home/Commodity_details">aaa</router-link>
+          <router-link to="/Commodity_details">aaa</router-link>
           <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3421435433,1448772455&fm=26&gp=0.jpg" />
           <div class="wsw-top-home-List-title">
             <p class="wsw-clearfix">

@@ -31,7 +31,7 @@
                 <van-button icon="plus" type="primary" size="mini" round />
               </template>
             </van-card>
-             <van-card price="2.00" desc="充满了夏天的味道" title="夏威夷菠萝堡" thumb="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg">
+            <van-card price="2.00" desc="充满了夏天的味道" title="夏威夷菠萝堡" thumb="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg">
               <!-- <template #tags>
                 <van-tag plain type="danger">标签</van-tag>
                 <van-tag plain type="danger">标签</van-tag>
@@ -42,7 +42,7 @@
                 <van-button icon="plus" type="primary" size="mini" round />
               </template>
             </van-card>
-             <van-card price="2.00" desc="充满了夏天的味道" title="夏威夷菠萝堡" thumb="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg">
+            <van-card price="2.00" desc="充满了夏天的味道" title="夏威夷菠萝堡" thumb="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg">
               <!-- <template #tags>
                 <van-tag plain type="danger">标签</van-tag>
                 <van-tag plain type="danger">标签</van-tag>
@@ -63,13 +63,15 @@
 
 <script>
 import { reactive, toRefs } from 'vue'
-// import { useRouter } from 'vue-router'
+import { Dialog } from 'vant';
+import { useRouter } from 'vue-router';
 // import { watch } from 'vue'
 
 export default {
   name: '',
   components: {},
   setup (propes, { root }) {
+    const router = useRouter();
     const model = reactive(
       {
         activeId: 1,
@@ -156,13 +158,22 @@ export default {
       },
     ];
     const onClickLeft = () => {
-      Toast('返回');
+      Dialog.confirm({
+        title: '',
+        message: '返回首页会清空购物车',
+      })
+        .then(() => {
+           router.push("/Home/Index");
+        })
+        .catch(() => {
+          // on cancel
+        });
     }
     const onClickRight = () => {
       Toast('按钮');
     }
-     const onSubmit = () => {
-      Toast('点击按钮');
+    const onSubmit = () => {
+      router.push("/Bill");
     };
     // watch(()=>route.path,(newValue)=>{
 
@@ -210,18 +221,18 @@ export default {
       top: 150px;
       margin: 0 auto;
       padding: 5px 10px;
-      p{
+      p {
         font-weight: bolder;
       }
-      div{
+      div {
         font-size: 14px;
         text-align: right;
-        span{
+        span {
           color: red;
-           font-weight: bolder;
+          font-weight: bolder;
         }
       }
-      .wsw-top-Commodity-shop-card-address{
+      .wsw-top-Commodity-shop-card-address {
         font-size: 12px;
         color: #333;
       }
@@ -229,12 +240,12 @@ export default {
   }
   .wsw-top-Commodity-list {
     margin-top: 45px;
-    button{
+    button {
       vertical-align: middle;
       margin: 0 3px;
     }
   }
-  ::v-deep .van-submit-bar__text{
+  ::v-deep .van-submit-bar__text {
     text-align: left;
   }
 }
