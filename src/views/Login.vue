@@ -1,7 +1,7 @@
 <!-- 登录页面 -->
 <template>
   <div class="wsw-login">
-    <span class="wsw-login-title">校园外卖</span>
+    <span class="wsw-login-title">饿了么</span>
     <div class="wsw-login-body">
       <van-form @submit="onSubmit">
         <van-field
@@ -72,7 +72,7 @@ export default {
     position: absolute;
     color: #fff;
     top: 50px;
-    left: 5px;
+    left: 20px;
     font-size: 20px;
     font-weight: bolder;
   }

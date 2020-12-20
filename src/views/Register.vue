@@ -1,46 +1,20 @@
 <!-- 注册页面 -->
 <template>
   <div class="wsw-login">
-    <span class="wsw-login-title">校园外卖</span>
+    <span class="wsw-login-title">饿了么</span>
     <div class="wsw-login-body">
       <van-form @submit="onSubmit">
-        <van-field
-          v-model="username"
-          name="账号"
-          label="账号"
-          placeholder="请输入账号"
-          :rules="[{ required: true, message: '请填写账号' }]"
-        />
-        <van-field
-          v-model="password"
-          type="password"
-          name="密码"
-          label="密码"
-          placeholder="请输入密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
-        />
-        <van-field
-          v-model="passwordAgain"
-          name="asyncValidator"
-          label="密码确认"
-          placeholder="再次输入密码"
-          :rules="[
+        <van-field v-model="username" name="账号" label="账号" placeholder="请输入账号" :rules="[{ required: true, message: '请填写账号' }]" />
+        <van-field v-model="password" type="password" name="新密码" label="新密码" placeholder="请输入新密码" :rules="[{ required: true, message: '请填写新密码' }]" />
+        <van-field v-model="passwordAgain" name="密码确认" label="密码确认" placeholder="再次输入密码" :rules="[
             { required: true, message: '请确认密码' },
-            { validator: asyncValidator, message: '请输入正确密码' },
-          ]"
-        />
+            { validator: Validator, message: '请输入正确密码' },
+          ]" />
+        <van-field v-model="secret" type="secret" name="暗号" label="暗号" placeholder="请输入暗号" :rules="[{ required: true, message: '请填写暗号' }]" />
         <div>
           <router-link to="/Login" tag="a" class="wsw-r">返回</router-link>
         </div>
-        <van-button
-          round
-          block
-          plain
-          type="info"
-          native-type="submit"
-          color="#ed9428"
-          >登录</van-button
-        >
+        <van-button round block plain type="info" native-type="submit" color="#ed9428">注册</van-button>
       </van-form>
     </div>
     <div class="wsw-login-footer">Copyright © 移应2018-1-21吴尚尉</div>
@@ -53,28 +27,27 @@ import { reactive, toRefs } from "vue";
 export default {
   name: "",
   components: {},
-  setup(propes, { root }) {
+  setup (propes, { root }) {
     const model = reactive({
       username: "",
       password: "",
+      secret: "",
       passwordAgain: "",
     });
     const onSubmit = (values) => {
       console.log("submit", values);
     };
-    const asyncValidator = (val) => {
-      return new Promise((resolve) => {
-        Toast.loading("验证中...");
-        setTimeout(() => {
-          Toast.clear();
-          resolve(/\d{6}/.test(val));
-        }, 1000);
-      });
+    const Validator = (val) => {
+      if (val == model.password) {
+        return true;
+      } else {
+        return false;
+      }
     };
     return {
       ...toRefs(model),
       onSubmit,
-      asyncValidator,
+      Validator,
     };
   },
 };
@@ -90,8 +63,8 @@ export default {
   .wsw-login-title {
     position: absolute;
     color: #fff;
-    top: 50px;
-    left: 5px;
+    top: 60px;
+    left: 20px;
     font-size: 20px;
     font-weight: bolder;
   }
@@ -100,7 +73,7 @@ export default {
     margin: 0 auto;
     position: relative;
     top: 50%; /*偏移*/
-    transform: translateY(-80%);
+    transform: translateY(-75%);
     .van-form {
       .van-cell {
         border-radius: 5px;

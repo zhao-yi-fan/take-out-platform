@@ -40,17 +40,29 @@ p {
 }
 
 /* 公共样式 */
-.clearfix:after {       
-    content: ".";    
-    display: block;  
-    clear: both;    
-    visibility: hidden;    
-    height: 0;    
-    font-size:0;   
-}
+.wsw-clearfix:after{
+  display:block;
+  clear:both;
+  content:"";
+  visibility:hidden; 
+  height:0;
+} 
+.wsw-clearfix{zoom:1}
 .wsw-l{
     float: left;
 }
 .wsw-r{
     float: right;
+}
+.wsw-f14{
+  font-size: 14px;
+}
+.wsw-f16{
+  font-size: 16px;
+}
+.wsw-color{
+  color:#ed9428;
+}
+.wsw-red{
+  color: red;;
 }
