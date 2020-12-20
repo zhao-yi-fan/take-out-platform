@@ -59,7 +59,7 @@ export default {
     })
     const toDetail = (shopsId) => {
       router.push({
-        path: '/Home/Commodity_details',
+        path: '/Commodity_details',
         shopsId: shopsId
       })
     }
