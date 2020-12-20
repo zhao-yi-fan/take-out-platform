@@ -1,24 +1,24 @@
 <!-- 商品详情 -->
 <template>
   <div class="wsw-top-Commodity">
-    <van-nav-bar title="汉堡王" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+    <van-nav-bar :title="currentShopInfo.shopsName" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
       <template #right>
         <van-icon name="star" size="18" />
         收藏
       </template>
     </van-nav-bar>
     <div class="wsw-top-Commodity-shop">
-      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608389530755&di=0bf62e45f9bfe4d61c47bdfef93cf0c3&imgtype=0&src=http%3A%2F%2Fd1.5ikfc.com%2Fcoupons%2Fhbw%2F2014%2Fhbw-5ikfc-1219_01.jpg" alt="">
+      <img :src="currentShopInfo.shopsImage" alt="">
       <div class="wsw-top-Commodity-shop-card">
-        <p>汉堡王</p>
-        <div>评分：<span>4.5</span></div>
+        <p>{{currentShopInfo.shopsName}}</p>
+        <div>评分：<span>{{currentShopInfo.score}}</span></div>
         <van-tag type="danger">优质商家</van-tag>
         <br>
-        <span class="wsw-top-Commodity-shop-card-address">地址：北京市通州区砖厂南里40号楼华远铭悦好天地1层139号</span>
-        <van-notice-bar scrollable text="技术是开发它的人的共同灵魂。" />
+        <span class="wsw-top-Commodity-shop-card-address">地址：{{currentShopInfo.address}}</span>
+        <van-notice-bar scrollable :text="currentShopInfo.notice" />
       </div>
       <div class="wsw-top-Commodity-list">
-        <van-tree-select v-model:active-id="model.activeId" v-model:main-active-index="model.activeIndex" :items="items">
+        <van-tree-select v-model:active-id="activeId" v-model:main-active-index="activeIndex" :items="items">
           <template #content>
             <van-card price="2.00" desc="充满了夏天的味道" title="夏威夷菠萝堡" thumb="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg">
               <!-- <template #tags>
@@ -62,22 +62,27 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue'
-import { Dialog } from 'vant';
-import { useRouter } from 'vue-router';
+import { reactive, toRefs, computed, onMounted } from 'vue'
+import { Dialog, Toast } from 'vant';
+import { useRouter, useRoute } from 'vue-router';
+import { useStore } from 'vuex'
 // import { watch } from 'vue'
 
 export default {
   name: '',
   components: {},
   setup (propes, { root }) {
+    const store = useStore();
+    const route = useRoute();
     const router = useRouter();
-    const model = reactive(
-      {
-        activeId: 1,
-        activeIndex: 0,
-      }
-    )
+    const model = reactive({
+      activeId: 1,
+      activeIndex: 0,
+      shopsList: computed(() => {
+        return store.state.shopsList;
+      }),
+      currentShopInfo: null
+    })
     const items = [
       {
         text: '浙江',
@@ -163,7 +168,7 @@ export default {
         message: '返回首页会清空购物车',
       })
         .then(() => {
-           router.push("/Home/Index");
+          router.push("/Home/Index");
         })
         .catch(() => {
           // on cancel
@@ -178,10 +183,24 @@ export default {
     // watch(()=>route.path,(newValue)=>{
 
     // })
+    const init = (shopsId) => {
+      debugger;
+      for (let i = 0; i < model.shopsList.length; i++) {
+        let item = model.shopsList[i];
+        if (shopsId === item.shopsId) {
 
+          model.currentShopInfo = item;
+          console.log(model,'a')
+        }
+      }
+    }
+    onMounted(() => {
+      var shopsId = route.query.shopsId;
+      init(shopsId)
+    })
 
     return {
-      model,
+      ...toRefs(model),
       items,
       onClickLeft,
       onClickRight,

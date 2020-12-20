@@ -26,7 +26,25 @@ export default createStore({
         shopsStart: '20',
         freight: '2',
         score: '4.5',
-        address: 'xxx路',
+        address: '北京市通州区砖厂南里40号楼华远铭悦好天地1层139号',
+        notice: 'xxxx good',
+        commodity: [
+          {
+            commodityId: '1',
+            commodityName: '汉堡',
+            commodityMoney: '12.5',
+            commodityDescribe: '描述'
+          }
+        ]
+      },
+      {
+        shopsId: '2',
+        shopsName: '汉堡王',
+        shopsImage: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608389530755&di=0bf62e45f9bfe4d61c47bdfef93cf0c3&imgtype=0&src=http%3A%2F%2Fd1.5ikfc.com%2Fcoupons%2Fhbw%2F2014%2Fhbw-5ikfc-1219_01.jpg',
+        shopsStart: '20',
+        freight: '2',
+        score: '4.5',
+        address: '北京市通州区砖厂南里40号楼华远铭悦好天地1层139号',
         notice: 'xxxx good',
         commodity: [
           {

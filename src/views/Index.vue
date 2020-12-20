@@ -54,13 +54,16 @@ export default {
     const model = reactive({
       active: ref(0),
       shopsList: computed(() => {
+        console.log(store.state.shopsList,'store.state.shopsList===');
         return store.state.shopsList;
       })
     })
     const toDetail = (shopsId) => {
       router.push({
         path: '/Commodity_details',
-        shopsId: shopsId
+        query: {
+          shopsId
+        }
       })
     }
     return {
