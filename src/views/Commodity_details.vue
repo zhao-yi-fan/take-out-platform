@@ -1,6 +1,6 @@
 <!-- 商品详情 -->
 <template>
-  <div class="wsw-top-Commodity" v-if="currentShopInfo">
+  <div class="wsw-top-Commodity">
     <van-nav-bar :title="currentShopInfo.shopsName" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
       <template #right>
         <van-icon name="star" size="18" />
@@ -193,10 +193,9 @@ export default {
         }
       }
     }
-    onMounted(() => {
-      var shopsId = route.query.shopsId;
-      init(shopsId)
-    })
+    
+    var shopsId = route.query.shopsId;
+    init(shopsId)
 
     return {
       ...toRefs(model),
