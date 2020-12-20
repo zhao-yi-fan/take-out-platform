@@ -1,11 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import store from '../store'
+import { Notify, Toast } from 'vant';
 // import Home from '../views/Home.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Index',
-    redirect:'/Login',
+    redirect: '/Login',
   },
   {
     path: '/Home',
@@ -64,6 +66,28 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+
+router.beforeEach(async (to, from) => {
+  // determine whether the user has logged in
+  let isLogin = store.state.loginInfo;
+  if (isLogin) {
+    if (to.path === '/Login' || to.path === '/Register' || to.path === '/ForgetPwd') {
+      // user login
+      return false;
+    }
+  } else {
+    if (to.path === '/Login' || to.path === '/Register' || to.path === '/ForgetPwd') {
+
+    } else {
+      Toast.fail('请登录之后再操作');
+      setTimeout(() => {
+        router.push('/Login')
+      }, 1000);
+      return false;
+    }
+
+  }
 })
 
 export default router

@@ -15,9 +15,14 @@ export default createStore({
         password: '123456',
         secret: ''
       },
-    ]
+    ],
+    loginInfo: null // 登录后的信息
   },
   mutations: {
+    SET_LOGIN_INFO: (state, loginInfo) => {
+      console.log(loginInfo, 'loginInfo===');
+      state.loginInfo = loginInfo
+    },
   },
   actions: {
     login ({ commit, state }, loginData = {}) {
@@ -25,6 +30,7 @@ export default createStore({
       for (let i = 0; i < state.userList.length; i++) {
         let userItem = state.userList[i];
         if (userItem.password === password && userItem.username === username) {
+          commit('SET_LOGIN_INFO',userItem);
           return true; // 登录成功
         }
       }
