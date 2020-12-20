@@ -21,17 +21,16 @@
     <van-tag type="warning">今日推荐</van-tag>
     <div class="wsw-top-home-List">
       <van-grid :column-num="2" :gutter="10">
-        <van-grid-item v-for="value in 6" :key="value" text="文字">
-          <router-link to="/Commodity_details">aaa</router-link>
-          <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3421435433,1448772455&fm=26&gp=0.jpg" />
+        <van-grid-item v-for="(item,index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
+          <img :src="item.shopsImage" />
           <div class="wsw-top-home-List-title">
             <p class="wsw-clearfix">
-              <span class="wsw-l">华莱士</span>
-              <span class="wsw-r wsw-red">4.5</span>
+              <span class="wsw-l">{{item.shopsName}}</span>
+              <span class="wsw-r wsw-red">{{item.score}}</span>
             </p>
             <p class="wsw-clearfix">
-              <span class="wsw-l wsw-f14">起送：20</span>
-              <span class="wsw-r wsw-f14">运费：2</span>
+              <span class="wsw-l wsw-f14">起送：{{item.shopsStart}}</span>
+              <span class="wsw-r wsw-f14">运费：{{item.freight}}</span>
             </p>
           </div>
         </van-grid-item>
@@ -41,16 +40,32 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive, toRefs, computed } from 'vue'
+import { Notify, Toast } from 'vant';
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 export default {
   name: '',
   components: {},
   setup (propes, { root }) {
-    const active = ref(0);
-
+    const router = useRouter()
+    const store = useStore();
+    const model = reactive({
+      active: ref(0),
+      shopsList: computed(() => {
+        return store.state.shopsList;
+      })
+    })
+    const toDetail = (shopsId) => {
+      router.push({
+        path: '/Home/Commodity_details',
+        shopsId: shopsId
+      })
+    }
     return {
-      active,
+      ...toRefs(model),
+      toDetail
     }
   }
 }
@@ -81,8 +96,8 @@ export default {
       color: #ccc;
     }
   }
-  .wsw-swipe{
-    img{
+  .wsw-swipe {
+    img {
       width: 100%;
       min-height: 230px;
     }

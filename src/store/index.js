@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
   state: {
@@ -16,7 +17,28 @@ export default createStore({
         secret: ''
       },
     ],
-    loginInfo: null // 登录后的信息
+    loginInfo: null, // 登录后的信息,
+    shopsList: [
+      {
+        shopsId: '1',
+        shopsName: '华莱士',
+        shopsImage: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3421435433,1448772455&fm=26&gp=0.jpg',
+        shopsStart: '20',
+        freight: '2',
+        score: '4.5',
+        address: 'xxx路',
+        notice: 'xxxx good',
+        commodity: [
+          {
+            commodityId: '1',
+            commodityName: '汉堡',
+            commodityMoney: '12.5',
+            commodityDescribe: '描述'
+          }
+        ]
+      }
+    ]
+
   },
   mutations: {
     SET_LOGIN_INFO: (state, loginInfo) => {
@@ -66,7 +88,7 @@ export default createStore({
         if (userItem.username === username) {
           if (userItem.secret === secret) {
             userItem.password = password
-            commit('SET_USER_LIST',userList)
+            commit('SET_USER_LIST', userList)
             return {
               code: 1,
               msg: '修改成功！'
@@ -85,6 +107,7 @@ export default createStore({
       };
     },
   },
+  plugins: [createPersistedState()],
   modules: {
   }
 })

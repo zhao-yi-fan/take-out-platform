@@ -21,7 +21,7 @@
 import { useStore } from 'vuex'
 import { reactive, toRefs } from "vue";
 import { Notify, Toast } from 'vant';
-import {useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 
 export default {
   name: "",
@@ -45,7 +45,7 @@ export default {
         if (isExist) {
           Toast.success('登录成功');
           router.push({
-            path:'/Home/Index'
+            path: '/Home/Index'
           })
         } else {
           Toast.fail('用户名或密码错误，请重试后登录！');
