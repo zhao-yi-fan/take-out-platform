@@ -204,8 +204,8 @@ export default createStore({
         ],
         money: '15',
         evaluate: {
-          content: null,
-          score: null
+          content: '唉呀妈呀相当好吃',
+          score: '4.5'
         }
       }
     ],
@@ -213,7 +213,7 @@ export default createStore({
       {
         collectionId: 1,
         userId:1,
-        shopsIds:[1, 2]
+        shopsIds:['1', '2']
       }
     ]
   },

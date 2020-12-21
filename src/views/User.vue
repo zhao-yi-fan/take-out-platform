@@ -2,11 +2,7 @@
 <template>
   <div class="wsw-top-User">
     <div class="wsw-top-User-top wsw-clearfix">
-      <img
-        class="wsw-l"
-        src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg"
-        alt=""
-      />
+      <img class="wsw-l" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg" alt="" />
       <span class="wsw-l">蜡笔小新</span>
       <i class="wsw-l">填满了肚子，人就不会空虚</i>
       <van-icon name="weapp-nav" size="24" color="#fff" @click="outLogin" />
@@ -14,57 +10,22 @@
     <div class="wsw-top-User-top-menu">
       <van-tabs type="card">
         <van-tab title="收藏商家">
-          <div class="wsw-top-User-top-menu-item wsw-clearfix">
-            <img
-              class="wsw-l"
-              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2665539707,3309730618&fm=26&gp=0.jpg"
-              alt=""
-              srcset=""
-              width="50"
-            />
-            <span class="wsw-r">汉堡王</span>
+          <div class="wsw-top-User-top-menu-item wsw-clearfix" v-for="(item) in currCollectionShops" :key="item.shopsId">
+            <img class="wsw-l" :src="item.shopsImage" alt="" srcset="" width="50" />
+            <span class="wsw-r">{{item.shopsName}}</span>
           </div>
-          <div class="wsw-top-User-top-menu-item wsw-clearfix">
-            <img
-              class="wsw-l"
-              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2665539707,3309730618&fm=26&gp=0.jpg"
-              alt=""
-              srcset=""
-              width="50"
-            />
-            <span class="wsw-r">汉堡王</span>
-          </div>
-          <div class="wsw-top-User-top-menu-item wsw-clearfix">
-            <img
-              class="wsw-l"
-              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2665539707,3309730618&fm=26&gp=0.jpg"
-              alt=""
-              srcset=""
-              width="50"
-            />
-            <span class="wsw-r">汉堡王</span>
-          </div>
-          <div class="wsw-top-User-top-menu-item wsw-clearfix">
-            <img
-              class="wsw-l"
-              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2665539707,3309730618&fm=26&gp=0.jpg"
-              alt=""
-              srcset=""
-              width="50"
-            />
-            <span class="wsw-r">汉堡王</span>
-          </div>
+
         </van-tab>
         <van-tab title="历史评价">
           <van-collapse v-model="activeNames">
-            <van-collapse-item title="汉堡王" name="1">
+            <van-collapse-item :title="item.businessesId" :name="item.businessesId" v-for="(item) in currEvaluateList" :key="item.businessesId">
               <template #title>
                 <div>
-                  <van-icon name="smile" size="20" color="#ed9428" />汉堡王
-                  <span class="wsw-r">4.5</span>
+                  <van-icon name="smile" size="20" color="#ed9428" />{{item.businessesId}}
+                  <span class="wsw-r">{{item.evaluate.score}}</span>
                 </div>
               </template>
-              唉呀妈呀相当好吃
+              {{item.evaluate.content}}
             </van-collapse-item>
           </van-collapse>
         </van-tab>
@@ -75,34 +36,65 @@
 </template>
 
 <script>
-import { reactive, ref } from "vue";
-import { Dialog } from "vant";
+import { reactive, toRefs, computed, onMounted, ref } from "vue";
+import { Dialog, Toast } from "vant";
 import { useRouter, useRoute } from "vue-router";
-import { useStore } from 'vuex';
-
+import { useStore } from "vuex";
 export default {
   name: "",
   components: {},
-  setup(propes, { root }) {
+  setup (propes, { root }) {
     const router = useRouter();
-    const model = reactive({});
     const store = useStore();
     const activeNames = ref(["1"]);
+    const model = reactive({
+      currCollectionShops: [],
+      currEvaluateList: []
+    })
     const outLogin = () => {
       Dialog.confirm({
         title: "退出登录",
         message: "",
       })
         .then(() => {
-            console.log('aaa');
-            store.state.loginInfo = null;
-            router.push('/Home/Order')
+          console.log('aaa');
+          store.state.loginInfo = null;
+          router.push('/Home/Order')
         })
         .catch(() => {
           // on cancel
         });
     };
-    return { model, activeNames, outLogin };
+    const init = () => {
+      let { collectionList, loginInfo, shopsList, orderList } = store.state;
+      let userId = loginInfo.userId;
+      let shopsIds = [];
+      collectionList.forEach((item, index) => {
+        if (item.userId == userId) {
+          shopsIds = item.shopsIds;
+        }
+      })
+      shopsList.forEach((item, index) => {
+        if (shopsIds.includes(item.shopsId)) {
+          model.currCollectionShops.push(item);
+        }
+      })
+      console.log(model.currCollectionShops, 'currCollectionShops===');
+
+
+      orderList.forEach((item, index) => {
+        if (item.userId == userId) {
+          model.currEvaluateList.push(item);
+        }
+      })
+      console.log(model.currEvaluateList, 'currEvaluateList===');
+    }
+    init();
+    return {
+      ...toRefs(model),
+      activeNames,
+      outLogin
+    };
   },
 };
 </script>
