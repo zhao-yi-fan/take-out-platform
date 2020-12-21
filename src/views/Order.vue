@@ -89,6 +89,7 @@ export default {
               item.evaluate.score = model.score;
             }
           })
+          Toast('评价成功');
           return true;
         } else {
           Toast('评价内容不能为空');
