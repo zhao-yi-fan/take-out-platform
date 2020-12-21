@@ -1,56 +1,64 @@
 <!-- 商品详情 -->
 <template>
   <div class="wsw-top-Commodity">
-    <van-nav-bar :title="currentShopInfo.shopsName" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+    <van-nav-bar
+      :title="currentShopInfo.shopsName"
+      left-text="返回"
+      left-arrow
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    >
       <template #right>
         <van-icon name="star" size="18" />
         收藏
       </template>
     </van-nav-bar>
     <div class="wsw-top-Commodity-shop">
-      <img :src="currentShopInfo.shopsImage" alt="">
+      <img :src="currentShopInfo.signImage" alt="" />
       <div class="wsw-top-Commodity-shop-card">
-        <p>{{currentShopInfo.shopsName}}</p>
-        <div>评分：<span>{{currentShopInfo.score}}</span></div>
+        <p>{{ currentShopInfo.shopsName }}</p>
+        <div>
+          评分：<span>{{ currentShopInfo.score }}</span>
+        </div>
         <van-tag type="danger">优质商家</van-tag>
-        <br>
-        <span class="wsw-top-Commodity-shop-card-address">地址：{{currentShopInfo.address}}</span>
+        <br />
+        <span class="wsw-top-Commodity-shop-card-address"
+          >地址：{{ currentShopInfo.address }}</span
+        >
         <van-notice-bar scrollable :text="currentShopInfo.notice" />
       </div>
       <div class="wsw-top-Commodity-list">
-        <van-tree-select v-model:active-id="activeId" v-model:main-active-index="activeIndex" :items="items">
+        <van-tree-select
+          v-model:active-id="activeId"
+          v-model:main-active-index="activeIndex"
+          :items="items"
+        >
           <template #content>
-            <van-card price="2.00" desc="充满了夏天的味道" title="夏威夷菠萝堡" thumb="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg">
-              <!-- <template #tags>
-                <van-tag plain type="danger">标签</van-tag>
-                <van-tag plain type="danger">标签</van-tag>
-              </template> -->
+            <van-card
+              v-for="(item, index) in items[activeIndex].children"
+              :key="index"
+              :price="item.commodityMoney"
+              :desc="item.commodityDescribe"
+              :title="item.commodityName"
+              :thumb="item.commodityImage"
+            >
               <template #footer>
-                <van-button icon="minus" type="primary" size="mini" round plain />
-                <span>12</span>
-                <van-button icon="plus" type="primary" size="mini" round />
-              </template>
-            </van-card>
-            <van-card price="2.00" desc="充满了夏天的味道" title="夏威夷菠萝堡" thumb="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg">
-              <!-- <template #tags>
-                <van-tag plain type="danger">标签</van-tag>
-                <van-tag plain type="danger">标签</van-tag>
-              </template> -->
-              <template #footer>
-                <van-button icon="minus" type="primary" size="mini" round plain />
-                <span>12</span>
-                <van-button icon="plus" type="primary" size="mini" round />
-              </template>
-            </van-card>
-            <van-card price="2.00" desc="充满了夏天的味道" title="夏威夷菠萝堡" thumb="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg">
-              <!-- <template #tags>
-                <van-tag plain type="danger">标签</van-tag>
-                <van-tag plain type="danger">标签</van-tag>
-              </template> -->
-              <template #footer>
-                <van-button icon="minus" type="primary" size="mini" round plain />
-                <span>12</span>
-                <van-button icon="plus" type="primary" size="mini" round />
+                <van-button
+                  icon="minus"
+                  type="primary"
+                  size="mini"
+                  round
+                  plain
+                  @click="addShop(delect, item.num, index)"
+                />
+                <span>{{ item.num }}</span>
+                <van-button
+                  icon="plus"
+                  type="primary"
+                  size="mini"
+                  round
+                  @click="addShop(add, item.num)"
+                />
               </template>
             </van-card>
           </template>
@@ -62,16 +70,16 @@
 </template>
 
 <script>
-import { reactive, toRefs, computed, onMounted } from 'vue'
-import { Dialog, Toast } from 'vant';
-import { useRouter, useRoute } from 'vue-router';
-import { useStore } from 'vuex'
+import { reactive, toRefs, computed, onMounted } from "vue";
+import { Dialog, Toast } from "vant";
+import { useRouter, useRoute } from "vue-router";
+import { useStore } from "vuex";
 // import { watch } from 'vue'
 
 export default {
-  name: '',
+  name: "",
   components: {},
-  setup (propes, { root }) {
+  setup(propes, { root }) {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
@@ -81,91 +89,14 @@ export default {
       shopsList: computed(() => {
         return store.state.shopsList;
       }),
-      currentShopInfo: null
-    })
-    const items = [
-      {
-        text: '浙江',
-        children: [
-          { text: '杭州', id: 1 },
-          { text: '温州', id: 2 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-      {
-        text: '江苏',
-        children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
-        ],
-      },
-    ];
+      currentShopInfo: null,
+      items: null,
+    });
+
     const onClickLeft = () => {
       Dialog.confirm({
-        title: '',
-        message: '返回首页会清空购物车',
+        title: "",
+        message: "返回首页会清空购物车",
       })
         .then(() => {
           router.push("/Home/Index");
@@ -173,10 +104,10 @@ export default {
         .catch(() => {
           // on cancel
         });
-    }
+    };
     const onClickRight = () => {
-      Toast('按钮');
-    }
+      Toast("按钮");
+    };
     const onSubmit = () => {
       router.push("/Bill");
     };
@@ -187,25 +118,43 @@ export default {
       for (let i = 0; i < model.shopsList.length; i++) {
         let item = model.shopsList[i];
         if (shopsId === item.shopsId) {
-
           model.currentShopInfo = item;
-          console.log(model, 'a')
+          model.items = model.currentShopInfo.commodity;
+          console.log(model.items);
+          console.log(model, "a");
         }
       }
-    }
-    
+    };
+    // model.currentShopInfo.forEach((item, index) => {
+    //   // item.commodity.forEach((son, i) => {
+    //   //   son.children.forEach((el, n) => {
+    //   //     el.num = 0;
+    //   //   });
+    //   // });
+    //   console.log(item);
+    // });
+    const addShop = (status, num, i) => {
+      console.log(model.currentShopInfo);
+      console.log(
+        model.currentShopInfo[model.activeIndex].commodity[0].children[i]
+      );
+
+      if (status == "delect") {
+        // num - 1
+      }
+    };
     var shopsId = route.query.shopsId;
-    init(shopsId)
+    init(shopsId);
 
     return {
       ...toRefs(model),
-      items,
       onClickLeft,
       onClickRight,
-      onSubmit
-    }
-  }
-}
+      onSubmit,
+      addShop,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

@@ -4,8 +4,9 @@
     <div class="wsw-top-home-logo">
       <img src="../assets/images/Logo.png" width="80" />
       <span>饿了么</span>
-      <i class="wsw-r">收货地址</i>
-      <van-icon name="location-o" color="#ccc" size="24" class="wsw-r" />
+      <!-- <i class="wsw-r">收货地址</i>
+      <van-icon name="location-o" color="#ccc" size="24" class="wsw-r" /> -->
+      <van-icon name="search" color="#ccc" size="24" class="wsw-r" />
     </div>
     <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item>

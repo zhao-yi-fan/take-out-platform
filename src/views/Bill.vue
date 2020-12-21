@@ -2,7 +2,7 @@
 <template>
   <div class="wsw-top-bill">
     <div class="wsw-top-bill-return">
-      <van-icon name="arrow-left" />
+      <van-icon name="arrow-left" @click="returnGo"/>
     </div>
     <van-notice-bar scrollable text="为减少接触，降低风险，请注意与外卖人员的安全距离。" />
     <div class="wsw-top-bill-title">
@@ -12,7 +12,7 @@
       <van-field v-model="username" name="收货地址" label="收货地址" placeholder="收货地址" :rules="[{ required: true, message: '请填写收货地址' }]" />
       <p>
         <span>立即送出</span>
-        <em class="wsw-r">大概15分钟后送到</em>
+        <span class="wsw-r">大概15分钟后抵达</span>
       </p>
     </div>
     <div class="wsw-top-bill-shopList">
@@ -29,22 +29,32 @@
 <script>
 import { ref } from 'vue'
 import { Toast } from 'vant';
+import { useRouter, useRoute } from 'vue-router';
 
 export default {
   name: '',
   components: {},
   setup (propes, { root }) {
+    const route = useRoute();
+    const router = useRouter();
     const active = ref(0);
     const onSubmit = () => {
       Toast.loading({
         message: '正在支付请稍候...',
         forbidClick: true,
       });
+      setTimeout(()=>{
+        Toast.success('支付成功');
+        router.push('/Home/Index')
+      }, 2000)
     };
-    
+    const returnGo = () =>{
+      router.go(-1)
+    }
     return {
       active,
-      onSubmit
+      onSubmit,
+      returnGo
     }
   }
 }
@@ -69,13 +79,18 @@ export default {
     background: #f6c993;
     z-index: 99;
   }
+  .van-notice-bar{
+    position: fixed;
+    top: 40px;
+    width: 100%;
+  }
   .wsw-top-bill-title {
     width: 40%;
     height: 30px;
     background: #fff;
     border-radius: 10px 30px 0 0;
     margin-left: 7.5%;
-    margin-top: 10px;
+    margin-top: 50px;
     text-align: center;
     line-height: 30px;
   }
