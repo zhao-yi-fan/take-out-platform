@@ -191,17 +191,16 @@ export default createStore({
         businessesId: 1,
         shopsId: 2,
         userId: 1,
-        status: '',
+        status: 'apply',
         address: '',
         foodList: [
           {
             foodId: '1_1',
-            num: 3
+            foodMoney: 37.5,
+            foodName: '汉堡',
+            foodNum: 3,
+            foodImageUrl: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3285227120,3432336058&fm=26&gp=0.jpg'
           },
-          {
-            foodId: '2_2',
-            num: 6
-          }
         ],
         money: '15',
         evaluate: {
@@ -277,7 +276,7 @@ export default createStore({
         msg: "修改失败，用户名不存在！",
       };
     },
-    setOrder ({ commit, state }, orderForm = {}) {
+    setOrderInfo ({ commit, state }, orderForm = {}) {
       let { userId, shopsId, money, foodList } = orderForm;
       let businessesId = state.orderList[state.orderList.length - 1].businessesId;
       businessesId++;
@@ -288,19 +287,39 @@ export default createStore({
         userId,
         foodList,
         money,
+        status: 'apply',
         evaluate: {
           content: '',
           score: null
         }
       });
-      return true; // 下单成功
+      return {
+        code: 1,
+        businessesId
+      }; // 下单成功
 
+    },
+    setOrderStatus ({ commit, state }, statusForm={}) {
+      let {businessesId,address} = statusForm;
+      let isExist = false;
+      state.orderList.forEach((item, index) => {
+        if (item.businessesId == businessesId) {
+          isExist = true;
+          item.status = 'success'
+          item.address = address;
+        }
+      })
+      if (isExist) {
+        return true; // 下单成功
+      } else {
+        return false; // 下单失败
+      }
     },
     getMyOrder ({ commit, state }, myForm = {}) {
       let { userId } = myForm;
       let myOrderList = [];
       state.orderList.forEach((item, index) => {
-        if (item.useId == userId) {
+        if (item.useId == userId && item.status == 'success') {
           myOrderList.push(item)
         }
       });
@@ -309,20 +328,20 @@ export default createStore({
         for (let i = 0; i < state.shopsList.length; i++) {
           if (currentItem.shopsId == state.shopsList[i].shopsId) {
             let shopsInfo = state.shopsList[i];
-            currentItem.foodList.forEach((foodItem, foodIndex) => {
-              let idArr = foodItem.foodId.split('_');
-              shopsInfo.commodity.forEach((typeItem, typeIndex) => {
-                if (typeItem.classificationId == idArr[0]) {
-                  foodItem.text = typeItem.text;
-                  typeItem.children.forEach((typeSonItem, typeSonIndex) => {
-                    if (typeSonItem.commodityId == idArr[1]) {
-                      foodItem.text += '-' + typeSonItem.commodityName;
-                      foodItem.price = typeSonItem.commodityMoney;
-                    }
-                  })
-                }
-              })
-            })
+            // currentItem.foodList.forEach((foodItem, foodIndex) => {
+            // let idArr = foodItem.foodId.split('_');
+            // shopsInfo.commodity.forEach((typeItem, typeIndex) => {
+            //   if (typeItem.classificationId == idArr[0]) {
+            //     foodItem.text = typeItem.text;
+            //     typeItem.children.forEach((typeSonItem, typeSonIndex) => {
+            //       if (typeSonItem.commodityId == idArr[1]) {
+            //         foodItem.text += '-' + typeSonItem.commodityName;
+            //         foodItem.price = typeSonItem.commodityMoney;
+            //       }
+            //     })
+            //   }
+            // })
+            // })
             currentItem.shopsInfo = shopsInfo;
           }
         }

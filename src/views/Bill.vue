@@ -2,56 +2,90 @@
 <template>
   <div class="wsw-top-bill">
     <div class="wsw-top-bill-return">
-      <van-icon name="arrow-left" @click="returnGo"/>
+      <van-icon name="arrow-left" @click="returnGo" />
     </div>
     <van-notice-bar scrollable text="为减少接触，降低风险，请注意与外卖人员的安全距离。" />
     <div class="wsw-top-bill-title">
       外卖配送
     </div>
     <div class="wsw-top-bill-address">
-      <van-field v-model="username" name="收货地址" label="收货地址" placeholder="收货地址" :rules="[{ required: true, message: '请填写收货地址' }]" />
+      <van-field v-model="address" name="address" label="收货地址" placeholder="收货地址" :rules="[{ required: true, message: '请填写收货地址' }]" />
       <p>
         <span>立即送出</span>
         <span class="wsw-r">大概15分钟后抵达</span>
       </p>
     </div>
     <div class="wsw-top-bill-shopList">
-      <p>汉堡王</p>
-      <van-card num="2" price="2.00" desc="描述信息" title="商品标题" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
-      <van-card num="2" price="2.00" desc="描述信息" title="商品标题" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
-      <van-card num="2" price="2.00" desc="描述信息" title="商品标题" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
-      <van-card num="2" price="2.00" desc="描述信息" title="商品标题" thumb="https://img.yzcdn.cn/vant/ipad.jpeg" />
+      <p>{{}}</p>
+      <van-card :num="item.foodNum" :price="item.foodMoney" desc="描述信息" :title="item.foodName" :thumb="item.foodImageUrl" v-for="(item) in currentOrderInfo.foodList" :key="item.foodId" />
     </div>
-    <van-submit-bar :price="3050" button-text="确认支付" @submit="onSubmit" />
+    <van-submit-bar :price="currentOrderInfo.money * 100" button-text="确认支付" @submit="onSubmit" />
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-import { Toast } from 'vant';
-import { useRouter, useRoute } from 'vue-router';
+import { reactive, toRefs, computed, onMounted, ref } from "vue";
+import { Dialog, Toast } from "vant";
+import { useRouter, useRoute } from "vue-router";
+import { useStore } from "vuex";
 
 export default {
   name: '',
   components: {},
   setup (propes, { root }) {
+    const store = useStore();
     const route = useRoute();
     const router = useRouter();
     const active = ref(0);
-    const onSubmit = () => {
+    const model = reactive({
+      address: '',
+      businessesId: '',
+      currentOrderInfo: null
+    })
+    const onSubmit = async () => {
+      if (!model.address) {
+        return Toast.fail('请填写收货地址');
+      }
+      let code = await store.dispatch('setOrderStatus', {
+        address: model.address,
+        businessesId: model.businessesId
+      });
       Toast.loading({
         message: '正在支付请稍候...',
         forbidClick: true,
       });
-      setTimeout(()=>{
-        Toast.success('支付成功');
-        router.push('/Home/Index')
+
+
+      setTimeout(() => {
+        Toast.clear();
+        if (code) {
+          Toast.success('支付成功');
+          router.push('/Home/Index')
+        } else {
+          Toast.fail('支付失败');
+        }
+
       }, 2000)
     };
-    const returnGo = () =>{
+    const returnGo = () => {
       router.go(-1)
     }
+    const init = () => {
+      console.log(store.state.orderList, 'store.state.orderList====');
+      model.businessesId = route.query.businessesId;
+      store.state.orderList.forEach((item, index) => {
+        if (item.businessesId == model.businessesId && item.status == 'apply') {
+          model.currentOrderInfo = item;
+        }
+      })
+      console.log(model.currentOrderInfo, 'model.currentOrderInfo===');
+    }
+
+    init();
+    onMounted(() => {
+    })
     return {
+      ...toRefs(model),
       active,
       onSubmit,
       returnGo
@@ -79,7 +113,7 @@ export default {
     background: #f6c993;
     z-index: 99;
   }
-  .van-notice-bar{
+  .van-notice-bar {
     position: fixed;
     top: 40px;
     width: 100%;

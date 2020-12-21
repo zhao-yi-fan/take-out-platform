@@ -19,10 +19,10 @@
               </template>
               <div class="wsw-top-Order-list-orderList wsw-clearfix">
                 <p v-for="(foodItem) in item.foodList" :key="foodItem.foodId">
-                  <span>{{foodItem.text || ''}}</span>
-                  <span>¥&nbsp;{{foodItem.price || 0}}</span>
+                  <span>{{foodItem.foodName || ''}}</span>
+                  <span>¥&nbsp;{{foodItem.foodMoney || 0}}</span>
                   <span>
-                    <van-icon name="cross" />{{foodItem.num || 0}}
+                    <van-icon name="cross" />{{foodItem.foodNum || 0}}
                   </span>
                 </p>
                 <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation(item.businessesId)" v-if="item.evaluate.content">

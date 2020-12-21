@@ -79,7 +79,7 @@ export default {
       Toast("按钮");
     };
     const onSubmit = async () => {
-      if(model.price == 0){
+      if (model.price == 0) {
         Toast.fail('请选择商品');
       }
       let commodity = model.currentShopInfo.commodity
@@ -90,7 +90,10 @@ export default {
             if (sonItem.num && sonItem.num > 0) {
               foodArr.push({
                 foodId: item.classificationId + '_' + sonItem.commodityId,
-                num: sonItem.num
+                foodNum: sonItem.num,
+                foodMoney: sonItem.commodityMoney,
+                foodName: sonItem.commodityName,
+                foodImageUrl: sonItem.commodityImage
               })
             }
           })
@@ -100,20 +103,25 @@ export default {
         shopsId: model.shopsId,
         userId: store.state.loginInfo.userId,
         foodList: foodArr,
-        money: model.price/100
+        money: model.price / 100
       }
       console.log(model.currentShopInfo);
-      console.log(obj,'obj====');
-      let code = await store.dispatch('setOrder', obj);
+      console.log(obj, 'obj====');
+      let resObj = await store.dispatch('setOrderInfo', obj);
       Toast.loading({
         message: '订单提交中...',
         forbidClick: true,
       });
       setTimeout(() => {
         Toast.clear();
-        if (code) {
+        if (resObj.code) {
           Toast.success('下单成功');
-          router.push("/Bill");
+          router.push({
+            path: "/Bill",
+            query: {
+              businessesId: resObj.businessesId
+            }
+          });
           console.log(store.state.orderList);
         } else {
           Toast.fail('下单失败');
