@@ -123,11 +123,11 @@ export default {
         span {
           display: inline-block;
           &:first-child {
-            width: 70%;
+            width: 68%;
           }
           &:nth-child(2),
           &:last-child {
-            width: 15%;
+            width: 16%;
             text-align: right;
           }
         }
