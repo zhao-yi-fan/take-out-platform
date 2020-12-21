@@ -186,6 +186,28 @@ export default createStore({
         ],
       },
     ],
+    orderList:[
+      {
+        businessesId: 1,
+        shopsId: 1,
+        userId: 1,
+        foodList:[
+          {
+            foodId:'1_1',
+            num: 3
+          },
+          {
+            foodId:'2_2',
+            num: 6
+          }
+        ],
+        money: '',
+        evaluate:{
+          content:'挺好',
+          score: 5
+        }
+      }
+    ]
   },
   mutations: {
     SET_LOGIN_INFO: (state, loginInfo) => {
@@ -252,6 +274,10 @@ export default createStore({
         code: 3,
         msg: "修改失败，用户名不存在！",
       };
+    },
+    setOrder({ commit, state }, orderForm = {}) {
+      let { userId } = orderForm;
+      
     },
   },
   plugins: [createPersistedState()],
