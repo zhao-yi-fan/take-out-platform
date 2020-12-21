@@ -82,7 +82,7 @@ export default {
       console.log(model.currCollectionShops, 'currCollectionShops===');
 
       orderList.forEach((item, index) => {
-        if (item.userId == userId) {
+        if (item.userId == userId && item.evaluate.content) {
           shopsList.forEach((shopItem, shopIndex) => {
             if (shopItem.shopsId == item.shopsId) {
               item.shopsName = shopItem.shopsName;
