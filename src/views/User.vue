@@ -18,10 +18,10 @@
         </van-tab>
         <van-tab title="历史评价">
           <van-collapse v-model="activeNames">
-            <van-collapse-item :title="item.businessesId" :name="item.businessesId" v-for="(item) in currEvaluateList" :key="item.businessesId">
+            <van-collapse-item :title="item.shopsName" :name="item.businessesId" v-for="(item) in currEvaluateList" :key="item.businessesId">
               <template #title>
                 <div>
-                  <van-icon name="smile" size="20" color="#ed9428" />{{item.businessesId}}
+                  <van-icon name="smile" size="20" color="#ed9428" />{{item.shopsName}}
                   <span class="wsw-r">{{item.evaluate.score}}</span>
                 </div>
               </template>
@@ -81,10 +81,14 @@ export default {
       })
       console.log(model.currCollectionShops, 'currCollectionShops===');
 
-
       orderList.forEach((item, index) => {
         if (item.userId == userId) {
-          model.currEvaluateList.push(item);
+          shopsList.forEach((shopItem, shopIndex) => {
+            if (shopItem.shopsId == item.shopsId) {
+              item.shopsName = shopItem.shopsName;
+              model.currEvaluateList.push(item);
+            }
+          })
         }
       })
       console.log(model.currEvaluateList, 'currEvaluateList===');
