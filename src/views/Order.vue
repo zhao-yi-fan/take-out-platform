@@ -6,90 +6,79 @@
       <van-tabs>
         <van-tab title="全部订单">
           <van-collapse v-model="activeNames">
-            <van-collapse-item name="1">
+            <van-collapse-item :name="item.businessesId" v-for="(item) in myOrderList" :key="item.businessesId">
               <template #title>
                 <div class="wsw-top-Order-list-collapse">
-                  <img
-                    src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2665539707,3309730618&fm=26&gp=0.jpg"
-                    alt=""
-                    width="75"
-                  />
-                  <span>汉堡王</span>
+                  <img :src="item.shopsInfo.shopsImage" alt="" width="75" />
+                  <span>{{item.shopsInfo.shopsName}}</span>
                 </div>
                 <div class="wsw-top-Order-list-money">
                   <span class="wsw-l">已送达</span>
-                  <span class="wsw-r">共计：15元</span>
+                  <span class="wsw-r">共计：{{item.money}}元</span>
                 </div>
               </template>
               <div class="wsw-top-Order-list-orderList wsw-clearfix">
-                <p>
-                  <span>鱼香肉丝</span>
-                  <span>¥&nbsp;25</span>
-                  <span><van-icon name="cross" />5</span>
+                <p v-for="(foodItem) in item.foodList" :key="foodItem.foodId">
+                  <span>{{foodItem.text || ''}}</span>
+                  <span>¥&nbsp;{{foodItem.price || 0}}</span>
+                  <span>
+                    <van-icon name="cross" />{{foodItem.num || 0}}
+                  </span>
                 </p>
-                <p>
-                  <span>鱼香肉丝</span>
-                  <span>¥&nbsp;25</span>
-                  <span><van-icon name="cross" />5</span>
-                </p>
-                <p>
-                  <span>鱼香肉丝</span>
-                  <span>¥&nbsp;25</span>
-                  <span><van-icon name="cross" />5</span>
-                </p>
-                <p>
-                  <span>鱼香肉丝</span>
-                  <span>¥&nbsp;25</span>
-                  <span><van-icon name="cross" />5</span>
-                </p>
-                <van-button
-                  class="wsw-r"
-                  color="linear-gradient(to right, #ff6034, #ee0a24)"
-                  size="small"
-                  round
-                  @click="Evaluation"
-                >
+                <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation">
                   评价
                 </van-button>
               </div>
             </van-collapse-item>
-            <van-collapse-item title="标题2" name="2"> 内容 </van-collapse-item>
           </van-collapse>
         </van-tab>
       </van-tabs>
     </div>
     <van-dialog v-model:show="show" title="评价" show-cancel-button>
-      <van-field
-        v-model="message"
-        rows="2"
-        autosize
-        label="评价"
-        type="textarea"
-        maxlength="50"
-        placeholder="请输入评价"
-        show-word-limit
-      />
+      <van-field v-model="message" rows="2" autosize label="评价" type="textarea" maxlength="50" placeholder="请输入评价" show-word-limit />
     </van-dialog>
   </div>
 </template>
 
 <script>
-import { reactive, ref } from "vue";
+import { reactive, toRefs, computed, onMounted, ref } from "vue";
+import { Dialog, Toast } from "vant";
+import { useRouter, useRoute } from "vue-router";
+import { useStore } from "vuex";
 
 export default {
   name: "",
   components: {},
-  setup(propes, { root }) {
+  setup (propes, { root }) {
+    const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
     const model = reactive({
-        message: null,
+      message: null,
+      myOrderList: []
     });
     const activeNames = ref(["1"]);
     const show = ref(false);
 
-    const Evaluation = ()=>{
-        show.value = true
+    const Evaluation = () => {
+      show.value = true
     }
-    return { model, activeNames, show, Evaluation };
+
+    const init = async(userId) => {
+      model.myOrderList = await store.dispatch('getMyOrder', userId);
+      console.log(model.myOrderList, 'model.myOrderList===');
+    }
+
+    onMounted(() => {
+      let userId = store.state.loginInfo.userId;
+      init(userId)
+    })
+    return {
+      ...toRefs(model),
+      activeNames,
+      show,
+      Evaluation
+    };
   },
 };
 </script>

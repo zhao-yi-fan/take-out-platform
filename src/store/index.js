@@ -186,24 +186,24 @@ export default createStore({
         ],
       },
     ],
-    orderList:[
+    orderList: [
       {
         businessesId: 1,
         shopsId: 1,
         userId: 1,
-        foodList:[
+        foodList: [
           {
-            foodId:'1_1',
+            foodId: '1_1',
             num: 3
           },
           {
-            foodId:'2_2',
+            foodId: '2_2',
             num: 6
           }
         ],
         money: '',
-        evaluate:{
-          content:'挺好',
+        evaluate: {
+          content: '挺好',
           score: 5
         }
       }
@@ -220,7 +220,7 @@ export default createStore({
     },
   },
   actions: {
-    login({ commit, state }, loginData = {}) {
+    login ({ commit, state }, loginData = {}) {
       let { username, password } = loginData;
       for (let i = 0; i < state.userList.length; i++) {
         let userItem = state.userList[i];
@@ -231,7 +231,7 @@ export default createStore({
       }
       return false; // 登陆失败
     },
-    register({ commit, state }, registerData = {}) {
+    register ({ commit, state }, registerData = {}) {
       let { username, password, secret } = registerData;
       let lastId = state.userList[state.userList.length - 1].userId;
       lastId++;
@@ -249,7 +249,7 @@ export default createStore({
       });
       return true; // 注册成功
     },
-    forgetPwd({ commit, state }, forgetPwd = {}) {
+    forgetPwd ({ commit, state }, forgetPwd = {}) {
       let { username, password, secret } = forgetPwd;
       let userList = state.userList;
       for (let i = 0; i < userList.length; i++) {
@@ -275,9 +275,58 @@ export default createStore({
         msg: "修改失败，用户名不存在！",
       };
     },
-    setOrder({ commit, state }, orderForm = {}) {
-      let { userId } = orderForm;
-      
+    setOrder ({ commit, state }, orderForm = {}) {
+      let { userId, shopsId, money, foodList } = orderForm;
+      let businessesId = state.orderList[state.orderList.length - 1].businessesId;
+      businessesId++;
+
+      state.orderList.push({
+        businessesId,
+        shopsId,
+        userId,
+        foodList,
+        money,
+        evaluate: {
+          content: '',
+          score: null
+        }
+      });
+      return true; // 下单成功
+
+    },
+    getMyOrder ({ commit, state }, myForm = {}) {
+      let { userId } = myForm;
+      let myOrderList = [];
+      state.orderList.forEach((item, index) => {
+        if (item.useId == userId) {
+          myOrderList.push(item)
+        }
+      });
+      // 增加商品信息
+      myOrderList.map((currentItem, index) => {
+        for (let i = 0; i < state.shopsList.length; i++) {
+          if (currentItem.shopsId == state.shopsList[i].shopsId) {
+            let shopsInfo = state.shopsList[i];
+            currentItem.foodList.forEach((foodItem, foodIndex) => {
+              let idArr = foodItem.foodId.split('_');
+              shopsInfo.commodity.forEach((typeItem, typeIndex) => {
+                if (typeItem.classificationId == idArr[0]) {
+                  foodItem.text = typeItem.text;
+                  typeItem.children.forEach((typeSonItem, typeSonIndex) => {
+                    if (typeSonItem.commodityId == idArr[1]) {
+                      foodItem.text += '-' + typeSonItem.commodityName;
+                      foodItem.price = typeSonItem.commodityMoney;
+                    }
+                  })
+                }
+              })
+            })
+            currentItem.shopsInfo = shopsInfo;
+          }
+        }
+        return currentItem;
+      })
+      return myOrderList;
     },
   },
   plugins: [createPersistedState()],

@@ -32,7 +32,7 @@
           </template>
         </van-tree-select>
       </div>
-      <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit" />
+      <van-submit-bar :price="price" button-text="提交订单" @submit="onSubmit" />
     </div>
   </div>
 </template>
@@ -59,6 +59,8 @@ export default {
       }),
       currentShopInfo: null,
       items: null,
+      shopsId: '',
+      price: 0
     });
 
     const onClickLeft = () => {
@@ -76,8 +78,48 @@ export default {
     const onClickRight = () => {
       Toast("按钮");
     };
-    const onSubmit = () => {
-      router.push("/Bill");
+    const onSubmit = async () => {
+      if(model.price == 0){
+        Toast.fail('请选择商品');
+      }
+      let commodity = model.currentShopInfo.commodity
+      let foodArr = [];
+      commodity.forEach((item, index) => {
+        if (Array.isArray(item.children) && item.children.length > 0) {
+          item.children.forEach((sonItem, sonIndex) => {
+            if (sonItem.num && sonItem.num > 0) {
+              foodArr.push({
+                foodId: item.classificationId + '_' + sonItem.commodityId,
+                num: sonItem.num
+              })
+            }
+          })
+        }
+      })
+      var obj = {
+        shopsId: model.shopsId,
+        userId: store.state.loginInfo.userId,
+        foodList: foodArr,
+        money: model.price/100
+      }
+      console.log(model.currentShopInfo);
+      console.log(obj,'obj====');
+      let code = await store.dispatch('setOrder', obj);
+      Toast.loading({
+        message: '订单提交中...',
+        forbidClick: true,
+      });
+      setTimeout(() => {
+        Toast.clear();
+        if (code) {
+          Toast.success('下单成功');
+          router.push("/Bill");
+          console.log(store.state.orderList);
+        } else {
+          Toast.fail('下单失败');
+        }
+      }, 1000);
+
     };
     // watch(()=>route.path,(newValue)=>{
 
@@ -93,8 +135,8 @@ export default {
         }
       }
     };
-    var shopsId = route.query.shopsId;
-    init(shopsId);
+    model.shopsId = route.query.shopsId;
+    init(model.shopsId);
     console.log(model.currentShopInfo);
     model.currentShopInfo.commodity.forEach((item, index) => {
       item.children.forEach((son, i) => {
@@ -109,6 +151,18 @@ export default {
       } else {
         model.currentShopInfo.commodity[model.activeIndex].children[i].num = num + 1;
       }
+      let commodity = model.currentShopInfo.commodity
+      let sum = 0;
+      commodity.forEach((item, index) => {
+        if (Array.isArray(item.children) && item.children.length > 0) {
+          item.children.forEach((sonItem, sonIndex) => {
+            if (typeof sonItem.num == 'number') {
+              sum += sonItem.num * sonItem.commodityMoney;
+            }
+          })
+        }
+      })
+      model.price = sum * 100;
     };
 
     return {
