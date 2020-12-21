@@ -125,6 +125,8 @@ export default {
         }
       }
     };
+    var shopsId = route.query.shopsId;
+    init(shopsId);
     // model.currentShopInfo.forEach((item, index) => {
     //   // item.commodity.forEach((son, i) => {
     //   //   son.children.forEach((el, n) => {
@@ -133,18 +135,16 @@ export default {
     //   // });
     //   console.log(item);
     // });
-    const addShop = (status, num, i) => {
-      console.log(model.currentShopInfo);
-      console.log(
-        model.currentShopInfo[model.activeIndex].commodity[0].children[i]
-      );
+    // const addShop = (status, num, i) => {
+    //   console.log(model.currentShopInfo);
+    //   console.log(
+    //     model.currentShopInfo[model.activeIndex].commodity[0].children[i]
+    //   );
 
-      if (status == "delect") {
-        // num - 1
-      }
-    };
-    var shopsId = route.query.shopsId;
-    init(shopsId);
+    //   if (status == "delect") {
+    //     // num - 1
+    //   }
+    // };
 
     return {
       ...toRefs(model),
