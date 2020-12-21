@@ -106,10 +106,6 @@ export default {
         userId: store.state.loginInfo.userId,
         foodList: foodArr,
         money: model.price / 100,
-        evaluate: {
-          content: null,
-          score: 0
-        }
       }
       console.log(model.currentShopInfo);
       console.log(obj, 'obj====');

@@ -25,7 +25,7 @@
                     <van-icon name="cross" />{{foodItem.foodNum || 0}}
                   </span>
                 </p>
-                <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation(item.businessesId)" v-if="item.evaluate.content != null">
+                <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation(item.businessesId)" v-if="item.evaluate.content == ''">
                   评价
                 </van-button>
               </div>
