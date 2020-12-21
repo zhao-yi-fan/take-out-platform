@@ -117,7 +117,7 @@ export default createStore({
         ],
       },
       {
-        shopsId: "2",
+        shopsId: "3",
         shopsName: "汉堡王",
         shopsImage:
           "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2665539707,3309730618&fm=26&gp=0.jpg",
@@ -207,6 +207,13 @@ export default createStore({
           content: null,
           score: null
         }
+      }
+    ],
+    collectionList:[
+      {
+        collectionId: 1,
+        userId:1,
+        shopsIds:[1, 2]
       }
     ]
   },

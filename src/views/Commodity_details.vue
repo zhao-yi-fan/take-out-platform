@@ -3,7 +3,7 @@
   <div class="wsw-top-Commodity">
     <van-nav-bar :title="currentShopInfo.shopsName" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
       <template #right>
-        <van-icon name="star" size="18" />
+        <van-icon :name="collectionStatus?'star':'star-o'" size="18" />
         收藏
       </template>
     </van-nav-bar>
@@ -57,10 +57,14 @@ export default {
       shopsList: computed(() => {
         return store.state.shopsList;
       }),
+      collectionList: computed(() => {
+        return store.state.collectionList;
+      }),
       currentShopInfo: null,
       items: null,
       shopsId: '',
-      price: 0
+      price: 0,
+      collectionStatus: false
     });
 
     const onClickLeft = () => {
@@ -75,9 +79,7 @@ export default {
           // on cancel
         });
     };
-    const onClickRight = () => {
-      Toast("按钮");
-    };
+
     const onSubmit = async () => {
       if (model.price == 0) {
         Toast.fail('请选择商品');
@@ -151,6 +153,40 @@ export default {
         son.num = 0;
       });
     });
+    model.collectionList.forEach((item, index) => {
+      if (item.userId == store.state.loginInfo.userId) {
+        item.shopsIds.forEach((el, inde) => {
+          if (el == model.shopsId) {
+            console.log(el);
+            model.collectionStatus = true;
+          }
+        })
+      }
+    })
+    const onClickRight = () => {
+      if (model.collectionStatus) {
+        model.collectionList.forEach((item, index) => {
+          if (item.userId == store.state.loginInfo.userId) {
+            item.shopsIds.forEach((el, inde) => {
+              if (el == model.shopsId) {
+                console.log(el);
+                item.shopsIds.splice(inde, 1);
+                model.collectionStatus = false;
+                Toast("取消收藏");
+              }
+            })
+          }
+        })
+      } else {
+        model.collectionList.forEach((item, index) => {
+          if (item.userId == store.state.loginInfo.userId) {
+            item.shopsIds.push(model.shopsId);
+            model.collectionStatus = true;
+            Toast("收藏成功");
+          }
+        })
+      }
+    };
     const addShop = (status, num, i) => {
       if (status == "delect") {
         if (num - 1 >= 0) {
@@ -185,6 +221,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$a: 100vh;
+$b: 363px;
 .wsw-top-Commodity {
   width: 100%;
   height: 100%;
@@ -233,6 +271,10 @@ export default {
   }
   .wsw-top-Commodity-list {
     margin-top: 45px;
+    height: calc(#{$a} - #{$b});
+    ::v-deep .van-tree-select {
+      height: 100% !important;
+    }
     button {
       vertical-align: middle;
       margin: 0 3px;
