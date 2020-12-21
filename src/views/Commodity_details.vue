@@ -222,7 +222,7 @@ export default {
 
 <style lang="scss" scoped>
 $a: 100vh;
-$b: 363px;
+$b: 390px;
 .wsw-top-Commodity {
   width: 100%;
   height: 100%;

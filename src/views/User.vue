@@ -148,7 +148,6 @@ $b: 390px;
   }
   .wsw-top-User-top-menu {
     width: 85%;
-    height: calc(100vh – 300px);
     position: absolute;
     left: 0;
     right: 0;
