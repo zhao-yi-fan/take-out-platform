@@ -274,7 +274,7 @@ export default createStore({
         businessesId: 1,
         shopsId: 2,
         userId: 1,
-        status: 'apply',
+        status: 'success',
         address: '',
         foodList: [
           {
@@ -296,7 +296,7 @@ export default createStore({
       {
         collectionId: 1,
         userId:1,
-        shopsIds:['1', '2']
+        shopsIds:['2', '3']
       }
     ]
   },
