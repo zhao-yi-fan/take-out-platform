@@ -191,6 +191,8 @@ export default createStore({
         businessesId: 1,
         shopsId: 1,
         userId: 1,
+        status: '',
+        address: '',
         foodList: [
           {
             foodId: '1_1',
@@ -202,6 +204,7 @@ export default createStore({
           }
         ],
         money: '',
+
         evaluate: {
           content: '挺好',
           score: 5
