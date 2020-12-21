@@ -25,7 +25,7 @@
                     <van-icon name="cross" />{{foodItem.num || 0}}
                   </span>
                 </p>
-                <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation">
+                <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation(item.businessesId)" v-if="item.evaluate.content">
                   评价
                 </van-button>
               </div>
@@ -34,8 +34,9 @@
         </van-tab>
       </van-tabs>
     </div>
-    <van-dialog v-model:show="show" title="评价" show-cancel-button>
-      <van-field v-model="message" rows="2" autosize label="评价" type="textarea" maxlength="50" placeholder="请输入评价" show-word-limit />
+    <van-dialog v-model:show="show" title="评价" show-cancel-button :before-close="beforeClose">
+      <van-rate v-model="score" :size="25" color="#ffd21e" void-icon="star" void-color="#eee" />
+      <van-field v-model="message" rows="2" autosize label="评价内容" type="textarea" maxlength="50" placeholder="请输入评价内容" show-word-limit />
     </van-dialog>
   </div>
 </template>
@@ -55,16 +56,19 @@ export default {
     const router = useRouter();
     const model = reactive({
       message: null,
-      myOrderList: []
+      myOrderList: [],
+      score: 5,
+      businessesId: null
     });
     const activeNames = ref(["1"]);
     const show = ref(false);
 
-    const Evaluation = () => {
-      show.value = true
+    const Evaluation = (id) => {
+      show.value = true;
+      model.businessesId = id;
     }
 
-    const init = async(userId) => {
+    const init = async (userId) => {
       model.myOrderList = await store.dispatch('getMyOrder', userId);
       console.log(model.myOrderList, 'model.myOrderList===');
     }
@@ -73,11 +77,35 @@ export default {
       let userId = store.state.loginInfo.userId;
       init(userId)
     })
+    const beforeClose = (action, done) => {
+      console.log(action);
+      if (action == "confirm") {
+        console.log('aaa',);
+        if (model.message) {
+          store.state.orderList.forEach((item, index) => {
+            console.log(item, model.businessesId);
+            if (item.businessesId == model.businessesId) {
+              item.evaluate.content = model.message;
+              item.evaluate.score = model.score;
+            }
+          })
+          return true;
+        } else {
+          Toast('评价内容不能为空');
+          return false;
+
+        }
+      }else{
+        return true;
+      }
+    }
+
     return {
       ...toRefs(model),
       activeNames,
       show,
-      Evaluation
+      Evaluation,
+      beforeClose
     };
   },
 };
@@ -135,6 +163,12 @@ export default {
       .van-button {
         margin-top: 22px;
       }
+    }
+  }
+  ::v-deep .van-dialog__content {
+    text-align: center;
+    .van-rate {
+      margin: 15px 0;
     }
   }
 }

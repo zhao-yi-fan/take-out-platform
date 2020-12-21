@@ -189,7 +189,7 @@ export default createStore({
     orderList: [
       {
         businessesId: 1,
-        shopsId: 1,
+        shopsId: 2,
         userId: 1,
         status: '',
         address: '',
@@ -203,11 +203,10 @@ export default createStore({
             num: 6
           }
         ],
-        money: '',
-
+        money: '15',
         evaluate: {
-          content: '挺好',
-          score: 5
+          content: null,
+          score: null
         }
       }
     ]
