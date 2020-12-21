@@ -1,13 +1,7 @@
 <!-- 商品详情 -->
 <template>
   <div class="wsw-top-Commodity">
-    <van-nav-bar
-      :title="currentShopInfo.shopsName"
-      left-text="返回"
-      left-arrow
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-    >
+    <van-nav-bar :title="currentShopInfo.shopsName" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
       <template #right>
         <van-icon name="star" size="18" />
         收藏
@@ -22,43 +16,17 @@
         </div>
         <van-tag type="danger">优质商家</van-tag>
         <br />
-        <span class="wsw-top-Commodity-shop-card-address"
-          >地址：{{ currentShopInfo.address }}</span
-        >
+        <span class="wsw-top-Commodity-shop-card-address">地址：{{ currentShopInfo.address }}</span>
         <van-notice-bar scrollable :text="currentShopInfo.notice" />
       </div>
       <div class="wsw-top-Commodity-list">
-        <van-tree-select
-          v-model:active-id="activeId"
-          v-model:main-active-index="activeIndex"
-          :items="items"
-        >
+        <van-tree-select v-model:active-id="activeId" v-model:main-active-index="activeIndex" :items="items">
           <template #content>
-            <van-card
-              v-for="(item, index) in items[activeIndex].children"
-              :key="index"
-              :price="item.commodityMoney"
-              :desc="item.commodityDescribe"
-              :title="item.commodityName"
-              :thumb="item.commodityImage"
-            >
+            <van-card v-for="(item, index) in items[activeIndex].children" :key="index" :price="item.commodityMoney" :desc="item.commodityDescribe" :title="item.commodityName" :thumb="item.commodityImage">
               <template #footer>
-                <van-button
-                  icon="minus"
-                  type="primary"
-                  size="mini"
-                  round
-                  plain
-                  @click="addShop(delect, item.num, index)"
-                />
+                <van-button icon="minus" type="primary" size="mini" round plain @click="addShop('delect', item.num, index)" />
                 <span>{{ item.num }}</span>
-                <van-button
-                  icon="plus"
-                  type="primary"
-                  size="mini"
-                  round
-                  @click="addShop(add, item.num)"
-                />
+                <van-button icon="plus" type="primary" size="mini" round @click="addShop('add', item.num, index)" />
               </template>
             </van-card>
           </template>
@@ -79,7 +47,7 @@ import { useStore } from "vuex";
 export default {
   name: "",
   components: {},
-  setup(propes, { root }) {
+  setup (propes, { root }) {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
@@ -127,24 +95,21 @@ export default {
     };
     var shopsId = route.query.shopsId;
     init(shopsId);
-    // model.currentShopInfo.forEach((item, index) => {
-    //   // item.commodity.forEach((son, i) => {
-    //   //   son.children.forEach((el, n) => {
-    //   //     el.num = 0;
-    //   //   });
-    //   // });
-    //   console.log(item);
-    // });
-    // const addShop = (status, num, i) => {
-    //   console.log(model.currentShopInfo);
-    //   console.log(
-    //     model.currentShopInfo[model.activeIndex].commodity[0].children[i]
-    //   );
-
-    //   if (status == "delect") {
-    //     // num - 1
-    //   }
-    // };
+    console.log(model.currentShopInfo);
+    model.currentShopInfo.commodity.forEach((item, index) => {
+      item.children.forEach((son, i) => {
+        son.num = 0;
+      });
+    });
+    const addShop = (status, num, i) => {
+      if (status == "delect") {
+        if (num - 1 >= 0) {
+          model.currentShopInfo.commodity[model.activeIndex].children[i].num = num - 1;
+        }
+      } else {
+        model.currentShopInfo.commodity[model.activeIndex].children[i].num = num + 1;
+      }
+    };
 
     return {
       ...toRefs(model),
