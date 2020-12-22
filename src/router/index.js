@@ -6,9 +6,7 @@ import { Notify, Toast } from 'vant';
 const routes = [
   {
     path: '/',
-    name: 'Index',
-    redirect: '/Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    redirect: '/Home/Index',
   },
   {
     path: '/Home',
@@ -103,8 +101,8 @@ router.beforeEach(async (to, from) => {
       return false;
     }
   } else {
-    if (to.path === '/' || to.path === '/Login' || to.path === '/Register' || to.path === '/ForgetPwd') {
-      
+    if (to.path === '/' || to.path === '/Login' || to.path === '/Register' || to.path === '/ForgetPwd' || to.path === '/Home/Index' || to.path === '/Commodity_details') {
+      console.log('aaaa')
     } else {
       Toast.fail('请登录之后再操作');
       setTimeout(() => {

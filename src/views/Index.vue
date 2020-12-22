@@ -111,6 +111,7 @@ export default {
   }
   .wsw-top-home-List {
     margin-bottom: 50px;
+    background: #fdf4e9;
     ::v-deep .van-grid-item__content {
       background: #fefcf9;
       img {

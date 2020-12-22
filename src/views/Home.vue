@@ -2,6 +2,7 @@
 <template>
   <div class="wsw-top-Home">
     <router-view></router-view>
+    <prompt></prompt>
     <van-tabbar v-model="active" inactive-color="#ed9428" active-color="#f44336">
       <van-tabbar-item icon="home-o" to="/Home/Index">首页</van-tabbar-item>
       <van-tabbar-item icon="shopping-cart-o" to="/Home/Order">订单</van-tabbar-item>
@@ -12,10 +13,13 @@
 
 <script>
 import { ref } from 'vue'
+import prompt from "@/components/prompt.vue"
 
 export default {
   name: '',
-  components: {},
+  components: {
+    prompt
+  },
   setup (propes, { root }) {
     const active = ref(0);
 
