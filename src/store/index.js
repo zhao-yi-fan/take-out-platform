@@ -29,8 +29,8 @@ export default createStore({
         shopsStart: "20",
         freight: "2",
         score: "4.5",
-        address: "北京市通州区砖厂南里40号楼华远铭悦好天地1层139号",
-        notice: "xxxx good",
+        address: "东城区搜秀城(崇文门外大街40号近羊市口)",
+        notice: "华莱士，国有本土汉堡品牌连锁店，一家主打速食及炸鸡的快餐店。",
         commodity: [
           {
             classificationId: 1,
@@ -38,13 +38,116 @@ export default createStore({
             children: [
               {
                 commodityId: "1",
-                commodityName: "汉堡",
-                commodityImage: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3285227120,3432336058&fm=26&gp=0.jpg",
+                commodityImage: "http://www.h96198.net/upload/cc1.jpg",
+                commodityName: "奥尔良鸡腿堡",
                 commodityMoney: 12.50,
-                commodityDescribe: "描述",
+                commodityDescribe: "美味",
+              },
+              {
+                commodityId: "2",
+                commodityImage: "http://www.h96198.net/upload/cc2.jpg",
+                commodityName: "板烧鸡腿堡",
+                commodityMoney: 12.50,
+                commodityDescribe: "美味",
+              },
+              {
+                commodityId: "3",
+                commodityImage: "http://www.h96198.net/upload/cc3.jpg",
+                commodityName: "劲脆鸡腿堡",
+                commodityMoney: 12.50,
+                commodityDescribe: "美味",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "http://www.h96198.net/upload/cc4.jpg",
+                commodityName: "老北京鸡肉卷",
+                commodityMoney: 12.50,
+                commodityDescribe: "美味",
+              },
+              {
+                commodityId: "5",
+                commodityImage: "http://www.h96198.net/upload/cc5.jpg",
+                commodityName: "麦辣鸡腿堡",
+                commodityMoney: 12.50,
+                commodityDescribe: "美味",
+              },
+              {
+                commodityId: "6",
+                commodityImage: "http://www.h96198.net/upload/cc6.jpg",
+                commodityName: "麦香鸡腿堡",
+                commodityMoney: 12.50,
+                commodityDescribe: "充满了夏天的味道",
+              },
+            ]
+          },
+          {
+            classificationId: 2,
+            text: "饮品",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage: "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I2R940-VN9.jpg",
+                commodityName: "热咖啡",
+                commodityMoney: 12.50,
+                commodityDescribe: "香甜可口",
+              },
+              {
+                commodityId: "2",
+                commodityImage: "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I203360-D409.jpg",
+                commodityName: "美年达",
+                commodityMoney: 12.50,
+                commodityDescribe: "香甜可口",
+              },
+              {
+                commodityId: "3",
+                commodityImage: "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I11T60-43c1.jpg",
+                commodityName: "牛奶",
+                commodityMoney: 12.50,
+                commodityDescribe: "香甜可口",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I014410-22001.jpg",
+                commodityName: "可乐",
+                commodityMoney: 12.50,
+                commodityDescribe: "香甜可口",
               },
             ],
           },
+          {
+            classificationId: 3,
+            text: "小食",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage: "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I941060-QO0.jpg",
+                commodityName: "蛋挞",
+                commodityMoney: 6.50,
+                commodityDescribe: "酥脆，可口",
+              },
+              {
+                commodityId: "2",
+                commodityImage: "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4IIAP-4BS.jpg",
+                commodityName: "薯条",
+                commodityMoney: 11.00,
+                commodityDescribe: "酥脆，可口",
+              },
+              {
+                commodityId: "3",
+                commodityImage: "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4J5A530-DY1.jpg",
+                commodityName: "香甜玉米",
+                commodityMoney: 10.00,
+                commodityDescribe: "酥脆，可口",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4J4635Z-495G.jpg",
+                commodityName: "香酥鸡腿",
+                commodityMoney: 12.50,
+                commodityDescribe: "酥脆，可口",
+              },
+            ],
+          }
         ],
       },
       {
@@ -58,7 +161,7 @@ export default createStore({
         freight: "2",
         score: "4.5",
         address: "北京市通州区砖厂南里40号楼华远铭悦好天地1层139号",
-        notice: "xxxx good",
+        notice: "皇堡在匿名口味测试中胜过麦当劳巨无霸和温迪（Wendy‘‘s）的Single汉堡。",
         commodity: [
           {
             classificationId: 1,
@@ -66,22 +169,43 @@ export default createStore({
             children: [
               {
                 commodityId: "1",
-                commodityImage: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg",
-                commodityName: "夏威夷菠萝堡",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_cpgvre.jpg",
+                commodityName: "美西沙拉皇堡",
                 commodityMoney: 12.50,
-                commodityDescribe: "充满了夏天的味道",
+                commodityDescribe: "美味",
               },
               {
                 commodityId: "2",
-                commodityImage: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg",
-                commodityName: "夏威夷菠萝堡",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_cz62tk.jpg",
+                commodityName: "复古烟熏鸡堡",
                 commodityMoney: 12.50,
-                commodityDescribe: "充满了夏天的味道",
+                commodityDescribe: "美味",
               },
               {
                 commodityId: "3",
-                commodityImage: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg",
-                commodityName: "夏威夷菠萝堡",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_cspfme.jpg",
+                commodityName: "皇堡/天椒皇堡",
+                commodityMoney: 12.50,
+                commodityDescribe: "美味",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_chtv2q.jpg",
+                commodityName: "双层皇堡",
+                commodityMoney: 12.50,
+                commodityDescribe: "美味",
+              },
+              {
+                commodityId: "5",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_cpvsm4.jpg",
+                commodityName: "意式荤劲十足很牛堡",
+                commodityMoney: 12.50,
+                commodityDescribe: "美味",
+              },
+              {
+                commodityId: "6",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_c5gdry.jpg",
+                commodityName: "三层皇堡",
                 commodityMoney: 12.50,
                 commodityDescribe: "充满了夏天的味道",
               },
@@ -93,24 +217,65 @@ export default createStore({
             children: [
               {
                 commodityId: "1",
-                commodityImage: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg",
-                commodityName: "夏威夷菠萝堡",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_csx4ym.jpg",
+                commodityName: "热咖啡",
                 commodityMoney: 12.50,
-                commodityDescribe: "充满了夏天的味道",
+                commodityDescribe: "香甜可口",
               },
               {
                 commodityId: "2",
-                commodityImage: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg",
-                commodityName: "夏威夷菠萝堡",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_csfnah.jpg",
+                commodityName: "印度金芒果气泡饮",
                 commodityMoney: 12.50,
-                commodityDescribe: "充满了夏天的味道",
+                commodityDescribe: "香甜可口",
               },
               {
                 commodityId: "3",
-                commodityImage: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=459317208,1913533082&fm=26&gp=0.jpg",
-                commodityName: "夏威夷菠萝堡",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_c7nfxm.jpg",
+                commodityName: "臻选豆浆/臻选冰豆浆",
                 commodityMoney: 12.50,
-                commodityDescribe: "充满了夏天的味道",
+                commodityDescribe: "香甜可口",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "http://d3.5ikfc.com/p/1/136/5ikfc_2u5ene.jpg",
+                commodityName: "港式奶茶",
+                commodityMoney: 12.50,
+                commodityDescribe: "香甜可口",
+              },
+            ],
+          },
+          {
+            classificationId: 3,
+            text: "小食",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage: "http://d3.5ikfc.com/p/3/136/5ikfc_4rddp8.jpg",
+                commodityName: "霸王鸡盒",
+                commodityMoney: 33.50,
+                commodityDescribe: "酥脆，可口",
+              },
+              {
+                commodityId: "2",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_c92hju.jpg",
+                commodityName: "薯霸王",
+                commodityMoney: 11.00,
+                commodityDescribe: "酥脆，可口",
+              },
+              {
+                commodityId: "3",
+                commodityImage: "http://d3.5ikfc.com/p/2/136/5ikfc_ctvu8s.jpg",
+                commodityName: "洋葱圈",
+                commodityMoney: 10.00,
+                commodityDescribe: "酥脆，可口",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "http://d3.5ikfc.com/p/1/136/5ikfc_2qe6s6.jpg",
+                commodityName: "霸王鸡条",
+                commodityMoney: 12.50,
+                commodityDescribe: "酥脆，可口",
               },
             ],
           }
@@ -126,7 +291,7 @@ export default createStore({
         shopsStart: "20",
         freight: "2",
         score: "4.5",
-        address: "肯德基KFC坚持“立足中国、融入生活”,打造新快餐,提供早餐,午餐,下午茶,晚餐,夜宵和甜品站等丰富选择。",
+        address: "北京市东城区东单北大街63号",
         notice: "肯德基24小时外卖送餐电话:4008823823。",
         commodity: [
           {
@@ -219,7 +384,7 @@ export default createStore({
             ],
           },
           {
-            classificationId: 2,
+            classificationId: 3,
             text: "酥脆小食",
             children: [
               {
@@ -266,6 +431,152 @@ export default createStore({
               },
             ],
           }
+        ],
+      },
+      {
+        shopsId: "4",
+        shopsName: "张亮麻辣烫",
+        shopsImage:
+          "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2514831641,2807693253&fm=26&gp=0.jpg",
+        signImage:
+          "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1650785558,1302371403&fm=26&gp=0.jpg",
+        shopsStart: "20",
+        freight: "2",
+        score: "4.6",
+        address: "北京市东城区北京站西街1-9附近",
+        notice: "张亮麻辣烫将“传统”工艺与“现代”口味相融合，麻中求柔和、辣中求层次、汤中求精华。美味定制，单锅单烫，“锅”然有味",
+        commodity: [
+          {
+            classificationId: 1,
+            text: "汤底",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3232895281,2776489672&fm=26&gp=0.jpg",
+                commodityName: "清汤汤底",
+                commodityMoney: 2.50,
+                commodityDescribe: "清汤，不辣",
+              },
+              {
+                commodityId: "2",
+                commodityImage: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2155294024,207681251&fm=26&gp=0.jpg",
+                commodityName: "麻辣汤底",
+                commodityMoney: 2.50,
+                commodityDescribe: "牛油的香气",
+              },
+              {
+                commodityId: "3",
+                commodityImage: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2394997130,2249043428&fm=26&gp=0.jpg",
+                commodityName: "番茄汤底",
+                commodityMoney: 2.50,
+                commodityDescribe: "酸甜的口感",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2062287663,3958928271&fm=26&gp=0.jpg",
+                commodityName: "菌汤汤底",
+                commodityMoney: 2.50,
+                commodityDescribe: "汤底鲜甜",
+              }
+            ]
+          },
+          {
+            classificationId: 2,
+            text: "菜品",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage: "http://p5.itc.cn/images01/20200723/6f0cbe6cbf8b48069dda6467c1271c4a.jpeg",
+                commodityName: "油条",
+                commodityMoney: 4.00,
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "2",
+                commodityImage: "http://p0.itc.cn/images01/20200723/ce8040f922e94ac8ba32e4c3fb5ca1cb.jpeg",
+                commodityName: "粉丝",
+                commodityMoney: 4.00,
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "3",
+                commodityImage: "http://p4.itc.cn/images01/20200723/edfa4308518649afbe19dbb427f9fe28.jpeg",
+                commodityName: "豆泡",
+                commodityMoney: 3.50,
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1637039159,2159516070&fm=26&gp=0.jpg",
+                commodityName: "娃娃菜",
+                commodityMoney: 3.50,
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "5",
+                commodityImage: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=824680010,3801588537&fm=26&gp=0.jpg",
+                commodityName: "油麦菜",
+                commodityMoney: 3.50,
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "6",
+                commodityImage: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1083946742,3984705671&fm=26&gp=0.jpg",
+                commodityName: "亲亲肠",
+                commodityMoney: 4.00,
+                commodityDescribe: "口感极好",
+              },
+            ],
+          },
+          {
+            classificationId: 3,
+            text: "饮品",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1016928880,1852879407&fm=26&gp=0.jpg",
+                commodityName: "可乐",
+                commodityMoney: 4.00,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "2",
+                commodityImage: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1369082197,1372179036&fm=26&gp=0.jpg",
+                commodityName: "雪碧",
+                commodityMoney: 4.00,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "3",
+                commodityImage: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=633815778,3039752227&fm=26&gp=0.jpg",
+                commodityName: "芬达",
+                commodityMoney: 4.00,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "4",
+                commodityImage: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3807687772,18477255&fm=26&gp=0.jpg",
+                commodityName: "王老吉",
+                commodityMoney: 4.00,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "5",
+                commodityImage: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2807285171,3837020360&fm=26&gp=0.jpg",
+                commodityName: "冰红茶",
+                commodityMoney: 4.00,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "6",
+                commodityImage: "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1787354675,3503691018&fm=26&gp=0.jpg",
+                commodityName: "绿茶",
+                commodityMoney: 4.00,
+                commodityDescribe: "冰凉可口",
+              },
+            ],
+          },
+         
         ],
       },
     ],

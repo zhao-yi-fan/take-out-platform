@@ -1,13 +1,7 @@
 <!-- 商品详情 -->
 <template>
   <div class="wsw-top-Commodity">
-    <van-nav-bar
-      :title="currentShopInfo.shopsName"
-      left-text="返回"
-      left-arrow
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-    >
+    <van-nav-bar :title="currentShopInfo.shopsName" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
       <template #right>
         <van-icon :name="collectionStatus ? 'star' : 'star-o'" size="18" />
         收藏
@@ -22,53 +16,23 @@
         </div>
         <van-tag type="danger">优质商家</van-tag>
         <br />
-        <span class="wsw-top-Commodity-shop-card-address"
-          >地址：{{ currentShopInfo.address }}</span
-        >
+        <span class="wsw-top-Commodity-shop-card-address">地址：{{ currentShopInfo.address }}</span>
         <van-notice-bar scrollable :text="currentShopInfo.notice" />
       </div>
       <div class="wsw-top-Commodity-list">
-        <van-tree-select
-          v-model:active-id="activeId"
-          v-model:main-active-index="activeIndex"
-          :items="items"
-        >
+        <van-tree-select v-model:active-id="activeId" v-model:main-active-index="activeIndex" :items="items">
           <template #content>
-            <van-card
-              v-for="(item, index) in items[activeIndex].children"
-              :key="index"
-              :price="item.commodityMoney"
-              :desc="item.commodityDescribe"
-              :title="item.commodityName"
-              :thumb="item.commodityImage"
-            >
+            <van-card v-for="(item, index) in items[activeIndex].children" :key="index" :price="item.commodityMoney" :desc="item.commodityDescribe" :title="item.commodityName" :thumb="item.commodityImage">
               <template #footer>
-                <van-button
-                  icon="minus"
-                  type="primary"
-                  size="mini"
-                  round
-                  plain
-                  @click="addShop('delect', item.num, index)"
-                />
+                <van-button icon="minus" type="primary" size="mini" round plain @click="addShop('delect', item.num, index)" />
                 <span>{{ item.num }}</span>
-                <van-button
-                  icon="plus"
-                  type="primary"
-                  size="mini"
-                  round
-                  @click="addShop('add', item.num, index)"
-                />
+                <van-button icon="plus" type="primary" size="mini" round @click="addShop('add', item.num, index)" />
               </template>
             </van-card>
           </template>
         </van-tree-select>
       </div>
-      <van-submit-bar
-        :price="price"
-        button-text="提交订单"
-        @submit="onSubmit"
-      />
+      <van-submit-bar :price="price" button-text="提交订单" @submit="onSubmit" />
     </div>
     <wsw-prompt></wsw-prompt>
   </div>
@@ -79,14 +43,14 @@ import { reactive, toRefs, computed, onMounted } from "vue";
 import { Dialog, Toast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
-import { prompt } from "@/components/prompt.vue";
+import prompt from "./../components/Prompt";
 
 export default {
   name: "",
   components: {
     "wsw-prompt": prompt
   },
-  setup(propes, { root }) {
+  setup (propes, { root }) {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
@@ -120,6 +84,7 @@ export default {
     };
 
     const onSubmit = async () => {
+      if (!store.state.loginInfo) return Toast("您未登录");
       if (model.price == 0) {
         Toast.fail("请选择商品");
       }
@@ -281,6 +246,7 @@ $b: 390px;
   .wsw-top-Commodity-shop {
     img {
       width: 100%;
+      height: 220px;
     }
     .wsw-top-Commodity-shop-card {
       width: 80%;

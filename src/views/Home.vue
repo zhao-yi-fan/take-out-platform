@@ -13,7 +13,7 @@
 
 <script>
 import { ref } from 'vue'
-import prompt from "@/components/prompt.vue"
+import  prompt  from "./../components/Prompt";
 
 export default {
   name: '',
