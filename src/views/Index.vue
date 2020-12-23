@@ -116,6 +116,7 @@ export default {
       background: #fefcf9;
       img {
         width: 100%;
+        height: 150px;
       }
       .wsw-top-home-List-title {
         width: 100%;

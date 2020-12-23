@@ -43,7 +43,7 @@ import { reactive, toRefs, computed, onMounted } from "vue";
 import { Dialog, Toast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
-import prompt from "./../components/Prompt";
+import prompt from "@/components/prompt.vue"
 
 export default {
   name: "",
@@ -85,8 +85,9 @@ export default {
 
     const onSubmit = async () => {
       if (!store.state.loginInfo) return Toast("您未登录");
-      if (model.price == 0) {
-        Toast.fail("请选择商品");
+      if (model.price == "0") {
+        console.log(model.price);
+        return Toast.fail("请选择商品");
       }
       let commodity = model.currentShopInfo.commodity;
       let foodArr = [];
@@ -208,7 +209,7 @@ export default {
         if (Array.isArray(item.children) && item.children.length > 0) {
           item.children.forEach((sonItem, sonIndex) => {
             if (typeof sonItem.num == "number") {
-              sum += sonItem.num * sonItem.commodityMoney;
+              sum += sonItem.num * Number(sonItem.commodityMoney);
             }
           });
         }
