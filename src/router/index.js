@@ -109,7 +109,7 @@ router.beforeEach(async (to, from) => {
       return false;
     }
   } else {
-    if (to.path === '/' || to.path === '/Login' || to.path === '/Register' || to.path === '/ForgetPwd' || to.path === '/Home/Index' || to.path === '/Commodity_details') {
+    if (to.path === '/' || to.path === '/Login' || to.path === '/Register' || to.path === '/ForgetPwd' || to.path === '/Home/Index' || to.path === '/Commodity_details' || to.path === '/search') {
       console.log('aaaa')
     } else {
       Toast.fail('请登录之后再操作');
