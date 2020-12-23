@@ -3,35 +3,32 @@
   <div class="wsw-top-Home">
     <router-view></router-view>
     <prompt></prompt>
-    <van-tabbar v-model="active" inactive-color="#ed9428" active-color="#f44336">
-      <van-tabbar-item icon="home-o" to="/Home/Index">首页</van-tabbar-item>
-      <van-tabbar-item icon="shopping-cart-o" to="/Home/Order">订单</van-tabbar-item>
-      <van-tabbar-item icon="user-o" to="/Home/User">我的</van-tabbar-item>
-    </van-tabbar>
+    <tab-bar></tab-bar>
   </div>
 </template>
 
 <script>
 import { ref } from 'vue'
-import prompt from "@/components/prompt.vue"
+import prompt from "@/components/Prompt.vue"
+import TabBar from './TabBar.vue';
 
 export default {
   name: '',
   components: {
-    prompt
+    prompt,
+    TabBar
   },
-  setup (propes, { root }) {
-    const active = ref(0);
+  TabBaretup (propes, { root }) {
 
     return {
-      active,
+      
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.wsw-top-Home{
+.wsw-top-Home {
   width: 100%;
   height: 100%;
 }

@@ -6,7 +6,7 @@
       <span>饿了么</span>
       <!-- <i class="wsw-r">收货地址</i>
       <van-icon name="location-o" color="#ccc" size="24" class="wsw-r" /> -->
-      <van-icon name="search" color="#ccc" size="24" class="wsw-r" />
+      <van-icon name="search" color="#ccc" size="24" class="wsw-r" @click="toSearch"/>
     </div>
     <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
       <van-swipe-item>
@@ -67,9 +67,17 @@ export default {
         }
       })
     }
+    const toSearch = (shopsId) => {
+      router.push({
+        path: '/search',
+      })
+    }
+
+    
     return {
       ...toRefs(model),
-      toDetail
+      toDetail,
+      toSearch
     }
   }
 }

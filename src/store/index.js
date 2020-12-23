@@ -1268,7 +1268,7 @@ export default createStore({
               {
                 commodityId: "4",
                 commodityImage:
-                "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2919483030,3211395605&fm=26&gp=0.jpg",
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2919483030,3211395605&fm=26&gp=0.jpg",
                 commodityName: "海鲜豆腐汤",
                 commodityMoney: "26.00",
                 commodityDescribe: "口感极好",
@@ -1391,7 +1391,7 @@ export default createStore({
               {
                 commodityId: "4",
                 commodityImage:
-                "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3046708624,604077741&fm=26&gp=0.jpg",
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3046708624,604077741&fm=26&gp=0.jpg",
                 commodityName: "暴打金柠四季春",
                 commodityMoney: "26.00",
                 commodityDescribe: "口感极好",
@@ -1506,7 +1506,7 @@ export default createStore({
               {
                 commodityId: "4",
                 commodityImage:
-                "http://img.holiland.com/data/wapimg/202004/1587523176848707003.jpg",
+                  "http://img.holiland.com/data/wapimg/202004/1587523176848707003.jpg",
                 commodityName: "爆浆球",
                 commodityMoney: "32.00",
                 commodityDescribe: "口感极好",
@@ -1552,7 +1552,7 @@ export default createStore({
               {
                 commodityId: "4",
                 commodityImage:
-                "http://img.holiland.com/data/wapimg/201702/1487804499830446925.jpg",
+                  "http://img.holiland.com/data/wapimg/201702/1487804499830446925.jpg",
                 commodityName: "青森芝士条",
                 commodityMoney: "38.00",
                 commodityDescribe: "口感极好",
@@ -1613,7 +1613,7 @@ export default createStore({
     },
   },
   actions: {
-    login({ commit, state }, loginData = {}) {
+    login ({ commit, state }, loginData = {}) {
       let { username, password } = loginData;
       for (let i = 0; i < state.userList.length; i++) {
         let userItem = state.userList[i];
@@ -1624,7 +1624,7 @@ export default createStore({
       }
       return false; // 登陆失败
     },
-    register({ commit, state }, registerData = {}) {
+    register ({ commit, state }, registerData = {}) {
       let { username, password, secret } = registerData;
       let lastId = state.userList[state.userList.length - 1].userId;
       lastId++;
@@ -1642,7 +1642,7 @@ export default createStore({
       });
       return true; // 注册成功
     },
-    forgetPwd({ commit, state }, forgetPwd = {}) {
+    forgetPwd ({ commit, state }, forgetPwd = {}) {
       let { username, password, secret } = forgetPwd;
       let userList = state.userList;
       for (let i = 0; i < userList.length; i++) {
@@ -1668,7 +1668,7 @@ export default createStore({
         msg: "修改失败，用户名不存在！",
       };
     },
-    setOrderInfo({ commit, state }, orderForm = {}) {
+    setOrderInfo ({ commit, state }, orderForm = {}) {
       let { userId, shopsId, money, foodList } = orderForm;
       let businessesId =
         state.orderList[state.orderList.length - 1].businessesId;
@@ -1691,7 +1691,7 @@ export default createStore({
         businessesId,
       }; // 下单成功
     },
-    setOrderStatus({ commit, state }, statusForm = {}) {
+    setOrderStatus ({ commit, state }, statusForm = {}) {
       let { businessesId, address } = statusForm;
       let isExist = false;
       state.orderList.forEach((item, index) => {
@@ -1707,7 +1707,7 @@ export default createStore({
         return false; // 下单失败
       }
     },
-    getMyOrder({ commit, state }, myForm = {}) {
+    getMyOrder ({ commit, state }, myForm = {}) {
       let { userId } = myForm;
       let myOrderList = [];
       state.orderList.forEach((item, index) => {
@@ -1741,6 +1741,16 @@ export default createStore({
       });
       return myOrderList;
     },
+    search ({ commit, state }, key = '') {
+      key = key.trim();
+      let searchList = [];
+      state.shopsList.forEach((item, index) => {
+        if (item.shopsName.indexOf(key) > -1) {
+          searchList.push(item)
+        }
+      })
+      return searchList;
+    }
   },
   plugins: [createPersistedState()],
   modules: {},
