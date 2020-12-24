@@ -121,6 +121,7 @@ export default {
     margin-bottom: 50px;
     background: #fdf4e9;
     ::v-deep .van-grid-item__content {
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
       background: #fefcf9;
       img {
         width: 100%;
