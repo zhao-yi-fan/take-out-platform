@@ -6,6 +6,7 @@
       <van-tabs>
         <van-tab title="全部订单">
           <van-collapse v-model="activeNames">
+            <van-empty description="无订单？赶快去下单吧" v-if="myOrderList.length == 0" />
             <van-collapse-item :name="item.businessesId" v-for="(item) in myOrderList" :key="item.businessesId">
               <template #title>
                 <div class="wsw-top-Order-list-collapse">

@@ -10,6 +10,7 @@
     <div class="wsw-top-User-top-menu">
       <van-tabs type="card">
         <van-tab title="收藏商家">
+          <van-empty description="无收藏的商家" v-if="currCollectionShops.length == 0" />
           <div class="wsw-top-User-top-menu-item wsw-clearfix" v-for="(item) in currCollectionShops" :key="item.shopsId">
             <img class="wsw-l" :src="item.shopsImage" alt="" srcset="" width="50" />
             <span class="wsw-r">{{item.shopsName}}</span>
@@ -17,6 +18,7 @@
 
         </van-tab>
         <van-tab title="历史评价">
+          <van-empty description="无历史评价" v-if="currEvaluateList.length == 0" />
           <van-collapse v-model="activeNames">
             <van-collapse-item :title="item.shopsName" :name="item.businessesId" v-for="(item) in currEvaluateList" :key="item.businessesId">
               <template #title>
@@ -59,7 +61,8 @@ export default {
         .then(() => {
           console.log('aaa');
           store.state.loginInfo = null;
-          router.push('/Home/Order')
+          console.log(store.state.loginInfo, 'aaaa');
+          router.push('/Login')
         })
         .catch(() => {
           // on cancel

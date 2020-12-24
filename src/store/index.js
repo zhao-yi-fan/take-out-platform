@@ -1635,7 +1635,7 @@ export default createStore({
         }
       }
       state.userList.push({
-        lastId,
+        "userId": lastId,
         username,
         password,
         secret,
@@ -1707,14 +1707,16 @@ export default createStore({
         return false; // 下单失败
       }
     },
-    getMyOrder ({ commit, state }, myForm = {}) {
-      let { userId } = myForm;
+    getMyOrder ({ commit, state }, userId = {}) {
+      // let { userId } = myForm;
       let myOrderList = [];
       state.orderList.forEach((item, index) => {
-        if (item.useId == userId && item.status == "success") {
+        console.log(index, state.orderList);
+        if (item.userId == userId && item.status == "success") {
           myOrderList.push(item);
         }
       });
+      console.log(myOrderList,'myOrderList');
       // 增加商品信息
       myOrderList.map((currentItem, index) => {
         for (let i = 0; i < state.shopsList.length; i++) {

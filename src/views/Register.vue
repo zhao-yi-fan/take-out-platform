@@ -1,7 +1,7 @@
 <!-- 注册页面 -->
 <template>
   <div class="wsw-login">
-    <span class="wsw-login-title">饿了么</span>
+    <router-link tag="span" to="/" class="wsw-login-title">饿了么</router-link>
     <div class="wsw-login-body">
       <van-form @submit="onSubmit">
         <van-field v-model="username" name="username" label="账号" placeholder="请输入账号" :rules="[{ required: true, message: '请填写账号' }]" />

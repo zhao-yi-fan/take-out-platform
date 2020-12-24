@@ -43,7 +43,7 @@ import { reactive, toRefs, computed, onMounted } from "vue";
 import { Dialog, Toast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
-import prompt from "@/components/Prompt.vue"
+import prompt from "@/components/prompt.vue"
 
 export default {
   name: "",

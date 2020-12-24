@@ -1,4 +1,4 @@
-<!-- 首页 -->
+<!-- 付款页面 -->
 <template>
   <div class="wsw-top-bill">
     <div class="wsw-top-bill-return">

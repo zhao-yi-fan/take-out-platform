@@ -9,7 +9,7 @@
 
 <script>
 import { ref } from 'vue'
-import prompt from "@/components/Prompt.vue"
+import prompt from "@/components/prompt.vue"
 import TabBar from './TabBar.vue';
 
 export default {
