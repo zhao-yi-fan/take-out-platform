@@ -62,7 +62,7 @@ export default {
           console.log('aaa');
           store.state.loginInfo = null;
           console.log(store.state.loginInfo, 'aaaa');
-          router.push('/Login')
+          router.push('/Home/Index')
         })
         .catch(() => {
           // on cancel
@@ -112,7 +112,7 @@ $b: 390px;
 .wsw-top-User {
   width: 100%;
   height: 100%;
-  background: #fdf4e9;
+  background: #f8f8fa;
   position: relative;
   .wsw-top-User-top {
     top: 20px;

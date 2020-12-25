@@ -1,32 +1,46 @@
 <!-- 订单列表 -->
 <template>
   <div class="wsw-top-Order">
-    <div class="wsw-top-Order-title">订单</div>
+    <div class="wsw-top-Order-title">我的订单</div>
     <div class="wsw-top-Order-list">
       <van-tabs>
         <van-tab title="全部订单">
           <van-collapse v-model="activeNames">
-            <van-empty description="无订单？赶快去下单吧" v-if="myOrderList.length == 0" />
-            <van-collapse-item :name="item.businessesId" v-for="(item) in myOrderList" :key="item.businessesId">
+            <van-empty
+              description="无订单？赶快去下单吧"
+              v-if="myOrderList.length == 0"
+            />
+            <van-collapse-item
+              :name="item.businessesId"
+              v-for="item in myOrderList"
+              :key="item.businessesId"
+            >
               <template #title>
                 <div class="wsw-top-Order-list-collapse">
                   <img :src="item.shopsInfo.shopsImage" alt="" width="75" />
-                  <span>{{item.shopsInfo.shopsName}}</span>
+                  <span>{{ item.shopsInfo.shopsName }}</span>
                 </div>
                 <div class="wsw-top-Order-list-money">
                   <span class="wsw-l">已送达</span>
-                  <span class="wsw-r">共计：{{item.money}}元</span>
+                  <span class="wsw-r">共计：{{ item.money }}元</span>
                 </div>
               </template>
               <div class="wsw-top-Order-list-orderList wsw-clearfix">
-                <p v-for="(foodItem) in item.foodList" :key="foodItem.foodId">
-                  <span>{{foodItem.foodName || ''}}</span>
-                  <span>¥&nbsp;{{foodItem.foodMoney || 0}}</span>
+                <p v-for="foodItem in item.foodList" :key="foodItem.foodId">
+                  <span>{{ foodItem.foodName || "" }}</span>
+                  <span>¥&nbsp;{{ foodItem.foodMoney || 0 }}</span>
                   <span>
-                    <van-icon name="cross" />{{foodItem.foodNum || 0}}
+                    <van-icon name="cross" />{{ foodItem.foodNum || 0 }}
                   </span>
                 </p>
-                <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation(item.businessesId)" v-if="item.evaluate.content == ''">
+                <van-button
+                  class="wsw-r"
+                  color="linear-gradient(to right, #ff6034, #ee0a24)"
+                  size="small"
+                  round
+                  @click="Evaluation(item.businessesId)"
+                  v-if="item.evaluate.content == ''"
+                >
                   评价
                 </van-button>
               </div>
@@ -35,9 +49,29 @@
         </van-tab>
       </van-tabs>
     </div>
-    <van-dialog v-model:show="show" title="评价" show-cancel-button :before-close="beforeClose">
-      <van-rate v-model="score" :size="25" color="#ffd21e" void-icon="star" void-color="#eee" />
-      <van-field v-model="message" rows="2" autosize label="评价内容" type="textarea" maxlength="50" placeholder="请输入评价内容" show-word-limit />
+    <van-dialog
+      v-model:show="show"
+      title="评价"
+      show-cancel-button
+      :before-close="beforeClose"
+    >
+      <van-rate
+        v-model="score"
+        :size="25"
+        color="#ffd21e"
+        void-icon="star"
+        void-color="#eee"
+      />
+      <van-field
+        v-model="message"
+        rows="2"
+        autosize
+        label="评价内容"
+        type="textarea"
+        maxlength="50"
+        placeholder="请输入评价内容"
+        show-word-limit
+      />
     </van-dialog>
   </div>
 </template>
@@ -51,7 +85,7 @@ import { useStore } from "vuex";
 export default {
   name: "",
   components: {},
-  setup (propes, { root }) {
+  setup(propes, { root }) {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
@@ -59,7 +93,7 @@ export default {
       message: null,
       myOrderList: [],
       score: 5,
-      businessesId: null
+      businessesId: null,
     });
     const activeNames = ref(["1"]);
     const show = ref(false);
@@ -67,21 +101,21 @@ export default {
     const Evaluation = (id) => {
       show.value = true;
       model.businessesId = id;
-    }
+    };
 
     const init = async (userId) => {
-      model.myOrderList = await store.dispatch('getMyOrder', userId);
-      console.log(model.myOrderList, 'model.myOrderList===');
-    }
+      model.myOrderList = await store.dispatch("getMyOrder", userId);
+      console.log(model.myOrderList, "model.myOrderList===");
+    };
 
     onMounted(() => {
       let userId = store.state.loginInfo.userId;
-      init(userId)
-    })
+      init(userId);
+    });
     const beforeClose = (action, done) => {
       console.log(action);
       if (action == "confirm") {
-        console.log('aaa',);
+        console.log("aaa");
         if (model.message) {
           store.state.orderList.forEach((item, index) => {
             console.log(item, model.businessesId);
@@ -89,25 +123,24 @@ export default {
               item.evaluate.content = model.message;
               item.evaluate.score = model.score;
             }
-          })
-          Toast('评价成功');
+          });
+          Toast("评价成功");
           return true;
         } else {
-          Toast('评价内容不能为空');
+          Toast("评价内容不能为空");
           return false;
-
         }
-      }else{
+      } else {
         return true;
       }
-    }
+    };
 
     return {
       ...toRefs(model),
       activeNames,
       show,
       Evaluation,
-      beforeClose
+      beforeClose,
     };
   },
 };
@@ -117,13 +150,15 @@ export default {
 .wsw-top-Order {
   width: 100%;
   height: 100%;
-  background: #fdf4e9;
+  background: #f8f8fa;
   .wsw-top-Order-title {
     font-size: 18px;
     font-weight: bolder;
-    margin-left: 5%;
-    padding-top: 10px;
-    color: #333;
+    padding-left: 5%;
+    height: 60px;
+    line-height: 60px;
+    color: #fff;
+    background-image: linear-gradient(to right, #f1b815, #efa71c);
   }
   .wsw-top-Order-list {
     width: 90%;
@@ -131,39 +166,42 @@ export default {
     //   border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 70px;
-    .wsw-top-Order-list-collapse {
-      img {
-        border-radius: 50%;
-        border: 1px solid #ccc;
-      }
-      span {
-        margin-left: 20px;
-        font-size: 16px;
-        font-weight: bolder;
-      }
-    }
-    .wsw-top-Order-list-money {
-      padding: 20px 0;
-    }
-    .wsw-top-Order-list-orderList {
-      padding: 5px 0;
-      p {
-        height: 24px;
-        line-height: 24px;
+    .van-tabs {
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      .wsw-top-Order-list-collapse {
+        img {
+          border-radius: 50%;
+          border: 1px solid #ccc;
+        }
         span {
-          display: inline-block;
-          &:first-child {
-            width: 68%;
-          }
-          &:nth-child(2),
-          &:last-child {
-            width: 16%;
-            text-align: right;
-          }
+          margin-left: 20px;
+          font-size: 16px;
+          font-weight: bolder;
         }
       }
-      .van-button {
-        margin-top: 22px;
+      .wsw-top-Order-list-money {
+        padding: 20px 0;
+      }
+      .wsw-top-Order-list-orderList {
+        padding: 5px 0;
+        p {
+          height: 24px;
+          line-height: 24px;
+          span {
+            display: inline-block;
+            &:first-child {
+              width: 60%;
+            }
+            &:nth-child(2),
+            &:last-child {
+              width: 20%;
+              text-align: right;
+            }
+          }
+        }
+        .van-button {
+          margin-top: 22px;
+        }
       }
     }
   }

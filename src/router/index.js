@@ -132,7 +132,7 @@ router.beforeEach(async (to, from) => {
       to.path === "/search"
     ) {
     } else if (to.path === "/Home/Order" || to.path === "/Home/User") {
-      Toast.fail("请登录之后再操作");
+      Toast.fail("您还未登录~");
       return false;
     } else {
       Toast.fail("请登录之后再操作");

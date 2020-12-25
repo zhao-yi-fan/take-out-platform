@@ -1,8 +1,8 @@
 <template>
   <van-tabbar v-model="active" inactive-color="#ed9428" active-color="#f44336">
-    <van-tabbar-item icon="home-o" to="/Home/Index">首页</van-tabbar-item>
-    <van-tabbar-item icon="shopping-cart-o" to="/Home/Order">订单</van-tabbar-item>
-    <van-tabbar-item icon="user-o" to="/Home/User">我的</van-tabbar-item>
+    <van-tabbar-item icon="wap-home" to="/Home/Index">首页</van-tabbar-item>
+    <van-tabbar-item icon="shopping-cart" to="/Home/Order">订单</van-tabbar-item>
+    <van-tabbar-item icon="manager" to="/Home/User">我的</van-tabbar-item>
   </van-tabbar>
 </template>
 
