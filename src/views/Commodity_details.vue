@@ -76,7 +76,7 @@ export default {
         message: "返回首页会清空购物车",
       })
         .then(() => {
-          router.push("/Home/Index");
+          router.go(-1);
         })
         .catch(() => {
           // on cancel
