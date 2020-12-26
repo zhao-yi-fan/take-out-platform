@@ -30,24 +30,11 @@ export default {
     const store = useStore();
     const activeNames = ref(["1"]);
     const model = reactive({
-      currCollectionShops: [],
       currEvaluateList: []
     })
     const init = () => {
-      let { collectionList, loginInfo, shopsList, orderList } = store.state;
+      let { loginInfo, shopsList, orderList } = store.state;
       let userId = loginInfo.userId;
-      let shopsIds = [];
-      collectionList.forEach((item, index) => {
-        if (item.userId == userId) {
-          shopsIds = item.shopsIds;
-        }
-      })
-      shopsList.forEach((item, index) => {
-        if (shopsIds.includes(item.shopsId)) {
-          model.currCollectionShops.push(item);
-        }
-      })
-      console.log(model.currCollectionShops, 'currCollectionShops===');
 
       orderList.forEach((item, index) => {
         if (item.userId == userId && item.evaluate.content) {

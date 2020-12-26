@@ -7,15 +7,15 @@
         <span>修改密码</span>
         <van-icon name="arrow" color="#ccc" size="24" />
       </div>
-      <div class="setting-btn" @click="tips('欢迎评分')">
+      <div class="setting-btn" @click="tips('评分成功')">
         <span>欢迎评分</span>
         <van-icon name="arrow" color="#ccc" size="24" />
       </div>
-      <div class="setting-btn" @click="tips('意见反馈')">
+      <div class="setting-btn" @click="tips('反馈成功')">
         <span>意见反馈</span>
         <van-icon name="arrow" color="#ccc" size="24" />
       </div>
-      <div class="setting-btn" @click="tips('联系客服')">
+      <div class="setting-btn" @click="tips('请联系 移应2018-1-21吴尚尉')">
         <span>联系客服</span>
         <van-icon name="arrow" color="#ccc" size="24" />
       </div>

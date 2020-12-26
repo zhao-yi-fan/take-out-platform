@@ -4,7 +4,7 @@
     <div class="wsw-top-User-top wsw-clearfix">
       <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg" alt="" />
       <div class="user-cont">
-        <p>蜡笔小新</p>
+        <p>{{loginInfo.username}}</p>
         <p>填满了肚子，人就不会空虚</p>
       </div>
     </div>
@@ -72,38 +72,10 @@ export default {
     const activeNames = ref(["1"]);
     const model = reactive({
       currCollectionShops: [],
-      currEvaluateList: []
+      currEvaluateList: [],
+      loginInfo: computed(() => store.state.loginInfo)
     })
 
-    const init = () => {
-      let { collectionList, loginInfo, shopsList, orderList } = store.state;
-      let userId = loginInfo.userId;
-      let shopsIds = [];
-      collectionList.forEach((item, index) => {
-        if (item.userId == userId) {
-          shopsIds = item.shopsIds;
-        }
-      })
-      shopsList.forEach((item, index) => {
-        if (shopsIds.includes(item.shopsId)) {
-          model.currCollectionShops.push(item);
-        }
-      })
-      console.log(model.currCollectionShops, 'currCollectionShops===');
-
-      orderList.forEach((item, index) => {
-        if (item.userId == userId && item.evaluate.content) {
-          shopsList.forEach((shopItem, shopIndex) => {
-            if (shopItem.shopsId == item.shopsId) {
-              item.shopsName = shopItem.shopsName;
-              model.currEvaluateList.push(item);
-            }
-          })
-        }
-      })
-      console.log(model.currEvaluateList, 'currEvaluateList===');
-    }
-    init();
     const toOrder = () => {
       router.push('/Home/Order')
     }
