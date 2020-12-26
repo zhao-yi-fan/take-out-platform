@@ -122,7 +122,7 @@ export default {
       setTimeout(() => {
         Toast.clear();
         if (resObj.code) {
-          Toast.success("下单成功");
+          Toast.success("挑选成功");
           router.push({
             path: "/Bill",
             query: {
@@ -183,14 +183,32 @@ export default {
             });
           }
         });
+        store.commit('SET_COLLECTION_LIST', model.collectionList);
       } else {
-        model.collectionList.forEach((item, index) => {
+        let isExist = false;
+        for (let i = 0; i < model.collectionList.length; i++) {
+          let item = model.collectionList[i];
           if (item.userId == store.state.loginInfo.userId) {
+            isExist = true;
             item.shopsIds.push(model.shopsId);
             model.collectionStatus = true;
-            Toast("收藏成功");
+            store.commit('SET_COLLECTION_LIST', model.collectionList);
+            return Toast("收藏成功");
           }
-        });
+        }
+        if (!isExist) {
+          let collectionId = model.collectionList[model.collectionList.length - 1].collectionId;
+          collectionId++;
+          let shopsIds = [];
+          shopsIds.push(model.shopsId);
+          model.collectionList.push({
+            collectionId,
+            userId: store.state.loginInfo.userId,
+            shopsIds
+          })
+          store.commit('SET_COLLECTION_LIST', model.collectionList);
+          Toast("收藏成功");
+        }
       }
     };
     const addShop = (status, num, i) => {

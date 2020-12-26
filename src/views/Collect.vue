@@ -3,7 +3,7 @@
   <van-nav-bar title="全部收藏" left-text="返回" left-arrow @click-left="onClickLeft" />
   <div class="collect">
     <van-empty description="无收藏的商家" v-if="currCollectionShops.length == 0" />
-    <div class="collect-item wsw-clearfix" v-for="(item) in currCollectionShops" :key="item.shopsId" v-else>
+    <div class="collect-item wsw-clearfix" v-for="(item) in currCollectionShops" :key="item.shopsId" @click="toDetail(item.shopsId)" v-else>
       <img class="wsw-l" :src="item.shopsImage" alt="" srcset="" width="50" />
       <span class="wsw-r">{{item.shopsName}}</span>
     </div>
@@ -45,10 +45,21 @@ export default {
     const onClickLeft = () => {
       router.go(-1)
     }
+
+    const toDetail = (shopsId) => {
+      router.push({
+        path: '/Commodity_details',
+        query: {
+          shopsId
+        }
+      })
+    }
+
     return {
       ...toRefs(model),
       activeNames,
-      onClickLeft
+      onClickLeft,
+      toDetail
     };
   },
 };

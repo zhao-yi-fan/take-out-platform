@@ -1611,6 +1611,14 @@ export default createStore({
       console.log(userList, "userList===");
       state.userList = userList;
     },
+    SET_ORDER_LIST: (state, orderList) => {
+      console.log(orderList, "orderList===");
+      state.orderList = orderList;
+    },
+    SET_COLLECTION_LIST: (state, collectionList) => {
+      console.log(collectionList, "collectionList===");
+      state.collectionList = collectionList;
+    },
   },
   actions: {
     login ({ commit, state }, loginData = {}) {
@@ -1670,11 +1678,11 @@ export default createStore({
     },
     setOrderInfo ({ commit, state }, orderForm = {}) {
       let { userId, shopsId, money, foodList } = orderForm;
+      let orderList = state.orderList;
       let businessesId =
-        state.orderList[state.orderList.length - 1].businessesId;
+        orderList[orderList.length - 1].businessesId;
       businessesId++;
-
-      state.orderList.push({
+      orderList.push({
         businessesId,
         shopsId,
         userId,
@@ -1685,7 +1693,9 @@ export default createStore({
           content: "",
           score: null,
         },
+        address: ''
       });
+      commit('SET_ORDER_LIST', orderList)
       return {
         code: 1,
         businessesId,
@@ -1694,13 +1704,15 @@ export default createStore({
     setOrderStatus ({ commit, state }, statusForm = {}) {
       let { businessesId, address } = statusForm;
       let isExist = false;
-      state.orderList.forEach((item, index) => {
+      let orderList = state.orderList;
+      orderList.forEach((item, index) => {
         if (item.businessesId == businessesId) {
           isExist = true;
           item.status = "success";
           item.address = address;
         }
       });
+      commit('SET_ORDER_LIST', orderList)
       if (isExist) {
         return true; // 下单成功
       } else {

@@ -5,8 +5,8 @@
     <div class="wsw-top-Order-list">
       <van-tabs>
         <van-tab title="全部订单">
-          <van-collapse v-model="activeNames">
-            <van-empty description="无订单？赶快去下单吧" v-if="myOrderList.length == 0" />
+          <van-empty description="无订单？赶快去下单吧" v-if="myOrderList.length == 0" />
+          <van-collapse v-model="activeNames" v-else>
             <van-collapse-item :name="item.businessesId" v-for="item in myOrderList" :key="item.businessesId">
               <template #title>
                 <div class="wsw-top-Order-list-collapse">
@@ -81,15 +81,16 @@ export default {
     const beforeClose = (action, done) => {
       console.log(action);
       if (action == "confirm") {
-        console.log("aaa");
         if (model.message) {
-          store.state.orderList.forEach((item, index) => {
+          let orderList = store.state.orderList;
+          orderList.forEach((item, index) => {
             console.log(item, model.businessesId);
             if (item.businessesId == model.businessesId) {
               item.evaluate.content = model.message;
               item.evaluate.score = model.score;
             }
           });
+          store.commit('SET_ORDER_LIST', orderList)
           Toast("评价成功");
           return true;
         } else {
@@ -115,7 +116,7 @@ export default {
 <style lang="scss" scoped>
 .wsw-top-Order {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px);
   background: #f8f8fa;
   .wsw-top-Order-title {
     font-size: 18px;
@@ -125,6 +126,7 @@ export default {
     background-image: linear-gradient(to right, #f1b815, #efa71c);
   }
   .wsw-top-Order-list {
+    height: calc(100% - 50px);
     .van-tabs {
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       .wsw-top-Order-list-collapse {
