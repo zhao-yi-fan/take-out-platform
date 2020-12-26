@@ -23,7 +23,7 @@
                   <span>{{ foodItem.foodName || "" }}</span>
                   <span>¥&nbsp;{{ foodItem.foodMoney || 0 }}</span>
                   <span>
-                    <van-icon name="cross" />{{ foodItem.foodNum || 0 }}
+                    x{{ foodItem.foodNum || 0 }}
                   </span>
                 </p>
                 <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation(item.businessesId)" v-if="item.evaluate.content == ''">
@@ -127,6 +127,8 @@ export default {
   }
   .wsw-top-Order-list {
     height: calc(100% - 50px);
+    position: relative;
+    opacity: 0.99;
     .van-tabs {
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       .wsw-top-Order-list-collapse {
@@ -165,6 +167,20 @@ export default {
         }
       }
     }
+  }
+
+  .wsw-top-Order-list::after {
+    content: "";
+    background-image: url("../assets/images/hb.png");
+    background-size: 200px;
+    background-color: #ffffe9;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
   }
   ::v-deep .van-dialog__content {
     text-align: center;
