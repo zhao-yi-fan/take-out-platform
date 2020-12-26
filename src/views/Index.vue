@@ -1,57 +1,33 @@
 <!-- 首页 -->
 <template>
+  <div class="wsw-top-home-logo">
+    <img src="../assets/images/Logo.png" width="130" />
+    <!-- <span>饿了么</span> -->
+    <!-- <i class="wsw-r">收货地址</i>
+      <van-icon name="location-o" color="#ccc" size="24" class="wsw-r" /> -->
+    <van-icon name="search" color="#fff" size="24" class="wsw-r" @click="toSearch" />
+  </div>
   <div class="wsw-top-home">
     <div class="wsw-top-home-top">
-      <div class="wsw-top-home-logo">
-        <img src="../assets/images/Logo.png" width="130" />
-        <!-- <span>饿了么</span> -->
-        <!-- <i class="wsw-r">收货地址</i>
-      <van-icon name="location-o" color="#ccc" size="24" class="wsw-r" /> -->
-        <van-icon
-          name="search"
-          color="#fff"
-          size="24"
-          class="wsw-r"
-          @click="toSearch"
-        />
-      </div>
-      <center>
-        <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
-          <van-swipe-item>
-            <img
-              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608348663068&di=9ccabacd2465508aee4a8296f52cfcc1&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180404%2Fe2f28fc29686449a9ffe7c6628b9d3c6.jpeg"
-            />
-          </van-swipe-item>
-          <van-swipe-item>
-            <img
-              src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2074007851,907951023&fm=26&gp=0.jpg"
-            />
-          </van-swipe-item>
-          <van-swipe-item>
-            <img
-              src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3467291110,2657821719&fm=26&gp=0.jpg"
-            />
-          </van-swipe-item>
-        </van-swipe>
-      </center>
+      <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
+        <van-swipe-item>
+          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608348663068&di=9ccabacd2465508aee4a8296f52cfcc1&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180404%2Fe2f28fc29686449a9ffe7c6628b9d3c6.jpeg" />
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2074007851,907951023&fm=26&gp=0.jpg" />
+        </van-swipe-item>
+        <van-swipe-item>
+          <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3467291110,2657821719&fm=26&gp=0.jpg" />
+        </van-swipe-item>
+      </van-swipe>
     </div>
     <!-- <van-tag type="warning">今日推荐</van-tag> -->
     <center>
-      <img
-        src="../assets/images/jrtj.png"
-        alt=""
-        width="100"
-        style="margin: 10px 0"
-      />
+      <img src="../assets/images/jrtj.png" alt="" width="100" style="margin: 10px 0" />
     </center>
     <div class="wsw-top-home-List">
       <van-grid :column-num="2" :gutter="10">
-        <van-grid-item
-          v-for="(item, index) in shopsList"
-          :key="index"
-          text="文字"
-          @click="toDetail(item.shopsId)"
-        >
+        <van-grid-item v-for="(item, index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
           <img :src="item.shopsImage" />
           <div class="wsw-top-home-List-title">
             <p class="wsw-clearfix">
@@ -78,7 +54,7 @@ import { useStore } from "vuex";
 export default {
   name: "",
   components: {},
-  setup(propes, { root }) {
+  setup (propes, { root }) {
     const router = useRouter();
     const store = useStore();
     const model = reactive({
@@ -112,45 +88,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wsw-top-home-logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-image: linear-gradient(to right, #f1b815, #efa71c);
+  span {
+    display: inline-block;
+    line-height: 80px;
+    color: #ed9428;
+    font-weight: bolder;
+  }
+  img {
+    margin: 5px 0;
+  }
+  .van-icon,
+  i {
+    margin-right: 10px;
+    color: #ccc;
+  }
+}
 .wsw-top-home {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 110px);
   background: #f8f8fa;
-  padding-top: 80px;
+  overflow: auto;
   .wsw-top-home-top {
     background: url("../assets/images/round.png");
     width: 100%;
     height: 200px;
     background-size: 100% 100%;
-    .wsw-top-home-logo {
-      width: 100%;
-      position: fixed;
-      z-index: 100;
-      top: 0;
-      background-image: linear-gradient(to right, #f1b815, #efa71c);
-      span {
-        display: inline-block;
-        line-height: 80px;
-        color: #ed9428;
-        font-weight: bolder;
-      }
-      img{
-        margin: 15px 0 0 15px;
-      }
-      .van-icon,
-      i {
-        line-height: 80px;
-        margin-right: 10px;
-        color: #ccc;
-      }
-    }
     .wsw-swipe {
+      margin: 0 auto;
       width: 90%;
       border-radius: 10px;
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      height: 100%;
       img {
         width: 100%;
-        min-height: 200px;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }
@@ -165,11 +143,14 @@ export default {
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       background: #fefcf9;
+      padding: 0;
+      border-radius: 10px;
+      overflow: hidden;
       img {
         width: 100%;
-        height: 150px;
       }
       .wsw-top-home-List-title {
+        box-sizing: border-box;
         width: 100%;
         padding: 5px;
         p {

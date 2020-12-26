@@ -6,15 +6,8 @@
       <van-tabs>
         <van-tab title="全部订单">
           <van-collapse v-model="activeNames">
-            <van-empty
-              description="无订单？赶快去下单吧"
-              v-if="myOrderList.length == 0"
-            />
-            <van-collapse-item
-              :name="item.businessesId"
-              v-for="item in myOrderList"
-              :key="item.businessesId"
-            >
+            <van-empty description="无订单？赶快去下单吧" v-if="myOrderList.length == 0" />
+            <van-collapse-item :name="item.businessesId" v-for="item in myOrderList" :key="item.businessesId">
               <template #title>
                 <div class="wsw-top-Order-list-collapse">
                   <img :src="item.shopsInfo.shopsImage" alt="" width="75" />
@@ -33,14 +26,7 @@
                     <van-icon name="cross" />{{ foodItem.foodNum || 0 }}
                   </span>
                 </p>
-                <van-button
-                  class="wsw-r"
-                  color="linear-gradient(to right, #ff6034, #ee0a24)"
-                  size="small"
-                  round
-                  @click="Evaluation(item.businessesId)"
-                  v-if="item.evaluate.content == ''"
-                >
+                <van-button class="wsw-r" color="linear-gradient(to right, #ff6034, #ee0a24)" size="small" round @click="Evaluation(item.businessesId)" v-if="item.evaluate.content == ''">
                   评价
                 </van-button>
               </div>
@@ -49,29 +35,9 @@
         </van-tab>
       </van-tabs>
     </div>
-    <van-dialog
-      v-model:show="show"
-      title="评价"
-      show-cancel-button
-      :before-close="beforeClose"
-    >
-      <van-rate
-        v-model="score"
-        :size="25"
-        color="#ffd21e"
-        void-icon="star"
-        void-color="#eee"
-      />
-      <van-field
-        v-model="message"
-        rows="2"
-        autosize
-        label="评价内容"
-        type="textarea"
-        maxlength="50"
-        placeholder="请输入评价内容"
-        show-word-limit
-      />
+    <van-dialog v-model:show="show" title="评价" show-cancel-button :before-close="beforeClose">
+      <van-rate v-model="score" :size="25" color="#ffd21e" void-icon="star" void-color="#eee" />
+      <van-field v-model="message" rows="2" autosize label="评价内容" type="textarea" maxlength="50" placeholder="请输入评价内容" show-word-limit />
     </van-dialog>
   </div>
 </template>
@@ -85,7 +51,7 @@ import { useStore } from "vuex";
 export default {
   name: "",
   components: {},
-  setup(propes, { root }) {
+  setup (propes, { root }) {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
@@ -153,19 +119,12 @@ export default {
   background: #f8f8fa;
   .wsw-top-Order-title {
     font-size: 18px;
-    font-weight: bolder;
     padding-left: 5%;
-    height: 60px;
-    line-height: 60px;
+    line-height: 50px;
     color: #fff;
     background-image: linear-gradient(to right, #f1b815, #efa71c);
   }
   .wsw-top-Order-list {
-    width: 90%;
-    margin-left: 5%;
-    //   border-radius: 10px;
-    margin-top: 20px;
-    margin-bottom: 70px;
     .van-tabs {
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       .wsw-top-Order-list-collapse {

@@ -2,36 +2,57 @@
 <template>
   <div class="wsw-top-User">
     <div class="wsw-top-User-top wsw-clearfix">
-      <img class="wsw-l" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg" alt="" />
-      <span class="wsw-l">蜡笔小新</span>
-      <i class="wsw-l">填满了肚子，人就不会空虚</i>
-      <van-icon name="weapp-nav" size="24" color="#fff" @click="outLogin" />
+      <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg" alt="" />
+      <div class="user-cont">
+        <p>蜡笔小新</p>
+        <p>填满了肚子，人就不会空虚</p>
+      </div>
     </div>
-    <div class="wsw-top-User-top-menu">
-      <van-tabs type="card">
-        <van-tab title="收藏商家">
-          <van-empty description="无收藏的商家" v-if="currCollectionShops.length == 0" />
-          <div class="wsw-top-User-top-menu-item wsw-clearfix" v-for="(item) in currCollectionShops" :key="item.shopsId">
-            <img class="wsw-l" :src="item.shopsImage" alt="" srcset="" width="50" />
-            <span class="wsw-r">{{item.shopsName}}</span>
-          </div>
+    <div class="module">
+      <div class="module-title">
+        <van-icon name="orders-o" color="#fff" size="24" />
+        <span>我的订单</span>
+      </div>
+      <div class="module-cont">
+        <div class="cont-btn" @click="toOrder">
+          <van-icon name="orders-o" color="#e6ba3d" size="30" />
+          <span>全部订单</span>
+        </div>
+      </div>
+    </div>
 
-        </van-tab>
-        <van-tab title="历史评价">
-          <van-empty description="无历史评价" v-if="currEvaluateList.length == 0" />
-          <van-collapse v-model="activeNames">
-            <van-collapse-item :title="item.shopsName" :name="item.businessesId" v-for="(item) in currEvaluateList" :key="item.businessesId">
-              <template #title>
-                <div>
-                  <van-icon name="smile" size="20" color="#ed9428" />{{item.shopsName}}
-                  <span class="wsw-r">{{item.evaluate.score}}</span>
-                </div>
-              </template>
-              {{item.evaluate.content}}
-            </van-collapse-item>
-          </van-collapse>
-        </van-tab>
-      </van-tabs>
+    <div class="module">
+      <div class="module-title">
+        <van-icon name="like-o" color="#fff" size="24" />
+        <span>收藏关注</span>
+      </div>
+      <div class="module-cont">
+        <div class="cont-btn" @click="toCollect">
+          <van-icon name="goods-collect-o" color="#ee0a24" size="30" />
+          <span>全部收藏</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="module">
+      <div class="module-title">
+        <van-icon name="edit" color="#fff" size="24" />
+        <span>我的评价</span>
+      </div>
+      <div class="module-cont">
+        <div class="cont-btn" @click="toComment">
+          <van-icon name="good-job-o" color="#da5ef1" size="30" />
+          <span>全部评价</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="setting" @click="toSetting">
+      <div class="setting-left">
+        <van-icon name="setting-o" color="#fff" size="24" />
+        <span>设置</span>
+      </div>
+      <van-icon name="arrow" color="#ccc" size="24" />
     </div>
     <!-- <van-button type="warning" class="outLogin" round>退出登录</van-button> -->
   </div>
@@ -53,21 +74,7 @@ export default {
       currCollectionShops: [],
       currEvaluateList: []
     })
-    const outLogin = () => {
-      Dialog.confirm({
-        title: "退出登录",
-        message: "",
-      })
-        .then(() => {
-          console.log('aaa');
-          store.state.loginInfo = null;
-          console.log(store.state.loginInfo, 'aaaa');
-          router.push('/Home/Index')
-        })
-        .catch(() => {
-          // on cancel
-        });
-    };
+
     const init = () => {
       let { collectionList, loginInfo, shopsList, orderList } = store.state;
       let userId = loginInfo.userId;
@@ -97,10 +104,25 @@ export default {
       console.log(model.currEvaluateList, 'currEvaluateList===');
     }
     init();
+    const toOrder = () => {
+      router.push('/Home/Order')
+    }
+    const toComment = () => {
+      router.push('/Comment')
+    }
+    const toCollect = () => {
+      router.push('/Collect')
+    }
+    const toSetting = () => {
+      router.push('/Setting')
+    }
     return {
       ...toRefs(model),
       activeNames,
-      outLogin
+      toOrder,
+      toComment,
+      toCollect,
+      toSetting
     };
   },
 };
@@ -111,37 +133,32 @@ $a: 100vh;
 $b: 390px;
 .wsw-top-User {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px);
+  overflow: auto;
   background: #f8f8fa;
   position: relative;
   .wsw-top-User-top {
-    top: 20px;
     background: #ed9428;
-    width: 85%;
-    margin-left: 7.5%;
-    height: 200px;
     border-radius: 10px;
     position: relative;
     img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      margin-left: 20px;
-      margin-top: 50px;
+      margin: 20px;
+      vertical-align: top;
     }
-    span,
-    i {
+    .user-cont {
       display: inline-block;
-      margin-left: 20px;
-    }
-    span {
-      margin-top: 70px;
-      font-size: 16px;
-      font-weight: bolder;
-    }
-    i {
-      margin-top: 20px;
-      font-size: 12px;
+      p:nth-child(1) {
+        margin-top: 30px;
+        font-size: 16px;
+        font-weight: bolder;
+      }
+      p:nth-child(2) {
+        margin-top: 20px;
+        font-size: 12px;
+      }
     }
     .van-icon {
       position: absolute;
@@ -149,48 +166,89 @@ $b: 390px;
       top: 0;
     }
   }
-  .wsw-top-User-top-menu {
-    width: 85%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 180px;
-    ::v-deep .van-tabs__wrap {
-      width: 95%;
-      margin-left: 2.5%;
-      height: 60px;
-      .van-tabs__nav {
-        height: 100%;
-        border: none;
+  .module {
+    background-color: #fff;
+    margin-top: 10px;
+    .module-title {
+      padding: 0 0 0 10px;
+      display: flex;
+      align-items: center;
+      line-height: 40px;
+      border-bottom: 1px solid #eae6e6;
+      i {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      i:before {
+        font-size: 18px;
+      }
+      span {
+        margin-left: 10px;
       }
     }
-    ::v-deep .van-tabs__content {
-      margin-top: 30px;
-      background: #fff;
-      padding: 20px;
-      height: calc(#{$a} - #{$b});
-      border-radius: 10px;
-      .wsw-top-User-top-menu-item {
-        margin: 5px 0;
-        img {
-          width: 60px;
-          height: 60px;
-          border: 1px solid #ccc;
-          margin: 0;
-        }
+
+    .module-cont {
+      display: flex;
+      align-items: center;
+      .cont-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 15px;
         span {
-          display: inline-block;
-          line-height: 60px;
-          margin: 0;
+          font-size: 12px;
         }
       }
-      .van-cell__title {
-        height: 30px;
-        line-height: 30px;
-        .van-badge__wrapper {
-          vertical-align: middle;
-        }
+    }
+  }
+  .module:nth-child(2) {
+    .module-title {
+      i {
+        background-color: #fd805a;
+      }
+    }
+  }
+  .module:nth-child(3) {
+    .module-title {
+      i {
+        background-color: #ea6d32;
+      }
+    }
+  }
+  .module:nth-child(4) {
+    .module-title {
+      i {
+        background-color: #25bb4c;
+      }
+    }
+  }
+  .setting {
+    margin-top: 10px;
+    background-color: #fff;
+    line-height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .setting-left {
+      display: flex;
+      align-items: center;
+      i {
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        background-color: #5ca0e6;
+        margin: 0 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      i:before {
+        font-size: 18px;
       }
     }
   }

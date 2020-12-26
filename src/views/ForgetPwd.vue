@@ -14,7 +14,7 @@
         <div>
           <router-link to="/Login" tag="a" class="wsw-r">返回</router-link>
         </div>
-        <van-button round block plain type="info" native-type="submit" color="#ed9428">注册</van-button>
+        <van-button round block plain type="info" native-type="submit" color="#ed9428">提交</van-button>
       </van-form>
     </div>
     <div class="wsw-login-footer">Copyright © 移应2018-1-21吴尚尉</div>

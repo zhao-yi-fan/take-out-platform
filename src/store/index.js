@@ -1716,7 +1716,7 @@ export default createStore({
           myOrderList.push(item);
         }
       });
-      console.log(myOrderList,'myOrderList');
+      console.log(myOrderList, 'myOrderList');
       // 增加商品信息
       myOrderList.map((currentItem, index) => {
         for (let i = 0; i < state.shopsList.length; i++) {
@@ -1752,7 +1752,45 @@ export default createStore({
         }
       })
       return searchList;
-    }
+    },
+    setPwd ({ commit, state }, setPwdForm = {}) {
+      let { userId, rawPassword, password, rePassword } = setPwdForm;
+      if (password !== rePassword) {
+        return {
+          code: 2,
+          msg: "两次密码输入不一致，请检查后重新提交！",
+        }
+      }
+      let userList = state.userList;
+      for (let i = 0; i < userList.length; i++) {
+        let userItem = userList[i];
+        if (userItem.userId === userId) {
+          if (userItem.password !== rawPassword) {
+            return {
+              code: 2,
+              msg: "原密码输入错误，请检查后重新提交！",
+            };
+          } else if (userItem.password === password) {
+            return {
+              code: 2,
+              msg: "原密码和新密码不能一样！",
+            };
+          } else {
+            userItem.password = password;
+            commit("SET_USER_LIST", userList);
+            return {
+              code: 1,
+              msg: "修改成功！",
+            };
+          }
+        }
+      }
+      return {
+        code: 2,
+        msg: "用户不存在，非法操作！",
+      };
+    },
+
   },
   plugins: [createPersistedState()],
   modules: {},
