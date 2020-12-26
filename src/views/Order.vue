@@ -147,8 +147,8 @@ export default {
       .wsw-top-Order-list-orderList {
         padding: 5px 0;
         p {
-          height: 24px;
           line-height: 24px;
+          border-bottom: 1px solid #eae6e6;
           span {
             display: inline-block;
             &:first-child {
