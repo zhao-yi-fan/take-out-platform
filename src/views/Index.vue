@@ -26,21 +26,19 @@
       <img src="../assets/images/jrtj.png" alt="" width="100" style="margin: 10px 0" />
     </center>
     <div class="wsw-top-home-List">
-      <van-grid :column-num="2" :gutter="10">
-        <van-grid-item v-for="(item, index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
-          <img :src="item.shopsImage" />
-          <div class="wsw-top-home-List-title">
-            <p class="wsw-clearfix">
-              <span class="wsw-l">{{ item.shopsName }}</span>
-              <span class="wsw-r wsw-red">{{ item.score }}</span>
-            </p>
-            <p class="wsw-clearfix">
-              <span class="wsw-l wsw-f14">起送：{{ item.shopsStart }}</span>
-              <span class="wsw-r wsw-f14">运费：{{ item.freight }}</span>
-            </p>
-          </div>
-        </van-grid-item>
-      </van-grid>
+      <div class="list-item" v-for="(item, index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
+        <img :src="item.shopsImage" />
+        <div class="wsw-top-home-List-title">
+          <p class="wsw-clearfix">
+            <span class="wsw-l">{{ item.shopsName }}</span>
+            <span class="wsw-r wsw-red">{{ item.score }}</span>
+          </p>
+          <p class="wsw-clearfix">
+            <span class="wsw-l wsw-f14">起送：{{ item.shopsStart }}</span>
+            <span class="wsw-r wsw-f14">运费：{{ item.freight }}</span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -137,15 +135,21 @@ export default {
     margin: 10px;
   }
   .wsw-top-home-List {
-    margin-bottom: 50px;
+    width: 96%;
+    margin: 0 auto;
+    margin-bottom: 30px;
     background: #f8f8fa;
-    ::v-deep .van-grid-item__content {
+    column-count: 2;
+    column-gap: 10px;
+    .list-item {
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       background: #fefcf9;
       padding: 0;
       border-radius: 10px;
       overflow: hidden;
+      margin-bottom: 10px;
+      -webkit-column-break-inside: avoid;
       img {
         width: 100%;
       }
