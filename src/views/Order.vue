@@ -130,7 +130,6 @@ export default {
     // position: relative;
     // opacity: 0.99;
     .van-tabs {
-      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       .wsw-top-Order-list-collapse {
         img {
           border-radius: 50%;
