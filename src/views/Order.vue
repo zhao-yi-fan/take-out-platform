@@ -127,8 +127,8 @@ export default {
   }
   .wsw-top-Order-list {
     height: calc(100% - 50px);
-    position: relative;
-    opacity: 0.99;
+    // position: relative;
+    // opacity: 0.99;
     .van-tabs {
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       .wsw-top-Order-list-collapse {
@@ -169,19 +169,19 @@ export default {
     }
   }
 
-  .wsw-top-Order-list::after {
-    content: "";
-    background-image: url("../assets/images/hb.png");
-    background-size: 200px;
-    background-color: #ffffe9;
-    opacity: 0.2;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
-  }
+  // .wsw-top-Order-list::after {
+  //   content: "";
+  //   background-image: url("../assets/images/hb.png");
+  //   background-size: 200px;
+  //   background-color: #ffffe9;
+  //   opacity: 0.2;
+  //   top: 0;
+  //   left: 0;
+  //   bottom: 0;
+  //   right: 0;
+  //   position: absolute;
+  //   z-index: -1;
+  // }
   ::v-deep .van-dialog__content {
     text-align: center;
     .van-rate {
