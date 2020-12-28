@@ -2,9 +2,17 @@
 <template>
   <div class="wsw-top-User">
     <div class="wsw-top-User-top wsw-clearfix">
-      <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg" alt="" />
+      <img
+        src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg"
+        alt=""
+      />
       <div class="user-cont">
-        <p>{{loginInfo.username}}</p>
+        <p v-if="loginInfo">{{ loginInfo.username }}</p>
+        <p v-else>
+          <router-link to="/newLogin">登录</router-link>
+          /
+          <router-link to="/newRegister">注册</router-link>
+          </p>
         <p>填满了肚子，人就不会空虚</p>
       </div>
     </div>
@@ -47,7 +55,7 @@
       </div>
     </div>
 
-    <div class="setting" @click="toSetting">
+    <div class="setting" @click="toSetting" v-if="loginInfo">
       <div class="setting-left">
         <van-icon name="setting-o" color="#fff" size="24" />
         <span>设置</span>
@@ -66,35 +74,35 @@ import { useStore } from "vuex";
 export default {
   name: "",
   components: {},
-  setup (propes, { root }) {
+  setup(propes, { root }) {
     const router = useRouter();
     const store = useStore();
     const activeNames = ref(["1"]);
     const model = reactive({
       currCollectionShops: [],
       currEvaluateList: [],
-      loginInfo: computed(() => store.state.loginInfo)
-    })
+      loginInfo: computed(() => store.state.loginInfo),
+    });
 
     const toOrder = () => {
-      router.push('/Home/Order')
-    }
+      router.push("/Home/Order");
+    };
     const toComment = () => {
-      router.push('/Comment')
-    }
+      router.push("/Comment");
+    };
     const toCollect = () => {
-      router.push('/Collect')
-    }
+      router.push("/Collect");
+    };
     const toSetting = () => {
-      router.push('/Setting')
-    }
+      router.push("/Setting");
+    };
     return {
       ...toRefs(model),
       activeNames,
       toOrder,
       toComment,
       toCollect,
-      toSetting
+      toSetting,
     };
   },
 };
@@ -126,6 +134,9 @@ $b: 390px;
         margin-top: 30px;
         font-size: 16px;
         font-weight: bolder;
+        a{
+          color: #000;
+        }
       }
       p:nth-child(2) {
         margin-top: 20px;

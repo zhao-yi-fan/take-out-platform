@@ -97,6 +97,33 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "Search" */ "../views/Search.vue"),
   },
+  {
+    path: "/newLogin",
+    name: "NewLogin",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "NewLogin" */ "../views/new/NewLogin.vue"),
+  },
+  {
+    path: "/newRegister",
+    name: "NewRegister",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "NewRegister" */ "../views/new/NewRegister.vue"),
+  },
+  {
+    path: "/newForgetPwd",
+    name: "NewForgetPwd",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "Search" */ "../views/new/NewForgetPwd.vue"),
+  },
 ];
 
 const router = createRouter({
@@ -124,18 +151,25 @@ router.beforeEach(async (to, from) => {
       to.path === "/Login" ||
       to.path === "/Register" ||
       to.path === "/ForgetPwd" ||
+      to.path === "/newLogin" ||
+      to.path === "/newRegister" ||
+      to.path === "/newForgetPwd" ||
       to.path === "/Home/Index" ||
       to.path === "/Commodity_details" ||
-      to.path === "/search"
+      to.path === "/search" ||
+      to.path === "/Home/Order" ||
+      to.path === "/Home/User"
     ) {
-    } else if (to.path === "/Home/Order" || to.path === "/Home/User") {
-      Toast.fail("您还未登录~");
-      return false;
-    } else {
-      Toast.fail("请登录之后再操作");
-      setTimeout(() => {
-        router.push("/Login");
-      }, 1000);
+    }
+    //  else if () {
+    //   Toast.fail("您还未登录~");
+    //   return false;
+    // }
+    else {
+      Toast("您未登录");
+      // setTimeout(() => {
+      //   router.push("/Login");
+      // }, 1000);
       return false;
     }
   }

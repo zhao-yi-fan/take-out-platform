@@ -72,6 +72,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+::v-deep .van-nav-bar__left {
+  span,
+  .van-icon {
+    color: #ed9428;
+  }
+}
 .set-pwd {
   width: 100%;
   height: calc(100% - 46px);

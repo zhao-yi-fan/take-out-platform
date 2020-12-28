@@ -75,6 +75,7 @@ export default {
     };
 
     onMounted(() => {
+      if(!store.state.loginInfo)return
       let userId = store.state.loginInfo.userId;
       init(userId);
     });
