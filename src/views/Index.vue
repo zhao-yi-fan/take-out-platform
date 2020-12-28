@@ -4,54 +4,31 @@
     <!-- <img src="../assets/images/Logo.png" width="130" /> -->
     <!-- <span>饿了么</span> -->
     <div class="wsw-top-home-address">
-      <i class="wsw-l">收货地址</i>
-      <van-icon name="location-o" color="#ccc" size="24" class="wsw-l" />
+      <van-icon name="location-o" color="#fff" size="24" class="wsw-l" />
+      <i class="wsw-l" @click="showArea = true">收货地址:{{value}}</i>
     </div>
-    <van-icon
-      name="search"
-      color="#fff"
-      size="24"
-      class="wsw-r"
-      @click="toSearch"
-    />
+    <van-icon name="search" color="#fff" size="24" class="wsw-r" @click="toSearch" />
   </div>
   <div class="wsw-top-home">
     <div class="wsw-top-home-top">
       <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item>
-          <img
-            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608348663068&di=9ccabacd2465508aee4a8296f52cfcc1&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180404%2Fe2f28fc29686449a9ffe7c6628b9d3c6.jpeg"
-          />
+          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608348663068&di=9ccabacd2465508aee4a8296f52cfcc1&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180404%2Fe2f28fc29686449a9ffe7c6628b9d3c6.jpeg" />
         </van-swipe-item>
         <van-swipe-item>
-          <img
-            src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2074007851,907951023&fm=26&gp=0.jpg"
-          />
+          <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2074007851,907951023&fm=26&gp=0.jpg" />
         </van-swipe-item>
         <van-swipe-item>
-          <img
-            src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3467291110,2657821719&fm=26&gp=0.jpg"
-          />
+          <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3467291110,2657821719&fm=26&gp=0.jpg" />
         </van-swipe-item>
       </van-swipe>
     </div>
     <!-- <van-tag type="warning">今日推荐</van-tag> -->
     <center>
-      <img
-        src="../assets/images/jrtj.png"
-        alt=""
-        width="100"
-        style="margin: 10px 0"
-      />
+      <img src="../assets/images/jrtj.png" alt="" width="100" style="margin: 10px 0" />
     </center>
     <div class="wsw-top-home-List">
-      <div
-        class="list-item"
-        v-for="(item, index) in shopsList"
-        :key="index"
-        text="文字"
-        @click="toDetail(item.shopsId)"
-      >
+      <div class="list-item" v-for="(item, index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
         <img :src="item.shopsImage" />
         <div class="wsw-top-home-List-title">
           <p class="wsw-clearfix">
@@ -66,6 +43,9 @@
       </div>
     </div>
   </div>
+  <van-popup v-model:show="showArea" position="bottom">
+    <van-area :area-list="areaList" @confirm="onConfirm" @cancel="showArea = false" />
+  </van-popup>
 </template>
 
 <script>
@@ -73,11 +53,12 @@ import { ref, reactive, toRefs, computed } from "vue";
 import { Notify, Toast } from "vant";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
+import areaList from '@/mock/area.js'
 
 export default {
   name: "",
   components: {},
-  setup(propes, { root }) {
+  setup (propes, { root }) {
     const router = useRouter();
     const store = useStore();
     const model = reactive({
@@ -86,6 +67,11 @@ export default {
         console.log(store.state.shopsList, "store.state.shopsList===");
         return store.state.shopsList;
       }),
+      showArea: false,
+      value: computed(() => {
+        return store.state.loginInfo.address || '';
+      }),
+      areaList: computed(() => areaList)
     });
     const toDetail = (shopsId) => {
       router.push({
@@ -100,11 +86,20 @@ export default {
         path: "/search",
       });
     };
+    const onConfirm = (values) => {
+      model.showArea = false;
+      let value = values
+        .filter((item) => !!item)
+        .map((item) => item.name)
+        .join('/');
+      store.dispatch('setCurrAddress', value)
+    };
 
     return {
       ...toRefs(model),
       toDetail,
       toSearch,
+      onConfirm
     };
   },
 };
@@ -129,12 +124,11 @@ export default {
   .van-icon,
   i {
     margin-right: 10px;
-    color: #ccc;
   }
 }
 .wsw-top-home {
   width: 100%;
-  height: calc(100% - 110px);
+  height: calc(100% - 74px);
   background: #f8f8fa;
   overflow: auto;
   .wsw-top-home-top {
