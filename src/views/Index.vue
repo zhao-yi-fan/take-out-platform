@@ -111,12 +111,13 @@ export default {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background-image: linear-gradient(to right, #f1b815, #efa71c);
+  background-image: linear-gradient(to right, #fcba02, #fdaa05);
   .wsw-top-home-address {
     height: 80px;
     line-height: 80px;
     display: inline-block;
     color: #fff;
+    font-weight: bolder;
     .van-icon {
       height: 80px;
       line-height: 80px;
