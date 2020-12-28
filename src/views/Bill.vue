@@ -151,6 +151,7 @@ export default {
     }
   }
   .wsw-top-bill-shopList {
+    max-height: calc(100% - 480px);;
     width: 85%;
     margin-left: 7.5%;
     background: #fff;

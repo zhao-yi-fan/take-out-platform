@@ -5,7 +5,7 @@
     <!-- <span>饿了么</span> -->
     <div class="wsw-top-home-address">
       <van-icon name="location-o" color="#fff" size="24" class="wsw-l" />
-      <i class="wsw-l" @click="showArea = true">收货地址:{{value}}</i>
+      <i class="wsw-l" @click="showArea = true">{{value || '请先选择收货地址'}}</i>
     </div>
     <van-icon name="search" color="#fff" size="24" class="wsw-r" @click="toSearch" />
   </div>
@@ -69,7 +69,7 @@ export default {
       }),
       showArea: false,
       value: computed(() => {
-        return store.state.loginInfo.baseAddress || '';
+        return store.state.loginInfo ? store.state.loginInfo.baseAddress : '';
       }),
       areaList: computed(() => areaList)
     });
@@ -112,6 +112,16 @@ export default {
   align-items: center;
   width: 100%;
   background-image: linear-gradient(to right, #f1b815, #efa71c);
+  .wsw-top-home-address {
+    height: 80px;
+    line-height: 80px;
+    display: inline-block;
+    color: #fff;
+    .van-icon {
+      height: 80px;
+      line-height: 80px;
+    }
+  }
   span {
     display: inline-block;
     line-height: 80px;
