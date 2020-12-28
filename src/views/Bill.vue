@@ -9,7 +9,10 @@
       外卖配送
     </div>
     <div class="wsw-top-bill-address">
-      <van-field v-model="address" name="address" label="收货地址" placeholder="收货地址" :rules="[{ required: true, message: '请填写收货地址' }]" />
+      <p>天津市滨海新区</p>
+      <van-field v-model="address" name="address" label="详细地址" placeholder="详细地址" :rules="[{ required: true, message: '请填写详细地址' }]" />
+      <van-field v-model="people" label="收货人" name="people" placeholder="收货人" :rules="[{ required: true, message: '请填写收货人' }]" />
+      <van-field v-model="phone" name="phone" type="tel" label="联系方式" placeholder="联系方式" :rules="[{ required: true, message: '请填写联系方式' }]" />
       <p>
         <span>立即送出</span>
         <span class="wsw-r">大概15分钟后抵达</span>
@@ -39,12 +42,18 @@ export default {
     const active = ref(0);
     const model = reactive({
       address: '',
+      people: '',
+      phone: '',
       businessesId: '',
       currentOrderInfo: null
     })
     const onSubmit = async () => {
       if (!model.address) {
         return Toast.fail('请填写收货地址');
+      }else if(!model.people){
+        return Toast.fail('请填写收货人');
+      }else if(!model.phone){
+        return Toast.fail('请填写联系方式');
       }
       let code = await store.dispatch('setOrderStatus', {
         address: model.address,
