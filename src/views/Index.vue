@@ -69,7 +69,7 @@ export default {
       }),
       showArea: false,
       value: computed(() => {
-        return store.state.loginInfo.address || '';
+        return store.state.loginInfo.baseAddress || '';
       }),
       areaList: computed(() => areaList)
     });

@@ -1802,9 +1802,9 @@ export default createStore({
         msg: "用户不存在，非法操作！",
       };
     },
-    setCurrAddress ({ commit, state }, adress = '') {
+    setCurrAddress ({ commit, state }, baseAddress = '') {
       let loginInfo = state.loginInfo;
-      loginInfo.address = adress;
+      loginInfo.baseAddress = baseAddress;
       commit('SET_LOGIN_INFO', loginInfo);
     },
 
