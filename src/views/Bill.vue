@@ -9,7 +9,7 @@
       外卖配送
     </div>
     <div class="wsw-top-bill-address">
-      <p>天津市滨海新区</p>
+      <p>{{baseAddress}}</p>
       <van-field v-model="address" name="address" label="详细地址" placeholder="详细地址" :rules="[{ required: true, message: '请填写详细地址' }]" />
       <van-field v-model="people" label="收货人" name="people" placeholder="收货人" :rules="[{ required: true, message: '请填写收货人' }]" />
       <van-field v-model="phone" name="phone" type="tel" label="联系方式" placeholder="联系方式" :rules="[{ required: true, message: '请填写联系方式' }]" />
@@ -41,6 +41,7 @@ export default {
     const router = useRouter();
     const active = ref(0);
     const model = reactive({
+      baseAddress: store.state.baseAddress.name,
       address: '',
       people: '',
       phone: '',
@@ -56,8 +57,10 @@ export default {
         return Toast.fail('请填写联系方式');
       }
       let code = await store.dispatch('setOrderStatus', {
-        address: model.address,
-        businessesId: model.businessesId
+        address: model.baseAddress + '--' +model.address,
+        businessesId: model.businessesId,
+        people: model.people,
+        phone: model.phone
       });
       Toast.loading({
         message: '正在支付请稍候...',

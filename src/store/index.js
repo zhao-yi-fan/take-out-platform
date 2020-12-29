@@ -1193,7 +1193,7 @@ export default createStore({
           "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2885489709,1921944805&fm=26&gp=0.jpg",
         signImage:
           "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2628605019,360637135&fm=26&gp=0.jpg",
-        shopsStart: "20",
+        shopsStart: "30",
         freight: "6",
         score: "4.6",
         address: "北京市东城区永定门外大街101-3号百荣世贸商城Ａ座1层",
@@ -1376,54 +1376,55 @@ export default createStore({
                 commodityMoney: "26.00",
                 commodityDescribe: "美味，饱腹",
               },
-              {
-                classificationId: 2,
-                text: "果茶",
-                children: [
-                  {
-                    commodityId: "1",
-                    commodityImage:
-                      "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=41491235,610485139&fm=26&gp=0.jpg",
-                    commodityName: "柠檬去哪儿",
-                    commodityMoney: "20.00",
-                    commodityDescribe: "口感极好",
-                  },
-                  {
-                    commodityId: "2",
-                    commodityImage:
-                      "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3040120637,3072558969&fm=26&gp=0.jpg",
-                    commodityName: "满杯百香果",
-                    commodityMoney: "25.00",
-                    commodityDescribe: "口感极好（辣）",
-                  },
-                  {
-                    commodityId: "3",
-                    commodityImage:
-                      "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1402630114,3646722378&fm=26&gp=0.jpg",
-                    commodityName: "金桔柠檬汁",
-                    commodityMoney: "22.00",
-                    commodityDescribe: "口感极好（不辣）",
-                  },
-                  {
-                    commodityId: "4",
-                    commodityImage:
-                      "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3046708624,604077741&fm=26&gp=0.jpg",
-                    commodityName: "暴打金柠四季春",
-                    commodityMoney: "26.00",
-                    commodityDescribe: "口感极好",
-                  },
-                  {
-                    commodityId: "5",
-                    commodityImage:
-                      "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3962229838,3252285578&fm=26&gp=0.jpg",
-                    commodityName: "草莓芦荟酸奶",
-                    commodityMoney: "29.00",
-                    commodityDescribe: "口感极好",
-                  }
-                ],
-              },
+
             ],
-          }
+          },
+          {
+            classificationId: 2,
+            text: "果茶",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=41491235,610485139&fm=26&gp=0.jpg",
+                commodityName: "柠檬去哪儿",
+                commodityMoney: "20.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3040120637,3072558969&fm=26&gp=0.jpg",
+                commodityName: "满杯百香果",
+                commodityMoney: "25.00",
+                commodityDescribe: "口感极好（辣）",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1402630114,3646722378&fm=26&gp=0.jpg",
+                commodityName: "金桔柠檬汁",
+                commodityMoney: "22.00",
+                commodityDescribe: "口感极好（不辣）",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3046708624,604077741&fm=26&gp=0.jpg",
+                commodityName: "暴打金柠四季春",
+                commodityMoney: "26.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3962229838,3252285578&fm=26&gp=0.jpg",
+                commodityName: "草莓芦荟酸奶",
+                commodityMoney: "29.00",
+                commodityDescribe: "口感极好",
+              }
+            ],
+          },
         ],
       },
       {
@@ -1591,7 +1592,7 @@ export default createStore({
       },
       {
         shopsId: "11",
-        shopsName: "柳州螺蛳粉(长沙岳麓区店)",
+        shopsName: "柳州螺蛳粉",
         classificationType: 1,
         addressCode: "430104",
         shopsImage:
@@ -2576,7 +2577,9 @@ export default createStore({
         shopsId: 2,
         userId: 1,
         status: "success",
-        address: "",
+        address: "长沙湖南工业职业技术学院",
+        people: '移应2018-1-21吴尚尉',
+        phone: '18974868294',
         foodList: [
           {
             foodId: "1_1",
@@ -2710,7 +2713,7 @@ export default createStore({
       }; // 下单成功
     },
     setOrderStatus ({ commit, state }, statusForm = {}) {
-      let { businessesId, address } = statusForm;
+      let { businessesId, address, people, phone } = statusForm;
       let isExist = false;
       let orderList = state.orderList;
       orderList.forEach((item, index) => {
@@ -2718,6 +2721,8 @@ export default createStore({
           isExist = true;
           item.status = "success";
           item.address = address;
+          item.people = people;
+          item.phone = phone;
         }
       });
       commit('SET_ORDER_LIST', orderList)

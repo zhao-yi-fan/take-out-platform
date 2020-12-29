@@ -2,7 +2,7 @@
 <template>
   <div class="wsw-component-prompt" v-if="!userId">
     <span>还未登陆？</span>
-    <van-button type="warning" size="mini" class="wsw-r" to="/Login">马上登陆</van-button>
+    <van-button type="warning" size="mini" class="wsw-r" to="/newLogin">马上登陆</van-button>
   </div>
 </template>
 

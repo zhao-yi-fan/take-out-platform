@@ -70,7 +70,9 @@
       </van-swipe>
     </div>
     <!-- <van-tag type="warning">今日推荐</van-tag> -->
-    <img src="../assets/images/jrtj.png" alt="" width="120" style="margin: 0 0 20px 0" />
+    <div style="text-align: center;">
+      <img src="../assets/images/jrtj.png" alt="" width="120" style="margin: 0 0 20px 0" />
+    </div>
     <van-empty description="该地区暂无商铺" v-if="shopsList.length == 0" />
     <div class="wsw-top-home-List" v-else>
       <div class="list-item" v-for="(item, index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
@@ -94,7 +96,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, computed } from "vue";
+import { ref, reactive, toRefs, computed, onMounted } from "vue";
 import { Notify, Toast } from "vant";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -108,13 +110,21 @@ export default {
     const store = useStore();
     const model = reactive({
       active: ref(0),
-      shopsList: store.state.shopsList,
+      shopsList: [],
       showArea: false,
       value: computed(() => {
         return store.state.baseAddress.name || "";
       }),
       areaList: computed(() => areaList),
     });
+    onMounted(()=>{
+      let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
+      var code = store.state.baseAddress.code
+      shopsList = shopsList.filter((item, index) => {
+        return item.addressCode == code;
+      })
+       model.shopsList = shopsList || [];
+    })
     const toDetail = (shopsId) => {
       router.push({
         path: "/Commodity_details",
