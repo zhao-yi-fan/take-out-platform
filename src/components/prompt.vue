@@ -30,7 +30,7 @@ export default {
   height: 50px;
   position: fixed;
   bottom: 50px;
-  z-index: 999999;
+  z-index: 2000;
   background: #333;
   opacity: 0.7;
   line-height: 50px;
