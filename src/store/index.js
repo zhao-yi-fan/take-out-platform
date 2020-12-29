@@ -28,7 +28,7 @@ export default createStore({
         signImage:
           "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1480947573,857613235&fm=26&gp=0.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "4",
         score: "4.5",
         address: "东城区搜秀城(崇文门外大街40号近羊市口)",
         notice: "华莱士，国有本土汉堡品牌连锁店，一家主打速食及炸鸡的快餐店。",
@@ -168,7 +168,7 @@ export default createStore({
         signImage:
           "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608389530755&di=0bf62e45f9bfe4d61c47bdfef93cf0c3&imgtype=0&src=http%3A%2F%2Fd1.5ikfc.com%2Fcoupons%2Fhbw%2F2014%2Fhbw-5ikfc-1219_01.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "5",
         score: "4.5",
         address: "北京市通州区砖厂南里40号楼华远铭悦好天地1层139号",
         notice:
@@ -301,7 +301,7 @@ export default createStore({
         signImage:
           "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3931371177,3952576752&fm=26&gp=0.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "8",
         score: "4.5",
         address: "北京市东城区东单北大街63号",
         notice: "肯德基24小时外卖送餐电话:4008823823。",
@@ -466,7 +466,7 @@ export default createStore({
         signImage:
           "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1650785558,1302371403&fm=26&gp=0.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "20",
         score: "4.6",
         address: "北京市东城区北京站西街1-9附近",
         notice:
@@ -629,7 +629,7 @@ export default createStore({
         signImage:
           "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1102414096,3214948861&fm=26&gp=0.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "10",
         score: "4.6",
         address: "北京市东城区北京站西街1-9附近",
         notice:
@@ -862,7 +862,7 @@ export default createStore({
         signImage:
           "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3424884161,3613781282&fm=26&gp=0.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "15",
         score: "4.6",
         address: "北京市西城区北京西站西街2-9附近",
         notice: "中国菜肴的特色色、香、味、形、器俱佳",
@@ -1062,7 +1062,7 @@ export default createStore({
         signImage:
           "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=104249318,1361450626&fm=26&gp=0.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "12",
         score: "4.3",
         address: "北京市朝阳区湖光北街9号旺角购物广场(南湖东园西北)1层",
         notice: "主要售卖汉堡包，以及薯条、炸鸡、汽水、冰品、沙拉、水果等快餐食品",
@@ -1186,7 +1186,7 @@ export default createStore({
         signImage:
           "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2628605019,360637135&fm=26&gp=0.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "6",
         score: "4.6",
         address: "北京市东城区永定门外大街101-3号百荣世贸商城Ａ座1层",
         notice: "土大力韩国料理在产品的制作上,采用韩国的技术,打造正宗特色的韩式美食",
@@ -1310,7 +1310,7 @@ export default createStore({
         signImage:
           "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=472560757,1886710252&fm=26&gp=0.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "10",
         score: "4.6",
         address: "北京市丰台区果园8号楼合生广场B1-K-02号商铺",
         notice: "沪上阿姨产品种类繁多,以既营养又健康的特点赢得了广大消费者们的认可",
@@ -1426,7 +1426,7 @@ export default createStore({
         signImage:
           "http://www.holiland.com/data/afficheimg/1598493204542282623.jpg",
         shopsStart: "20",
-        freight: "2",
+        freight: "3",
         score: "4.6",
         address: "北京市昌平区立汤路祥和珠宝古玩城一层",
         notice: "味道特别分层,每口都很丰富,美味到软腿! ",

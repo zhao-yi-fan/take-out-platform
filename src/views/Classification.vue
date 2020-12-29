@@ -4,7 +4,7 @@
     <van-nav-bar :title="option1[classificationId - 1].text" left-text="返回" left-arrow @click-left="onClickLeft" />
     <van-dropdown-menu>
       <van-dropdown-item v-model="value1" :options="option1" @change="changeType" />
-      <van-dropdown-item v-model="value2" :options="option2" />
+      <van-dropdown-item v-model="value2" :options="option2" @change="changeSort" />
     </van-dropdown-menu>
     <div class="wsw-Classification-list">
       <van-empty description="暂无商铺" v-if="shopsList.length == 0" />
@@ -90,15 +90,35 @@ export default {
       if (!value) {
         console.log('a', model.shopsList);
         arr = store.state.shopsList;
-      } else{
+      } else {
         store.state.shopsList.forEach((item, index) => {
           if (value == item.classificationType) {
             arr.push(item);
           }
         });
       }
+      model.value2 = 0; // 初始化排序方式
       model.value1 = Number(value);
       model.shopsList = arr;
+    }
+
+    const changeSort = (value) => {
+      console.log(value, '排序');
+      let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
+      shopsList = shopsList.filter((item, index) => {
+        return item.classificationType == model.value1
+      })
+      if (value == 1) {
+        shopsList.sort((a, b) => {
+          return b.score - a.score;
+        })
+      } else if (value == 2) {
+        shopsList.sort((a, b) => {
+          return a.freight - b.freight;
+        })
+      }
+
+      model.shopsList = shopsList;
     }
     return {
       ...toRefs(model),
@@ -106,7 +126,8 @@ export default {
       option2,
       onClickLeft,
       toDetail,
-      changeType
+      changeType,
+      changeSort
     };
   },
 };
