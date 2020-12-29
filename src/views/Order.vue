@@ -19,6 +19,9 @@
                 </div>
               </template>
               <div class="wsw-top-Order-list-orderList wsw-clearfix">
+                <p>收货地址：{{item.address}}</p>
+                <p>收货人　：{{item.people}}</p>
+                <p>联系方式：{{item.phone}}</p>
                 <p v-for="foodItem in item.foodList" :key="foodItem.foodId">
                   <span>{{ foodItem.foodName || "" }}</span>
                   <span>¥&nbsp;{{ foodItem.foodMoney || 0 }}</span>
