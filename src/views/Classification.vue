@@ -42,7 +42,10 @@ export default {
       value1: 0,
       value2: 0,
       classificationId: route.query.classificationId || null,
-      shopsList: []
+      shopsList: [],
+      districtCode:computed(()=>{
+        return store.state.baseAddress.code;
+      })
       // computed(() => {
       //   console.log(store.state.shopsList, "store.state.shopsList===");
       //   var arr = [];
@@ -86,12 +89,16 @@ export default {
       });
     };
     const changeType = (value) => {
-      var arr = []
+      var arr = [];
+      let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
+      shopsList = shopsList.filter((item, index) => {
+        return item.addressCode == model.districtCode;
+      })
       if (!value) {
         console.log('a', model.shopsList);
-        arr = store.state.shopsList;
+        arr = shopsList;
       } else {
-        store.state.shopsList.forEach((item, index) => {
+        shopsList.forEach((item, index) => {
           if (value == item.classificationType) {
             arr.push(item);
           }
@@ -105,6 +112,9 @@ export default {
     const changeSort = (value) => {
       console.log(value, '排序');
       let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
+      shopsList = shopsList.filter((item, index) => {
+        return item.addressCode == model.districtCode;
+      })
       shopsList = shopsList.filter((item, index) => {
         return item.classificationType == model.value1
       })
@@ -136,11 +146,9 @@ export default {
 .wsw-Classification {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 50px);
   ::v-deep .van-nav-bar {
     width: 100%;
-    position: fixed;
-    top: 0;
     .van-nav-bar__content {
       background: #ed9428;
       .van-nav-bar__left {
@@ -156,14 +164,11 @@ export default {
   }
   ::v-deep .van-dropdown-menu {
     width: 100%;
-    position: fixed;
-    top: 46px;
   }
   .wsw-Classification-list {
     width: 90%;
     padding: 0 5%;
-    height: calc(100% - 50px);
-    margin: 100px 0 50px 0;
+    height: calc(100% - 95px);
     overflow: auto;
     .wsw-Classification-list-item {
       width: 95%;

@@ -2602,8 +2602,8 @@ export default createStore({
       },
     ],
     baseAddress: {
-      name: '',
-      code: ''
+      name: '北京市/北京市/东城区',
+      code: '110101'
     }
   },
   mutations: {

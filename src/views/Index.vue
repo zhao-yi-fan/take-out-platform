@@ -193,7 +193,7 @@ export default {
 }
 .wsw-top-home {
   width: 100%;
-  height: calc(100% - 74px);
+  height: calc(100% - 80px);
   background: #f8f8fa;
   overflow: auto;
   .wsw-top-home-top {
