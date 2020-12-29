@@ -82,14 +82,12 @@
       </van-swipe>
     </div>
     <!-- <van-tag type="warning">今日推荐</van-tag> -->
-    <center>
       <img
         src="../assets/images/jrtj.png"
         alt=""
         width="120"
         style="margin: 0 0 20px 0"
       />
-    </center>
     <div class="wsw-top-home-List">
       <div
         class="list-item"
@@ -160,6 +158,7 @@ export default {
       });
     };
     const onConfirm = (values) => {
+      console.log(values,'2222');
       model.showArea = false;
       let value = values
         .filter((item) => !!item)
