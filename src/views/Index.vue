@@ -71,7 +71,8 @@
     </div>
     <!-- <van-tag type="warning">今日推荐</van-tag> -->
     <img src="../assets/images/jrtj.png" alt="" width="120" style="margin: 0 0 20px 0" />
-    <div class="wsw-top-home-List">
+    <van-empty description="该地区暂无商铺" v-if="shopsList.length == 0" />
+    <div class="wsw-top-home-List" v-else>
       <div class="list-item" v-for="(item, index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
         <img :src="item.shopsImage" />
         <div class="wsw-top-home-List-title">
@@ -107,10 +108,7 @@ export default {
     const store = useStore();
     const model = reactive({
       active: ref(0),
-      shopsList: computed(() => {
-        console.log(store.state.shopsList, "store.state.shopsList===");
-        return store.state.shopsList;
-      }),
+      shopsList: store.state.shopsList,
       showArea: false,
       value: computed(() => {
         return store.state.baseAddress.name || "";
@@ -132,6 +130,8 @@ export default {
     };
     const onConfirm = (values) => {
       console.log(values, '2222');
+      let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
+      let districtCode = values[values.length - 1].code;
       model.showArea = false;
       let value = values
         .filter((item) => !!item)
@@ -139,8 +139,12 @@ export default {
         .join("/");
       store.dispatch("setCurrAddress", {
         name: value,
-        code: values[values.length - 1].code
+        code: districtCode
       });
+      shopsList = shopsList.filter((item, index) => {
+        return item.addressCode == districtCode;
+      })
+      model.shopsList = shopsList || [];
     };
 
     return {
