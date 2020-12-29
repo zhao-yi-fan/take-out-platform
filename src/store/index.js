@@ -1611,7 +1611,10 @@ export default createStore({
         shopsIds: ["2", "3"],
       },
     ],
-    baseAddress:''
+    baseAddress: {
+      name: '',
+      code: ''
+    }
   },
   mutations: {
     SET_LOGIN_INFO: (state, loginInfo) => {
@@ -1817,7 +1820,13 @@ export default createStore({
         msg: "用户不存在，非法操作！",
       };
     },
-    setCurrAddress ({ commit, state }, baseAddress = '') {
+    setCurrAddress ({ commit, state }, addressForm = '') {
+      let {name,code} = addressForm;
+      let baseAddress = state.baseAddress;
+      baseAddress = {
+        name,
+        code
+      }
       commit('SET_BASE_ADDRESS', baseAddress);
     },
 
