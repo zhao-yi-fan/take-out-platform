@@ -1,7 +1,7 @@
 <!-- 分类页面 -->
 <template>
   <div class="wsw-Classification">
-    <van-nav-bar :title="option1[classificationId - 1].text" left-text="返回" left-arrow @click-left="onClickLeft" />
+    <van-nav-bar :title="text" left-text="返回" left-arrow @click-left="onClickLeft" />
     <van-dropdown-menu>
       <van-dropdown-item v-model="value1" :options="option1" @change="changeType" />
       <van-dropdown-item v-model="value2" :options="option2" @change="changeSort" />
@@ -13,11 +13,12 @@
         <div class="wsw-l">
           <p class="wsw-clearfix">
             <span class="wsw-l wsw-fb">{{ item.shopsName }}</span>
-            <span class="wsw-r wsw-f12 wsw-red wsw-fb">{{ item.score }}</span>
+            
           </p>
           <p class="wsw-clearfix">
             <span class="wsw-l wsw-f12">起送：{{ item.shopsStart }}</span>
             <span class="wsw-l wsw-f12">运费：{{ item.freight }}</span>
+            <span class="wsw-r wsw-f12 wsw-red wsw-fb">{{ item.score }}</span>
           </p>
         </div>
       </div>
@@ -41,6 +42,7 @@ export default {
     const model = reactive({
       value1: 0,
       value2: 0,
+      text: '',
       classificationId: route.query.classificationId || null,
       shopsList: [],
       districtCode:computed(()=>{
@@ -106,6 +108,7 @@ export default {
       }
       model.value2 = 0; // 初始化排序方式
       model.value1 = Number(value);
+      model.text = option1[value].text;
       model.shopsList = arr;
     }
 
@@ -115,9 +118,11 @@ export default {
       shopsList = shopsList.filter((item, index) => {
         return item.addressCode == model.districtCode;
       })
-      shopsList = shopsList.filter((item, index) => {
-        return item.classificationType == model.value1
-      })
+      if(model.value1){
+        shopsList = shopsList.filter((item, index) => {
+          return item.classificationType == model.value1
+        })
+      }
       if (value == 1) {
         shopsList.sort((a, b) => {
           return b.score - a.score;
