@@ -1813,6 +1813,7 @@ export default createStore({
       };
     },
     setCurrAddress ({ commit, state }, baseAddress = '') {
+      if (!state.loginInfo) return;
       let loginInfo = state.loginInfo;
       loginInfo.baseAddress = baseAddress;
       commit('SET_LOGIN_INFO', loginInfo);

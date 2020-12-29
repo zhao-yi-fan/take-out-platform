@@ -66,3 +66,9 @@ p {
 .wsw-red{
   color: red;;
 }
+.wsw-f12{
+  font-size: 12px;
+}
+.wsw-fb{
+  font-weight: bolder;
+}
