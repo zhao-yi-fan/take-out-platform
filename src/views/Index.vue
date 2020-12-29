@@ -140,7 +140,7 @@ export default {
       }),
       showArea: false,
       value: computed(() => {
-        return store.state.loginInfo ? store.state.loginInfo.baseAddress : "";
+        return store.state.baseAddress || "";
       }),
       areaList: computed(() => areaList),
     });

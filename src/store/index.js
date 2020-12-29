@@ -1611,6 +1611,7 @@ export default createStore({
         shopsIds: ["2", "3"],
       },
     ],
+    baseAddress:''
   },
   mutations: {
     SET_LOGIN_INFO: (state, loginInfo) => {
@@ -1628,6 +1629,10 @@ export default createStore({
     SET_COLLECTION_LIST: (state, collectionList) => {
       console.log(collectionList, "collectionList===");
       state.collectionList = collectionList;
+    },
+    SET_BASE_ADDRESS: (state, baseAddress) => {
+      console.log(baseAddress, "baseAddress===");
+      state.baseAddress = baseAddress;
     },
   },
   actions: {
@@ -1813,10 +1818,7 @@ export default createStore({
       };
     },
     setCurrAddress ({ commit, state }, baseAddress = '') {
-      if (!state.loginInfo) return;
-      let loginInfo = state.loginInfo;
-      loginInfo.baseAddress = baseAddress;
-      commit('SET_LOGIN_INFO', loginInfo);
+      commit('SET_BASE_ADDRESS', baseAddress);
     },
 
   },
