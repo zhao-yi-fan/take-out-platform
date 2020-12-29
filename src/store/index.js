@@ -21,7 +21,8 @@ export default createStore({
     shopsList: [
       {
         shopsId: "1",
-        shopsName: "华莱士",
+        shopsName: "华莱士(北京东城店)",
+        classificationType: 1,
         shopsImage:
           "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3931901972,2904817796&fm=26&gp=0.jpg",
         signImage:
@@ -160,7 +161,8 @@ export default createStore({
       },
       {
         shopsId: "2",
-        shopsName: "汉堡王",
+        shopsName: "汉堡王(北京通州店)",
+        classificationType: 1,
         shopsImage:
           "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2665539707,3309730618&fm=26&gp=0.jpg",
         signImage:
@@ -292,7 +294,8 @@ export default createStore({
       },
       {
         shopsId: "3",
-        shopsName: "肯德基",
+        shopsName: "肯德基(北京东城店)",
+        classificationType: 1,
         shopsImage:
           "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2971128110,1131389812&fm=26&gp=0.jpg",
         signImage:
@@ -456,7 +459,8 @@ export default createStore({
       },
       {
         shopsId: "4",
-        shopsName: "张亮麻辣烫",
+        shopsName: "张亮麻辣烫(北京东城店)",
+        classificationType: 1,
         shopsImage:
           "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2514831641,2807693253&fm=26&gp=0.jpg",
         signImage:
@@ -618,7 +622,8 @@ export default createStore({
       },
       {
         shopsId: "5",
-        shopsName: "必胜客",
+        shopsName: "必胜客(北京东城店)",
+        classificationType: 1,
         shopsImage:
           "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=887842277,1981039376&fm=26&gp=0.jpg",
         signImage:
@@ -851,6 +856,7 @@ export default createStore({
       {
         shopsId: "6",
         shopsName: "家常菜馆",
+        classificationType: 1,
         shopsImage:
           "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2513869882,2684738312&fm=26&gp=0.jpg",
         signImage:
@@ -1049,7 +1055,8 @@ export default createStore({
       },
       {
         shopsId: "7",
-        shopsName: "麦当劳",
+        shopsName: "麦当劳(北京朝阳店)",
+        classificationType: 1,
         shopsImage:
           "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2296564993,2873419710&fm=26&gp=0.jpg",
         signImage:
@@ -1172,7 +1179,8 @@ export default createStore({
       },
       {
         shopsId: "8",
-        shopsName: "土大力",
+        shopsName: "土大力(北京东城店)",
+        classificationType: 1,
         shopsImage:
           "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2885489709,1921944805&fm=26&gp=0.jpg",
         signImage:
@@ -1295,7 +1303,8 @@ export default createStore({
       },
       {
         shopsId: "9",
-        shopsName: "沪上阿姨",
+        shopsName: "沪上阿姨(北京丰台店)",
+        classificationType: 2,
         shopsImage:
           "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1929119196,3404094601&fm=26&gp=0.jpg",
         signImage:
@@ -1410,7 +1419,8 @@ export default createStore({
       },
       {
         shopsId: "10",
-        shopsName: "好利来",
+        shopsName: "好利来(北京昌平店)",
+        classificationType: 3,
         shopsImage:
           "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=942897544,438625437&fm=26&gp=0.jpg",
         signImage:

@@ -5,30 +5,99 @@
     <!-- <span>饿了么</span> -->
     <div class="wsw-top-home-address">
       <van-icon name="location-o" color="#fff" size="24" class="wsw-l" />
-      <i class="wsw-l" @click="showArea = true">{{value || '请先选择收货地址'}}</i>
+      <i class="wsw-l" @click="showArea = true">{{
+        value || "请先选择收货地址"
+      }}</i>
     </div>
-    <van-icon name="search" color="#fff" size="24" class="wsw-r" @click="toSearch" />
+    <van-icon
+      name="search"
+      color="#fff"
+      size="24"
+      class="wsw-r"
+      @click="toSearch"
+    />
   </div>
   <div class="wsw-top-home">
     <div class="wsw-top-home-top">
       <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item>
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608348663068&di=9ccabacd2465508aee4a8296f52cfcc1&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180404%2Fe2f28fc29686449a9ffe7c6628b9d3c6.jpeg" />
+          <img
+            src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608348663068&di=9ccabacd2465508aee4a8296f52cfcc1&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180404%2Fe2f28fc29686449a9ffe7c6628b9d3c6.jpeg"
+          />
         </van-swipe-item>
         <van-swipe-item>
-          <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2074007851,907951023&fm=26&gp=0.jpg" />
+          <img
+            src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2074007851,907951023&fm=26&gp=0.jpg"
+          />
         </van-swipe-item>
         <van-swipe-item>
-          <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3467291110,2657821719&fm=26&gp=0.jpg" />
+          <img
+            src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3467291110,2657821719&fm=26&gp=0.jpg"
+          />
         </van-swipe-item>
+      </van-swipe>
+    </div>
+    <div class="wsw-top-home-classification">
+      <van-swipe class="classification-swipe" indicator-color="white">
+        <van-swipe-item>
+          <van-grid :gutter="10" square>
+            <van-grid-item to="/Home/Classification?classificationId=1">
+              <img src="../assets/images/cf1.png" alt="" srcset="" />
+              美食
+            </van-grid-item>
+            <van-grid-item to="/Home/Classification?classificationId=2">
+              <img src="../assets/images/cf2.png" alt="" srcset="" />
+              饮品
+            </van-grid-item>
+            <van-grid-item to="/Home/Classification?classificationId=3">
+              <img src="../assets/images/cf3.png" alt="" srcset="" />
+              甜品
+            </van-grid-item>
+            <van-grid-item to="/Home/Classification?classificationId=4">
+              <img src="../assets/images/cf4.png" alt="" srcset="" />
+              鲜花
+            </van-grid-item>
+          </van-grid>
+        </van-swipe-item>
+        <van-swipe-item>
+          <van-grid :gutter="10" square>
+            <van-grid-item to="/Home/Classification?classificationId=5">
+              <img src="../assets/images/cf5.png" alt="" srcset="" />
+              下午茶
+            </van-grid-item>
+            <van-grid-item to="/Home/Classification?classificationId=6">
+              <img src="../assets/images/cf6.png" alt="" srcset="" />
+              超市
+            </van-grid-item>
+            <van-grid-item to="/Home/Classification?classificationId=7">
+              <img src="../assets/images/cf7.png" alt="" srcset="" />
+              药品
+            </van-grid-item>
+            <van-grid-item to="/Home/Classification?classificationId=8">
+              <img src="../assets/images/cf8.png" alt="" srcset="" />
+              买菜
+            </van-grid-item>
+          </van-grid>
+          </van-swipe-item>
       </van-swipe>
     </div>
     <!-- <van-tag type="warning">今日推荐</van-tag> -->
     <center>
-      <img src="../assets/images/jrtj.png" alt="" width="100" style="margin: 10px 0" />
+      <img
+        src="../assets/images/jrtj.png"
+        alt=""
+        width="120"
+        style="margin: 0 0 20px 0"
+      />
     </center>
     <div class="wsw-top-home-List">
-      <div class="list-item" v-for="(item, index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
+      <div
+        class="list-item"
+        v-for="(item, index) in shopsList"
+        :key="index"
+        text="文字"
+        @click="toDetail(item.shopsId)"
+      >
         <img :src="item.shopsImage" />
         <div class="wsw-top-home-List-title">
           <p class="wsw-clearfix">
@@ -44,7 +113,11 @@
     </div>
   </div>
   <van-popup v-model:show="showArea" position="bottom">
-    <van-area :area-list="areaList" @confirm="onConfirm" @cancel="showArea = false" />
+    <van-area
+      :area-list="areaList"
+      @confirm="onConfirm"
+      @cancel="showArea = false"
+    />
   </van-popup>
 </template>
 
@@ -53,12 +126,12 @@ import { ref, reactive, toRefs, computed } from "vue";
 import { Notify, Toast } from "vant";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import areaList from '@/mock/area.js'
+import areaList from "@/mock/area.js";
 
 export default {
   name: "",
   components: {},
-  setup (propes, { root }) {
+  setup(propes, { root }) {
     const router = useRouter();
     const store = useStore();
     const model = reactive({
@@ -69,9 +142,9 @@ export default {
       }),
       showArea: false,
       value: computed(() => {
-        return store.state.loginInfo ? store.state.loginInfo.baseAddress : '';
+        return store.state.loginInfo ? store.state.loginInfo.baseAddress : "";
       }),
-      areaList: computed(() => areaList)
+      areaList: computed(() => areaList),
     });
     const toDetail = (shopsId) => {
       router.push({
@@ -91,15 +164,15 @@ export default {
       let value = values
         .filter((item) => !!item)
         .map((item) => item.name)
-        .join('/');
-      store.dispatch('setCurrAddress', value)
+        .join("/");
+      store.dispatch("setCurrAddress", value);
     };
 
     return {
       ...toRefs(model),
       toDetail,
       toSearch,
-      onConfirm
+      onConfirm,
     };
   },
 };
@@ -117,7 +190,9 @@ export default {
     line-height: 80px;
     display: inline-block;
     color: #fff;
-    font-weight: bolder;
+    i {
+      font-weight: bolder;
+    }
     .van-icon {
       height: 80px;
       line-height: 80px;
@@ -160,7 +235,29 @@ export default {
       }
     }
   }
-
+  .wsw-top-home-classification {
+    margin: 10px 0;
+    .classification-swipe {
+      padding: 0 0 25px 0;
+      ::v-deep .van-grid-item__content {
+        background: transparent;
+        box-shadow: 0 1px 4px 0 rgb(240 172 26 / 30%);
+        img {
+          margin: 5px 0;
+          width: 70%;
+          height: 90%;
+        }
+      }
+      ::v-deep .van-swipe__indicator {
+        width: 20px;
+        border-radius: 5px;
+        opacity: .5;
+      }
+      ::v-deep .van-swipe__indicator--active{
+        background: #f0ab1a !important;
+      }
+    }
+  }
   .van-tag {
     margin: 10px;
   }

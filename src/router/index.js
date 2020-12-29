@@ -32,6 +32,12 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "about" */ "../views/User.vue"),
       },
+      {
+        path: "/Home/Classification",
+        name: "Classification",
+        component: () =>
+          import(/* webpackChunkName: "about" */ "../views/Classification.vue"),
+      },
     ],
   },
   {
@@ -113,7 +119,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "NewRegister" */ "../views/new/NewRegister.vue"),
+      import(
+        /* webpackChunkName: "NewRegister" */ "../views/new/NewRegister.vue"
+      ),
   },
   {
     path: "/newForgetPwd",
@@ -158,7 +166,8 @@ router.beforeEach(async (to, from) => {
       to.path === "/Commodity_details" ||
       to.path === "/search" ||
       to.path === "/Home/Order" ||
-      to.path === "/Home/User"
+      to.path === "/Home/User" ||
+      to.path === "/Home/Classification" 
     ) {
     }
     //  else if () {
