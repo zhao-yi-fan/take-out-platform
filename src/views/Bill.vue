@@ -106,7 +106,6 @@ export default {
 <style lang="scss" scoped>
 .wsw-top-bill {
   width: 100%;
-  height: 100%;
   background: #ed9428;
   position: relative;
   padding-top: 40px;

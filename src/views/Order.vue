@@ -128,6 +128,7 @@ export default {
   }
   .wsw-top-Order-list {
     height: calc(100% - 50px);
+    overflow: auto;
     // position: relative;
     // opacity: 0.99;
     .van-tabs {
