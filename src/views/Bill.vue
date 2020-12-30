@@ -20,7 +20,7 @@
     </div>
     <div class="wsw-top-bill-shopList">
       <p>{{}}</p>
-      <van-card :num="item.foodNum" :price="item.foodMoney" desc="描述信息" :title="item.foodName" :thumb="item.foodImageUrl" v-for="(item) in currentOrderInfo.foodList" :key="item.foodId" />
+      <van-card :num="item.foodNum" :price="item.foodMoney" :desc="item.commodityDescribe" :title="item.foodName" :thumb="item.foodImageUrl" v-for="(item) in currentOrderInfo.foodList" :key="item.foodId" />
     </div>
     <van-submit-bar :price="currentOrderInfo.money * 100" button-text="确认支付" @submit="onSubmit" />
   </div>

@@ -1072,7 +1072,8 @@ export default createStore({
         freight: "12",
         score: "4.3",
         address: "北京市朝阳区湖光北街9号旺角购物广场(南湖东园西北)1层",
-        notice: "主要售卖汉堡包，以及薯条、炸鸡、汽水、冰品、沙拉、水果等快餐食品",
+        notice:
+          "主要售卖汉堡包，以及薯条、炸鸡、汽水、冰品、沙拉、水果等快餐食品",
         commodity: [
           {
             classificationId: 1,
@@ -1197,7 +1198,8 @@ export default createStore({
         freight: "6",
         score: "4.6",
         address: "北京市东城区永定门外大街101-3号百荣世贸商城Ａ座1层",
-        notice: "土大力韩国料理在产品的制作上,采用韩国的技术,打造正宗特色的韩式美食",
+        notice:
+          "土大力韩国料理在产品的制作上,采用韩国的技术,打造正宗特色的韩式美食",
         commodity: [
           {
             classificationId: 1,
@@ -1322,7 +1324,8 @@ export default createStore({
         freight: "10",
         score: "4.6",
         address: "北京市丰台区果园8号楼合生广场B1-K-02号商铺",
-        notice: "沪上阿姨产品种类繁多,以既营养又健康的特点赢得了广大消费者们的认可",
+        notice:
+          "沪上阿姨产品种类繁多,以既营养又健康的特点赢得了广大消费者们的认可",
         commodity: [
           {
             classificationId: 1,
@@ -1376,7 +1379,6 @@ export default createStore({
                 commodityMoney: "26.00",
                 commodityDescribe: "美味，饱腹",
               },
-
             ],
           },
           {
@@ -1422,7 +1424,7 @@ export default createStore({
                 commodityName: "草莓芦荟酸奶",
                 commodityMoney: "29.00",
                 commodityDescribe: "口感极好",
-              }
+              },
             ],
           },
         ],
@@ -1539,7 +1541,7 @@ export default createStore({
                 commodityName: "雪顶戚风",
                 commodityMoney: "22.00",
                 commodityDescribe: "口感极好",
-              }
+              },
             ],
           },
           {
@@ -1585,7 +1587,7 @@ export default createStore({
                 commodityName: "半熟芝士挞",
                 commodityMoney: "25.00",
                 commodityDescribe: "口感极好",
-              }
+              },
             ],
           },
         ],
@@ -1603,129 +1605,127 @@ export default createStore({
         freight: "4",
         score: "4.9",
         address: "长沙湖南工业职业技术学院南门100米",
-        notice: "华莱士，国有本土汉堡品牌连锁店，一家主打速食及炸鸡的快餐店。",
+        notice: "螺蛳粉具有辣、爽、鲜、酸、烫的独特风味。。",
         commodity: [
           {
             classificationId: 1,
-            text: "汉堡",
+            text: "螺蛳粉",
             children: [
               {
                 commodityId: "1",
-                commodityImage: "http://www.h96198.net/upload/cc1.jpg",
-                commodityName: "奥尔良鸡腿堡",
-                commodityMoney: "12.50",
+                commodityImage:
+                  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2121233564,4230873929&fm=26&gp=0.jpgg",
+                commodityName: "螺蛳粉（小）",
+                commodityMoney: "18.00",
                 commodityDescribe: "美味",
               },
               {
                 commodityId: "2",
-                commodityImage: "http://www.h96198.net/upload/cc2.jpg",
-                commodityName: "板烧鸡腿堡",
-                commodityMoney: "12.50",
+                commodityImage:
+                  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2121233564,4230873929&fm=26&gp=0.jpg",
+                commodityName: "螺蛳粉（大）",
+                commodityMoney: "25.00",
                 commodityDescribe: "美味",
-              },
-              {
-                commodityId: "3",
-                commodityImage: "http://www.h96198.net/upload/cc3.jpg",
-                commodityName: "劲脆鸡腿堡",
-                commodityMoney: "12.50",
-                commodityDescribe: "美味",
-              },
-              {
-                commodityId: "4",
-                commodityImage: "http://www.h96198.net/upload/cc4.jpg",
-                commodityName: "老北京鸡肉卷",
-                commodityMoney: "12.50",
-                commodityDescribe: "美味",
-              },
-              {
-                commodityId: "5",
-                commodityImage: "http://www.h96198.net/upload/cc5.jpg",
-                commodityName: "麦辣鸡腿堡",
-                commodityMoney: "12.50",
-                commodityDescribe: "美味",
-              },
-              {
-                commodityId: "6",
-                commodityImage: "http://www.h96198.net/upload/cc6.jpg",
-                commodityName: "麦香鸡腿堡",
-                commodityMoney: "12.50",
-                commodityDescribe: "充满了夏天的味道",
               },
             ],
           },
           {
             classificationId: 2,
-            text: "饮品",
+            text: "配菜",
             children: [
               {
                 commodityId: "1",
                 commodityImage:
-                  "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I2R940-VN9.jpg",
-                commodityName: "热咖啡",
-                commodityMoney: "12.50",
-                commodityDescribe: "香甜可口",
-              },
-              {
-                commodityId: "2",
-                commodityImage:
-                  "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I203360-D409.jpg",
-                commodityName: "美年达",
-                commodityMoney: "12.50",
-                commodityDescribe: "香甜可口",
-              },
-              {
-                commodityId: "3",
-                commodityImage:
-                  "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I11T60-43c1.jpg",
-                commodityName: "牛奶",
-                commodityMoney: "12.50",
-                commodityDescribe: "香甜可口",
-              },
-              {
-                commodityId: "4",
-                commodityImage:
-                  "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I014410-22001.jpg",
-                commodityName: "可乐",
-                commodityMoney: "12.50",
-                commodityDescribe: "香甜可口",
-              },
-            ],
-          },
-          {
-            classificationId: 3,
-            text: "小食",
-            children: [
-              {
-                commodityId: "1",
-                commodityImage:
-                  "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4I941060-QO0.jpg",
-                commodityName: "蛋挞",
-                commodityMoney: "6.50",
+                  "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1887849199,3806657193&fm=26&gp=0.jpg",
+                commodityName: "卤蛋",
+                commodityMoney: "3.50",
                 commodityDescribe: "酥脆，可口",
               },
               {
                 commodityId: "2",
                 commodityImage:
-                  "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4IIAP-4BS.jpg",
-                commodityName: "薯条",
-                commodityMoney: "11.00",
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3280615071,2245041998&fm=26&gp=0.jpg",
+                commodityName: "卤猪脚",
+                commodityMoney: "30.00",
                 commodityDescribe: "酥脆，可口",
               },
               {
                 commodityId: "3",
                 commodityImage:
-                  "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4J5A530-DY1.jpg",
-                commodityName: "香甜玉米",
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3621446995,604338204&fm=26&gp=0.jpg",
+                commodityName: "卤鸡爪",
                 commodityMoney: "10.00",
                 commodityDescribe: "酥脆，可口",
               },
               {
                 commodityId: "4",
                 commodityImage:
-                  "http://www.hzjdhf.com/uploads/allimg/c160613/14AO4J4635Z-495G.jpg",
-                commodityName: "香酥鸡腿",
-                commodityMoney: "12.50",
+                  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1117054201,576150392&fm=26&gp=0.jpg",
+                commodityName: "腐竹",
+                commodityMoney: "2.50",
                 commodityDescribe: "酥脆，可口",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=266248723,3242480469&fm=26&gp=0.jpg",
+                commodityName: "豆泡",
+                commodityMoney: "5.00",
+                commodityDescribe: "酥脆，可口",
+              },
+            ],
+          },
+          {
+            classificationId: 3,
+            text: "饮品",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1016928880,1852879407&fm=26&gp=0.jpg",
+                commodityName: "可乐",
+                commodityMoney: 4.0,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1369082197,1372179036&fm=26&gp=0.jpg",
+                commodityName: "雪碧",
+                commodityMoney: 4.0,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=633815778,3039752227&fm=26&gp=0.jpg",
+                commodityName: "芬达",
+                commodityMoney: 4.0,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3807687772,18477255&fm=26&gp=0.jpg",
+                commodityName: "王老吉",
+                commodityMoney: 4.0,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2807285171,3837020360&fm=26&gp=0.jpg",
+                commodityName: "冰红茶",
+                commodityMoney: 4.0,
+                commodityDescribe: "冰凉可口",
+              },
+              {
+                commodityId: "6",
+                commodityImage:
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1787354675,3503691018&fm=26&gp=0.jpg",
+                commodityName: "绿茶",
+                commodityMoney: 4.0,
+                commodityDescribe: "冰凉可口",
               },
             ],
           },
@@ -2570,6 +2570,359 @@ export default createStore({
           },
         ],
       },
+      {
+        shopsId: "17",
+        shopsName: "沪上阿姨(长沙岳麓区店)",
+        classificationType: 2,
+        addressCode: "430104",
+        shopsImage:
+          "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1929119196,3404094601&fm=26&gp=0.jpg",
+        signImage:
+          "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=472560757,1886710252&fm=26&gp=0.jpg",
+        shopsStart: "20",
+        freight: "10",
+        score: "4.6",
+        address: "长沙湖南工业职业技术学院南门100米",
+        notice:
+          "沪上阿姨产品种类繁多,以既营养又健康的特点赢得了广大消费者们的认可",
+        commodity: [
+          {
+            classificationId: 1,
+            text: "奶茶",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1569350901,208175033&fm=26&gp=0.jpg",
+                commodityName: "血糯米奶茶",
+                commodityMoney: "18.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1130603285,2597933684&fm=26&gp=0.jpg",
+                commodityName: "经典波波奶茶",
+                commodityMoney: "22.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3745018127,697670354&fm=15&gp=0.jpg",
+                commodityName: "厚芋泥波波奶茶",
+                commodityMoney: "26.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1060564007,662377873&fm=26&gp=0.jpg",
+                commodityName: "稞麦奶茶",
+                commodityMoney: "24.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3963812666,2791806707&fm=26&gp=0.jpg",
+                commodityName: "经典椰果奶茶",
+                commodityMoney: "20.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "6",
+                commodityImage:
+                  "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2270008782,2491193167&fm=26&gp=0.jpg",
+                commodityName: "抹茶珍珠鲜奶",
+                commodityMoney: "26.00",
+                commodityDescribe: "美味，饱腹",
+              },
+            ],
+          },
+          {
+            classificationId: 2,
+            text: "果茶",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=41491235,610485139&fm=26&gp=0.jpg",
+                commodityName: "柠檬去哪儿",
+                commodityMoney: "20.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3040120637,3072558969&fm=26&gp=0.jpg",
+                commodityName: "满杯百香果",
+                commodityMoney: "25.00",
+                commodityDescribe: "口感极好（辣）",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1402630114,3646722378&fm=26&gp=0.jpg",
+                commodityName: "金桔柠檬汁",
+                commodityMoney: "22.00",
+                commodityDescribe: "口感极好（不辣）",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3046708624,604077741&fm=26&gp=0.jpg",
+                commodityName: "暴打金柠四季春",
+                commodityMoney: "26.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3962229838,3252285578&fm=26&gp=0.jpg",
+                commodityName: "草莓芦荟酸奶",
+                commodityMoney: "29.00",
+                commodityDescribe: "口感极好",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        shopsId: "18",
+        shopsName: "好利来(长沙岳麓区店)",
+        classificationType: 3,
+        addressCode: "430104",
+        shopsImage:
+          "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=942897544,438625437&fm=26&gp=0.jpg",
+        signImage:
+          "http://www.holiland.com/data/afficheimg/1598493204542282623.jpg",
+        shopsStart: "20",
+        freight: "3",
+        score: "4.6",
+        address: "长沙湖南工业职业技术学院南门100米",
+        notice: "味道特别分层,每口都很丰富,美味到软腿! ",
+        commodity: [
+          {
+            classificationId: 1,
+            text: "奶茶",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202012/1607035868666833413.jpg",
+                commodityName: "圣诞款生日蛋糕",
+                commodityMoney: "299.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202010/1602574548126560941.jpg",
+                commodityName: "好利来x奥利奥蛋糕",
+                commodityMoney: "279.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202008/1597771373737866649.jpg",
+                commodityName: "朵朵情歌",
+                commodityMoney: "199.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202008/1597771585558550335.jpg",
+                commodityName: "软萌精灵",
+                commodityMoney: "199.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202007/1595548880850440127.jpg",
+                commodityName: "一起跳舞吧",
+                commodityMoney: "199.00",
+                commodityDescribe: "美味，饱腹",
+              },
+              {
+                commodityId: "6",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202008/1598320203822828471.jpg",
+                commodityName: "朵朵甜心",
+                commodityMoney: "199.00",
+                commodityDescribe: "美味，饱腹",
+              },
+            ],
+          },
+          {
+            classificationId: 2,
+            text: "Mini蛋糕",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202012/1606790219943595766.png",
+                commodityName: "圣诞巧脆双拼蛋糕",
+                commodityMoney: "36.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202008/1596575433826735427.jpg",
+                commodityName: "半熟花花马卡龙-七夕情人节礼盒",
+                commodityMoney: "62.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202005/1589832758685720183.jpg",
+                commodityName: "好利来×小马宝莉联名云朵芝士",
+                commodityMoney: "42.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202004/1587523176848707003.jpg",
+                commodityName: "爆浆球",
+                commodityMoney: "32.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/202004/1587522281280340085.jpg",
+                commodityName: "雪顶戚风",
+                commodityMoney: "22.00",
+                commodityDescribe: "口感极好",
+              },
+            ],
+          },
+          {
+            classificationId: 3,
+            text: "零食糕点",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/201809/1536034217561873296.jpg",
+                commodityName: "冰山熔岩",
+                commodityMoney: "59.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/201603/1456897858547169892.jpg",
+                commodityName: "半熟芝士",
+                commodityMoney: "39.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/201808/1535044247227997871.jpg",
+                commodityName: "蜂蜜蛋糕",
+                commodityMoney: "39.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/201702/1487804499830446925.jpg",
+                commodityName: "青森芝士条",
+                commodityMoney: "38.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "http://img.holiland.com/data/wapimg/201702/1487032606872933579.jpg",
+                commodityName: "半熟芝士挞",
+                commodityMoney: "25.00",
+                commodityDescribe: "口感极好",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        shopsId: "19",
+        shopsName: "喜茶(长沙岳麓区店)",
+        classificationType: 2,
+        addressCode: "430104",
+        shopsImage:
+          "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3272920449,4064486292&fm=15&gp=0.jpg",
+        signImage:
+          "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=326432328,106040977&fm=26&gp=0.jpg",
+        shopsStart: "20",
+        freight: "10",
+        score: "4.6",
+        address: "长沙湖南工业职业技术学院南门100米",
+        notice:
+          "沪上阿姨产品种类繁多,以既营养又健康的特点赢得了广大消费者们的认可",
+        commodity: [
+          {
+            classificationId: 1,
+            text: "奶茶",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "http://oulilai.net/upload/cc1.jpg",
+                commodityName: "喜芝红玉茗茶",
+                commodityMoney: "18.00",
+                commodityDescribe: "好喝",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "http://oulilai.net/upload/cc2.jpg",
+                commodityName: "喜芝新桂清风茶",
+                commodityMoney: "22.00",
+                commodityDescribe: "好喝",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "http://oulilai.net/upload/cc3.jpg",
+                commodityName: "喜芝樱花青茶",
+                commodityMoney: "26.00",
+                commodityDescribe: "好喝",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "http://oulilai.net/upload/cc4.jpg",
+                commodityName: "底脂奶霜金风茶",
+                commodityMoney: "24.00",
+                commodityDescribe: "好喝",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "http://oulilai.net/upload/cc5.jpg",
+                commodityName: "喜芝庄园可可",
+                commodityMoney: "20.00",
+                commodityDescribe: "好喝",
+              },
+              {
+                commodityId: "6",
+                commodityImage:
+                  "http://oulilai.net/upload/cc6.jpg",
+                commodityName: "抹茶珍珠鲜奶",
+                commodityMoney: "26.00",
+                commodityDescribe: "好喝",
+              },
+            ],
+          },
+        ],
+      },
     ],
     orderList: [
       {
@@ -2578,8 +2931,8 @@ export default createStore({
         userId: 1,
         status: "success",
         address: "长沙湖南工业职业技术学院",
-        people: '移应2018-1-21吴尚尉',
-        phone: '18974868294',
+        people: "移应2018-1-21吴尚尉",
+        phone: "18974868294",
         foodList: [
           {
             foodId: "1_1",
@@ -2605,9 +2958,9 @@ export default createStore({
       },
     ],
     baseAddress: {
-      name: '北京市/北京市/东城区',
-      code: '110101'
-    }
+      name: "北京市/北京市/东城区",
+      code: "110101",
+    },
   },
   mutations: {
     SET_LOGIN_INFO: (state, loginInfo) => {
@@ -2632,7 +2985,7 @@ export default createStore({
     },
   },
   actions: {
-    login ({ commit, state }, loginData = {}) {
+    login({ commit, state }, loginData = {}) {
       let { username, password } = loginData;
       for (let i = 0; i < state.userList.length; i++) {
         let userItem = state.userList[i];
@@ -2643,7 +2996,7 @@ export default createStore({
       }
       return false; // 登陆失败
     },
-    register ({ commit, state }, registerData = {}) {
+    register({ commit, state }, registerData = {}) {
       let { username, password, secret } = registerData;
       let lastId = state.userList[state.userList.length - 1].userId;
       lastId++;
@@ -2654,14 +3007,14 @@ export default createStore({
         }
       }
       state.userList.push({
-        "userId": lastId,
+        userId: lastId,
         username,
         password,
         secret,
       });
       return true; // 注册成功
     },
-    forgetPwd ({ commit, state }, forgetPwd = {}) {
+    forgetPwd({ commit, state }, forgetPwd = {}) {
       let { username, password, secret } = forgetPwd;
       let userList = state.userList;
       for (let i = 0; i < userList.length; i++) {
@@ -2687,11 +3040,10 @@ export default createStore({
         msg: "修改失败，用户名不存在！",
       };
     },
-    setOrderInfo ({ commit, state }, orderForm = {}) {
+    setOrderInfo({ commit, state }, orderForm = {}) {
       let { userId, shopsId, money, foodList } = orderForm;
       let orderList = state.orderList;
-      let businessesId =
-        orderList[orderList.length - 1].businessesId;
+      let businessesId = orderList[orderList.length - 1].businessesId;
       businessesId++;
       orderList.push({
         businessesId,
@@ -2704,15 +3056,15 @@ export default createStore({
           content: "",
           score: null,
         },
-        address: ''
+        address: "",
       });
-      commit('SET_ORDER_LIST', orderList)
+      commit("SET_ORDER_LIST", orderList);
       return {
         code: 1,
         businessesId,
       }; // 下单成功
     },
-    setOrderStatus ({ commit, state }, statusForm = {}) {
+    setOrderStatus({ commit, state }, statusForm = {}) {
       let { businessesId, address, people, phone } = statusForm;
       let isExist = false;
       let orderList = state.orderList;
@@ -2725,14 +3077,14 @@ export default createStore({
           item.phone = phone;
         }
       });
-      commit('SET_ORDER_LIST', orderList)
+      commit("SET_ORDER_LIST", orderList);
       if (isExist) {
         return true; // 下单成功
       } else {
         return false; // 下单失败
       }
     },
-    getMyOrder ({ commit, state }, userId = {}) {
+    getMyOrder({ commit, state }, userId = {}) {
       // let { userId } = myForm;
       let myOrderList = [];
       state.orderList.forEach((item, index) => {
@@ -2741,7 +3093,7 @@ export default createStore({
           myOrderList.push(item);
         }
       });
-      console.log(myOrderList, 'myOrderList');
+      console.log(myOrderList, "myOrderList");
       // 增加商品信息
       myOrderList.map((currentItem, index) => {
         for (let i = 0; i < state.shopsList.length; i++) {
@@ -2768,23 +3120,23 @@ export default createStore({
       });
       return myOrderList;
     },
-    search ({ commit, state }, key = '') {
+    search({ commit, state }, key = "") {
       key = key.trim();
       let searchList = [];
       state.shopsList.forEach((item, index) => {
         if (item.shopsName.indexOf(key) > -1) {
-          searchList.push(item)
+          searchList.push(item);
         }
-      })
+      });
       return searchList;
     },
-    setPwd ({ commit, state }, setPwdForm = {}) {
+    setPwd({ commit, state }, setPwdForm = {}) {
       let { userId, rawPassword, password, rePassword } = setPwdForm;
       if (password !== rePassword) {
         return {
           code: 2,
           msg: "两次密码输入不一致，请检查后重新提交！",
-        }
+        };
       }
       let userList = state.userList;
       for (let i = 0; i < userList.length; i++) {
@@ -2815,16 +3167,15 @@ export default createStore({
         msg: "用户不存在，非法操作！",
       };
     },
-    setCurrAddress ({ commit, state }, addressForm = '') {
+    setCurrAddress({ commit, state }, addressForm = "") {
       let { name, code } = addressForm;
       let baseAddress = state.baseAddress;
       baseAddress = {
         name,
-        code
-      }
-      commit('SET_BASE_ADDRESS', baseAddress);
+        code,
+      };
+      commit("SET_BASE_ADDRESS", baseAddress);
     },
-
   },
   plugins: [createPersistedState()],
   modules: {},
