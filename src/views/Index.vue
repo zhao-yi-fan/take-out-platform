@@ -15,13 +15,13 @@
     <div class="wsw-top-home-top">
       <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item>
-          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1608348663068&di=9ccabacd2465508aee4a8296f52cfcc1&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180404%2Fe2f28fc29686449a9ffe7c6628b9d3c6.jpeg" />
+          <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589032813,4145335677&fm=26&gp=0.jpg" />
         </van-swipe-item>
         <van-swipe-item>
-          <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2074007851,907951023&fm=26&gp=0.jpg" />
+          <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2692624379,284733204&fm=26&gp=0.jpg" />
         </van-swipe-item>
         <van-swipe-item>
-          <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3467291110,2657821719&fm=26&gp=0.jpg" />
+          <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3137981730,3583513968&fm=26&gp=0.jpg" />
         </van-swipe-item>
       </van-swipe>
     </div>

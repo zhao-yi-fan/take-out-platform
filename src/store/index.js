@@ -1542,7 +1542,7 @@ export default createStore({
                 commodityMoney: "22.00",
                 commodityDescribe: "口感极好",
               },
-            ],
+            ], 
           },
           {
             classificationId: 3,
@@ -1559,7 +1559,7 @@ export default createStore({
               {
                 commodityId: "2",
                 commodityImage:
-                  "http://img.holiland.com/data/wapimg/201603/1456897858547169892.jpg",
+                  "http://img.holiland.com/data/wapimg/201603/1456897858547169892.jpg", 
                 commodityName: "半熟芝士",
                 commodityMoney: "39.00",
                 commodityDescribe: "口感极好",
