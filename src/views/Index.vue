@@ -15,13 +15,19 @@
     <div class="wsw-top-home-top">
       <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item>
-          <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2589032813,4145335677&fm=26&gp=0.jpg" />
+        <router-link to="/Commodity_details?shopsId=14">
+          <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4083615963,856728706&fm=11&gp=0.jpg" />
+        </router-link>
         </van-swipe-item>
         <van-swipe-item>
-          <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2692624379,284733204&fm=26&gp=0.jpg" />
+         <router-link to="/Commodity_details?shopsId=20">
+          <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1004056377,3540152604&fm=26&gp=0.jpg" />
+        </router-link>
         </van-swipe-item>
         <van-swipe-item>
-          <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3137981730,3583513968&fm=26&gp=0.jpg" />
+         <router-link to="/Commodity_details?shopsId=13">
+          <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3487836899,16466550&fm=26&gp=0.jpg" />
+        </router-link>
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -117,13 +123,13 @@ export default {
       }),
       areaList: computed(() => areaList),
     });
-    onMounted(()=>{
+    onMounted(() => {
       let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
       var code = store.state.baseAddress.code
       shopsList = shopsList.filter((item, index) => {
         return item.addressCode == code;
       })
-       model.shopsList = shopsList || [];
+      model.shopsList = shopsList || [];
     })
     const toDetail = (shopsId) => {
       router.push({
@@ -226,11 +232,14 @@ export default {
   }
   .wsw-top-home-classification {
     margin: 10px 0;
+    ::v-deep [class*="van-hairline"]::after {
+      border: none;
+    }
     .classification-swipe {
       padding: 0 0 25px 0;
       ::v-deep .van-grid-item__content {
         background: transparent;
-        box-shadow: 0 1px 4px 0 rgb(240 172 26 / 30%);
+        // box-shadow: 0 1px 4px 0 rgb(240 172 26 / 30%);
         img {
           margin: 5px 0;
           width: 70%;

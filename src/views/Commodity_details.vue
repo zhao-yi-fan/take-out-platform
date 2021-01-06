@@ -71,16 +71,16 @@ export default {
     });
 
     const onClickLeft = () => {
-      Dialog.confirm({
-        title: "",
-        message: "返回首页会清空购物车",
-      })
-        .then(() => {
+      // Dialog.confirm({
+      //   title: "",
+      //   message: "返回首页会清空购物车",
+      // })
+      //   .then(() => {
           router.go(-1);
-        })
-        .catch(() => {
-          // on cancel
-        });
+      //   })
+      //   .catch(() => {
+      //     // on cancel
+      //   });
     };
 
     const onSubmit = async () => {

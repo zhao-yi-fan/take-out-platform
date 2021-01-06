@@ -2923,6 +2923,132 @@ export default createStore({
           },
         ],
       },
+      {
+        shopsId: "20",
+        shopsName: "麦当劳(长沙岳麓区店)",
+        classificationType: 1,
+        addressCode: "430104",
+        shopsImage:
+          "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2296564993,2873419710&fm=26&gp=0.jpg",
+        signImage:
+          "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=104249318,1361450626&fm=26&gp=0.jpg",
+        shopsStart: "20",
+        freight: "12",
+        score: "4.3",
+        address: "长沙湖南工业职业技术学院南门100米",
+        notice:
+          "主要售卖汉堡包，以及薯条、炸鸡、汽水、冰品、沙拉、水果等快餐食品",
+        commodity: [
+          {
+            classificationId: 1,
+            text: "套餐",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/chaozhitaocan-4104_07.jpg",
+                commodityName: "麦辣鸡腿汉堡套餐",
+                commodityMoney: "18.00",
+                commodityDescribe: "小朋友的最爱",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/chaozhitaocan-4104_11.jpg",
+                commodityName: "巨无霸超值套餐（小）",
+                commodityMoney: "26.00",
+                commodityDescribe: "小朋友的最爱",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/chaozhitaocan-4104_09.jpg",
+                commodityName: "原味板烧鸡腿堡套餐",
+                commodityMoney: "22.00",
+                commodityDescribe: "小朋友的最爱",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/chaozhitaocan-4104_15.jpg",
+                commodityName: "麦乐鸡超值套餐",
+                commodityMoney: "15.00",
+                commodityDescribe: "小朋友的最爱",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/chaozhitaocan-4104_03.jpg",
+                commodityName: "麦香鸡超值套餐",
+                commodityMoney: "15.00",
+                commodityDescribe: "小朋友的最爱",
+              },
+              {
+                commodityId: "6",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/chaozhitaocan-4104_12.jpg",
+                commodityName: "巨无霸超值套餐（大）",
+                commodityMoney: "26.50",
+                commodityDescribe: "小朋友的最爱",
+              },
+            ],
+          },
+          {
+            classificationId: 2,
+            text: "桶类",
+            children: [
+              {
+                commodityId: "1",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/mdl-5ikfc-19911_203.jpg",
+                commodityName: "家有金桶(汉堡版)",
+                commodityMoney: "80.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "2",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/mdl-5ikfc-19911_204.jpg",
+                commodityName: "金拱门桶B",
+                commodityMoney: "51.00",
+                commodityDescribe: "口感极好（辣）",
+              },
+              {
+                commodityId: "3",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/mdl-5ikfc-19911_205.jpg",
+                commodityName: "金拱门桶A",
+                commodityMoney: "51.00",
+                commodityDescribe: "口感极好（不辣）",
+              },
+              {
+                commodityId: "4",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/mdl-5ikfc-191230_237.jpg",
+                commodityName: "金桶(亚历山大王黑金桶)",
+                commodityMoney: "51.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "5",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/mdl-5ikfc-191230_235.jpg",
+                commodityName: "家有金桶黑金全家福",
+                commodityMoney: "99.00",
+                commodityDescribe: "口感极好",
+              },
+              {
+                commodityId: "6",
+                commodityImage:
+                  "http://static.5ikfc.com/img/mdl/menu/ver-136/mdl-5ikfc-191230_236.jpg",
+                commodityName: "亚历山大王黑金大桶",
+                commodityMoney: "82.50",
+                commodityDescribe: "口感极好",
+              },
+            ],
+          },
+        ],
+      },
     ],
     orderList: [
       {
@@ -3124,7 +3250,7 @@ export default createStore({
       key = key.trim();
       let searchList = [];
       state.shopsList.forEach((item, index) => {
-        if (item.shopsName.indexOf(key) > -1) {
+        if (item.shopsName.indexOf(key) > -1 && item.addressCode == state.baseAddress.code) {
           searchList.push(item);
         }
       });
@@ -3143,6 +3269,7 @@ export default createStore({
         let userItem = userList[i];
         if (userItem.userId === userId) {
           if (userItem.password !== rawPassword) {
+            
             return {
               code: 2,
               msg: "原密码输入错误，请检查后重新提交！",

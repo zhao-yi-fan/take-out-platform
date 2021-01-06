@@ -54,7 +54,7 @@ export default {
         if (resObj.code == 1) {
           Toast.success('修改密码成功，请您重新登录');
           store.commit('SET_LOGIN_INFO',null)
-          router.push('/Login')
+          router.push('/Home/User')
         } else {
           Toast.fail(resObj.msg);
         }
