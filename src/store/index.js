@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import dayjs from 'dayjs'
 import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
@@ -3074,6 +3075,8 @@ export default createStore({
           content: "唉呀妈呀相当好吃",
           score: "4.5",
         },
+        createDate: "2021-01-06 08:41:39",
+        sendDate: "2021-01-06 08:56:39"
       },
     ],
     collectionList: [
@@ -3196,11 +3199,14 @@ export default createStore({
       let orderList = state.orderList;
       orderList.forEach((item, index) => {
         if (item.businessesId == businessesId) {
+          let currDayjs = dayjs();
           isExist = true;
           item.status = "success";
           item.address = address;
           item.people = people;
           item.phone = phone;
+          item.createDate = currDayjs.format('YYYY-MM-DD hh:mm:ss');
+          item.sendDate = currDayjs.add(15, 'minute').format('YYYY-MM-DD hh:mm:ss');
         }
       });
       commit("SET_ORDER_LIST", orderList);
