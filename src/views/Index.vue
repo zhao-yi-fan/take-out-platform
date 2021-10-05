@@ -232,12 +232,12 @@ export default {
   }
   .wsw-top-home-classification {
     margin: 10px 0;
-    ::v-deep [class*="van-hairline"]::after {
+    :deep([class*="van-hairline"]::after) {
       border: none;
     }
     .classification-swipe {
       padding: 0 0 25px 0;
-      ::v-deep .van-grid-item__content {
+      :deep(.van-grid-item__content) {
         background: transparent;
         // box-shadow: 0 1px 4px 0 rgb(240 172 26 / 30%);
         img {
@@ -246,12 +246,12 @@ export default {
           height: 90%;
         }
       }
-      ::v-deep .van-swipe__indicator {
+      :deep(.van-swipe__indicator) {
         width: 20px;
         border-radius: 5px;
         opacity: 0.5;
       }
-      ::v-deep .van-swipe__indicator--active {
+      :deep(.van-swipe__indicator--active) {
         background: #f0ab1a !important;
       }
     }

@@ -188,7 +188,7 @@ export default {
   //   position: absolute;
   //   z-index: -1;
   // }
-  ::v-deep .van-dialog__content {
+  :deep(.van-dialog__content) {
     text-align: center;
     .van-rate {
       margin: 15px 0;

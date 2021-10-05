@@ -152,7 +152,7 @@ export default {
   position: relative;
   width: 100%;
   height: calc(100% - 50px);
-  ::v-deep .van-nav-bar {
+  :deep(.van-nav-bar) {
     width: 100%;
     .van-nav-bar__content {
       background: #ed9428;
@@ -167,7 +167,7 @@ export default {
       }
     }
   }
-  ::v-deep .van-dropdown-menu {
+  :deep(.van-dropdown-menu) {
     width: 100%;
   }
   .wsw-Classification-list {

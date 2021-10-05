@@ -72,7 +72,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-::v-deep .van-nav-bar__left {
+:deep(.van-nav-bar__left) {
   span,
   .van-icon {
     color: #ed9428;

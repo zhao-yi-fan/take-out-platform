@@ -40,7 +40,7 @@ export default {
     color: #fff;
     font-weight: bolder;
   }
-  ::v-deep .van-button {
+  :deep(.van-button) {
     margin: 14px 10px 0 0;
   }
 }

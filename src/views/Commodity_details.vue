@@ -254,7 +254,7 @@ $b: 390px;
   height: 100%;
   position: relative;
   background: #fefcf9;
-  ::v-deep .van-nav-bar {
+  :deep(.van-nav-bar) {
     .van-nav-bar__left i,
     .van-nav-bar__left span,
     .van-nav-bar__right,
@@ -299,7 +299,7 @@ $b: 390px;
   .wsw-top-Commodity-list {
     margin-top: 45px;
     height: calc(#{$a} - #{$b});
-    ::v-deep .van-tree-select {
+    :deep(.van-tree-select) {
       height: 100% !important;
     }
     button {
@@ -307,7 +307,7 @@ $b: 390px;
       margin: 0 3px;
     }
   }
-  ::v-deep .van-submit-bar__text {
+  :deep(.van-submit-bar__text) {
     text-align: left;
   }
 }

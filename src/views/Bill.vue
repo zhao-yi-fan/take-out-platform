@@ -145,7 +145,7 @@ export default {
     background: #fff;
     border-radius: 0 10px 10px 10px;
     font-size: 14px;
-    ::v-deep .van-cell {
+    :deep(.van-cell) {
       border-radius: 0 10px 0 0;
     }
     p {

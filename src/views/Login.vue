@@ -87,7 +87,7 @@ export default {
         border-radius: 5px;
         margin-bottom: 10px;
         background-color: #f8df96;
-        ::v-deep .van-cell__value {
+        :deep(.van-cell__value) {
           input {
             color: #fff;
           }
@@ -103,7 +103,7 @@ export default {
         margin: 20px auto;
         border: none;
         background-color: rgb(255 255 255 / 70%);
-        ::v-deep span {
+        :deep(span) {
           font-size: 18px;
           font-weight: 700;
         }

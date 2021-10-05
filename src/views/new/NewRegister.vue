@@ -114,7 +114,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-::v-deep .van-nav-bar__left {
+:deep(.van-nav-bar__left) {
   span,
   .van-icon {
     color: #ed9428;
@@ -131,7 +131,7 @@ export default {
       .van-cell {
         border-radius: 5px;
         margin-bottom: 10px;
-        ::v-deep .van-cell__value {
+        :deep(.van-cell__value) {
           .van-field__error-message {
             position: absolute;
             right: 0;
@@ -143,7 +143,7 @@ export default {
         margin: 20px auto;
         border: none;
         background-color: #ed9428;
-        ::v-deep span {
+        :deep(span) {
           font-size: 18px;
           font-weight: 700;
           color: #fff;
