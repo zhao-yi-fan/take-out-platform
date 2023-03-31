@@ -3,9 +3,7 @@ import vue from '@vitejs/plugin-vue'
 // import legacy from '@vitejs/plugin-legacy'
 // import requireTransform from 'vite-plugin-require-transform'
 // import vitePluginRequire from "vite-plugin-require";
-// q: vite中 favicon.ico的href怎么写
-// a:  
-// <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
 export default {
   base: './',
   plugins: [
