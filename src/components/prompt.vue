@@ -1,27 +1,18 @@
 <!-- 未登录的提示 -->
 <template>
-  <div class="wsw-component-prompt" v-if="!userId">
+  <div class="wsw-component-prompt" v-if="!isLogin">
     <span>还未登陆？</span>
-    <van-button type="warning" size="mini" class="wsw-r" to="/newLogin">马上登陆</van-button>
+    <van-button type="warning" size="mini" class="wsw-r" to="/newLogin"
+      >马上登陆</van-button
+    >
   </div>
 </template>
 
-<script>
-import { reactive, toRefs } from "vue";
+<script setup>
+import { reactive, ref } from "vue";
 import { useStore } from "vuex";
-
-export default {
-  name: "",
-  components: {},
-  setup(propes, { root }) {
-    const store = useStore();
-    const model = reactive({
-      userId: store.state.loginInfo ? true : false,
-    });
-    console.log(model.userId, "userId");
-    return { ...toRefs(model) };
-  },
-};
+const store = useStore();
+const isLogin = ref(!!store.state.loginInfo);
 </script>
 
 <style lang="scss" scoped>
