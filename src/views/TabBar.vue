@@ -19,7 +19,7 @@
 <script setup>
 import { ref, reactive, toRefs, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useUserStore } from "@/store/userStore";
+import { useUserStore } from "@/stores/userStore";
 const userStore = useUserStore();
 
 const route = useRoute();

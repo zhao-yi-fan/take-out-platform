@@ -129,7 +129,7 @@
 import { ref, reactive, toRefs, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import areaJson from "@/mock/area.js";
-import { useShopStore } from "@/store/shopStore";
+import { useShopStore } from "@/stores/shopStore";
 const shopStore = useShopStore();
 
 const router = useRouter();

@@ -43,7 +43,7 @@
 import { reactive, ref } from "vue";
 import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
-import { useUserStore } from "@/store/userStore";
+import { useUserStore } from "@/stores/userStore";
 
 const userStore = useUserStore();
 const router = useRouter();

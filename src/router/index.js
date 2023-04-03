@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import { useUserStore } from "../store/userStore";
+import { useUserStore } from "@/stores/userStore";
 import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 
 const routes = [
@@ -38,12 +38,6 @@ const routes = [
           import("../views/Classification.vue"),
       },
     ],
-  },
-  {
-    path: "/Login",
-    name: "Login",
-    component: () =>
-      import("../views/Login.vue"),
   },
   {
     path: "/Commodity_details",
@@ -89,7 +83,7 @@ const routes = [
   },
   {
     path: "/newLogin",
-    name: "NewLogin",
+    name: "Login",
     component: () =>
       import("../views/new/NewLogin.vue"),
   },
@@ -121,14 +115,16 @@ router.beforeEach(async (to, from) => {
   let isLogin = userStore.isLogin;
   if (!isLogin) {
     if (
-      ["Index", "Login", "NewLogin", "Register", "ForgetPwd",].includes(to.name)
+      ["Index", "Login", "Register", "ForgetPwd",].includes(to.name)
     ) {
       // user login
       return true;
     }
     showToast("您未登录");
     setTimeout(() => {
-      router.push("/NewLogin");
+      router.push({
+        name: "Login",
+      });
     }, 1000);
     return false;
   }

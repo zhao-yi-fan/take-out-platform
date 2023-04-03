@@ -32,7 +32,7 @@
 import { ref, reactive, toRefs, defineComponent } from "vue";
 import TabBar from "./TabBar";
 import { useRouter } from "vue-router";
-import { useShopStore } from "@/store/shopStore";
+import { useShopStore } from "@/stores/shopStore";
 
 export default defineComponent({
   name: "Search",

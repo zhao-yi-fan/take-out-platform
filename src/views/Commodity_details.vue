@@ -78,10 +78,10 @@ import { reactive, toRefs, computed, onMounted } from "vue";
 import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 import prompt from "@/components/prompt.vue";
-import { useUserStore } from "@/store/userStore";
-import { useOrderStore } from "@/store/orderStore";
-import { useShopStore } from "@/store/shopStore";
-import { useCollectionStore } from "@/store/collectionStore";
+import { useUserStore } from "@/stores/userStore";
+import { useOrderStore } from "@/stores/orderStore";
+import { useShopStore } from "@/stores/shopStore";
+import { useCollectionStore } from "@/stores/collectionStore";
 
 export default {
   name: "",

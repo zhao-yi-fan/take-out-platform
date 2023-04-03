@@ -45,7 +45,7 @@
 <script setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useShopStore } from "@/store/shopStore";
+import { useShopStore } from "@/stores/shopStore";
 const shopStore = useShopStore();
 const route = useRoute();
 const router = useRouter();

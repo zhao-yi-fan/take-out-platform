@@ -111,4 +111,5 @@ export const useOrderStore = defineStore("order", {
       }
     },
   },
+  persist: true,
 });

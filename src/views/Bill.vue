@@ -63,8 +63,8 @@
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";
-import { useShopStore } from "@/store/shopStore";
-import { useOrderStore } from "../store/orderStore";
+import { useShopStore } from "@/stores/shopStore";
+import { useOrderStore } from "@/stores/orderStore";
 
 const shopStore = useShopStore();
 const orderStore = useOrderStore();

@@ -81,8 +81,8 @@
 <script setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
-import { useUserStore } from "@/store/userStore";
-import { useOrderStore } from "@/store/orderStore";
+import { useUserStore } from "@/stores/userStore";
+import { useOrderStore } from "@/stores/orderStore";
 const userStore = useUserStore();
 const orderStore = useOrderStore();
 let myOrderList = reactive([]);

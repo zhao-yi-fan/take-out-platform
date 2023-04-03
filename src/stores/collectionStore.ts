@@ -16,4 +16,5 @@ export const useCollectionStore = defineStore("collection", {
       this.collectionList = collectionList;
     },
   },
+  persist: true,
 });

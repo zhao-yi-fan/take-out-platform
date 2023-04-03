@@ -1,5 +1,5 @@
 <template>
-  <div class="component-prompt" v-if="!store.isLogin">
+  <div class="component-prompt" v-if="!userStore.isLogin">
     <span>还未登陆？</span>
     <van-button type="warning" size="mini" class="r" to="/newLogin"
       >马上登陆</van-button
@@ -8,8 +8,8 @@
 </template>
 
 <script setup>
-import { useUserStore } from "@/store/userStore";
-const store = useUserStore();
+import { useUserStore } from "@/stores/userStore";
+const userStore = useUserStore();
 </script>
 
 <style lang="scss" scoped>

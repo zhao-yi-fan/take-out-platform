@@ -31,10 +31,10 @@
 <script setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { useUserStore } from "@/store/userStore";
-import { useShopStore } from "@/store/shopStore";
-import { useCollectionStore } from "@/store/collectionStore";
-import { useOrderStore } from "@/store/orderStore";
+import { useUserStore } from "@/stores/userStore";
+import { useShopStore } from "@/stores/shopStore";
+import { useCollectionStore } from "@/stores/collectionStore";
+import { useOrderStore } from "@/stores/orderStore";
 
 const shopStore = useShopStore();
 const userStore = useUserStore();

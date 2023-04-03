@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 
-
 interface State {
   userList: Array<any>;
   loginInfo: Object | null;
@@ -132,4 +131,5 @@ export const useUserStore = defineStore("user", {
       };
     },
   },
+  persist: true,
 });

@@ -71,7 +71,7 @@
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";
-import { useUserStore } from "@/store/userStore";
+import { useUserStore } from "@/stores/userStore";
 const userStore = useUserStore();
 const router = useRouter();
 const fankuiShow = ref(false);

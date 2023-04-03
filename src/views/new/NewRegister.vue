@@ -59,7 +59,7 @@
 import { reactive, toRefs } from "vue";
 import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
-import { useUserStore } from "@/store/userStore.ts";
+import { useUserStore } from "@/stores/userStore.ts";
 const userStore = useUserStore();
 const router = useRouter();
 const form = reactive({

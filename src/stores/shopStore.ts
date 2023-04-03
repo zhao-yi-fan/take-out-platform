@@ -3053,4 +3053,5 @@ export const useShopStore = defineStore("shop", {
       return searchList;
     },
   },
+  persist: true,
 });
