@@ -78,7 +78,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useUserStore } from "@/stores/userStore";

@@ -163,7 +163,7 @@ export default {
       setTimeout(() => {
         closeToast();
         if (resObj.code) {
-          showSuccessToast, showFailToast("挑选成功");
+          showSuccessToast("挑选成功");
           router.push({
             path: "/Bill",
             query: {

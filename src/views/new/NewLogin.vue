@@ -39,7 +39,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, ref } from "vue";
 import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
@@ -62,7 +62,7 @@ const onSubmit = async (values) => {
   setTimeout(() => {
     closeToast();
     if (isExist) {
-      showSuccessToast, showFailToast("登录成功");
+      showSuccessToast("登录成功");
       router.push({
         path: "/Home/Index",
       });

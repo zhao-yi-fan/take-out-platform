@@ -66,7 +66,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useUserStore } from "@/stores/userStore";

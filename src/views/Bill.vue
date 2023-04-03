@@ -7,9 +7,7 @@
       scrollable
       text="为减少接触，降低风险，请注意与外卖人员的安全距离。"
     />
-    <div class="top-bill-title">
-      外卖配送
-    </div>
+    <div class="top-bill-title">外卖配送</div>
     <div class="top-bill-address">
       <p>{{ baseAddress }}</p>
       <van-field
@@ -40,14 +38,13 @@
       </p>
     </div>
     <div class="top-bill-shopList">
-      <p>{{}}</p>
       <van-card
+        v-for="item in currentOrderInfo.foodList"
         :num="item.foodNum"
         :price="item.foodMoney"
         :desc="item.commodityDescribe"
         :title="item.foodName"
         :thumb="item.foodImageUrl"
-        v-for="item in currentOrderInfo.foodList"
         :key="item.foodId"
       />
     </div>
@@ -59,10 +56,16 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
-import { useRouter, useRoute } from "vue-router";
+import {
+  showToast,
+  showSuccessToast,
+  showFailToast,
+  showLoadingToast,
+  closeToast,
+} from "vant";
+import { useRouter, useRoute, LocationQueryValue } from "vue-router";
 import { useShopStore } from "@/stores/shopStore";
 import { useOrderStore } from "@/stores/orderStore";
 
@@ -71,10 +74,26 @@ const orderStore = useOrderStore();
 const route = useRoute();
 const router = useRouter();
 const baseAddress = ref(shopStore.baseAddress.name);
-const currentOrderInfo = ref({
+const currentOrderInfo = ref<{
+  foodList: {
+    foodId: string;
+    foodName: string;
+    foodMoney: number;
+    foodNum: number;
+    foodImageUrl: string;
+    commodityDescribe: string;
+  }[];
+  money: number;
+}>({
   foodList: [],
+  money: 0,
 });
-const form = reactive({
+const form = reactive<{
+  address: string;
+  people: string;
+  phone: string;
+  businessesId: string | null | LocationQueryValue[];
+}>({
   address: "",
   people: "",
   phone: "",
@@ -89,7 +108,7 @@ const onSubmit = async () => {
     return showFailToast("请填写联系方式");
   }
   let code = await orderStore.setOrderStatus({
-    address: form.baseAddress + "--" + form.address,
+    address: baseAddress + "--" + form.address,
     businessesId: form.businessesId,
     people: form.people,
     phone: form.phone,
@@ -102,7 +121,7 @@ const onSubmit = async () => {
   setTimeout(() => {
     closeToast();
     if (code) {
-      showSuccessToast, showFailToast("支付成功");
+      showSuccessToast("支付成功");
       router.push("/Home/Index");
     } else {
       showFailToast("支付失败");
@@ -114,11 +133,10 @@ const returnGo = () => {
 };
 const init = () => {
   form.businessesId = route.query.businessesId;
-  orderStore.orderList.forEach((item, index) => {
-    if (item.businessesId == form.businessesId && item.status == "apply") {
-      currentOrderInfo.value = item;
-    }
-  });
+  const item = orderStore.orderList.find(
+    (item) => item.businessesId == form.businessesId && item.status == "apply"
+  );
+  currentOrderInfo.value = item;
 };
 
 init();

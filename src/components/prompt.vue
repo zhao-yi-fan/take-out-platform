@@ -7,7 +7,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useUserStore } from "@/stores/userStore";
 const userStore = useUserStore();
 </script>

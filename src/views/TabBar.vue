@@ -16,7 +16,7 @@
   </van-tabbar>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, reactive, toRefs, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useUserStore } from "@/stores/userStore";

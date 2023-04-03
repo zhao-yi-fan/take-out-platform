@@ -52,7 +52,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { reactive, toRefs } from "vue";
 import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
@@ -77,7 +77,7 @@ const onSubmit = async (values) => {
   setTimeout(() => {
     closeToast();
     if (resObj.code == 1) {
-      showSuccessToast, showFailToast("修改成功，请登录");
+      showSuccessToast("修改成功，请登录");
       router.push({
         path: "/newLogin",
       });

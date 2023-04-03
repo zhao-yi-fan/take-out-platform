@@ -85,7 +85,7 @@
       </van-swipe>
     </div>
     <!-- <van-tag type="warning">今日推荐</van-tag> -->
-    <div style="text-align: center;">
+    <div style="text-align: center">
       <img
         src="../assets/images/jrtj.png"
         alt=""
@@ -125,10 +125,10 @@
   </van-popup>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { ref, reactive, toRefs, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { areaList } from '@vant/area-data';
+import { areaList } from "@vant/area-data";
 import { useShopStore } from "@/stores/shopStore";
 const shopStore = useShopStore();
 
@@ -159,22 +159,15 @@ const toSearch = () => {
   });
 };
 const onConfirm = ({ selectedValues, selectedOptions }) => {
-  console.log(selectedValues, selectedOptions);
-  let districtCode = selectedValues[selectedValues.length - 1].code;
+  let districtCode = selectedOptions[selectedOptions.length - 1].value;
   showArea.value = false;
-  let value = selectedValues
-    .filter((item) => !!item)
-    .map((item) => item.name)
-    .join("/");
   shopStore.setCurrAddress({
-    name: value,
+    name: selectedOptions.map((item) => item.text).join("/"),
     code: districtCode,
   });
-  shopsList.value = (
-    JSON.parse(JSON.stringify(shopStore.shopsList)) || []
-  ).filter((item, index) => {
-    return item.addressCode == districtCode;
-  });
+  shopsList.value = shopStore.shopsList.filter(
+    (item) => item.addressCode === districtCode
+  );
 };
 </script>
 

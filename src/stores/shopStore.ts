@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 
-
 export const useShopStore = defineStore("shop", {
   state: () => ({
     baseAddress: {
@@ -3036,21 +3035,20 @@ export const useShopStore = defineStore("shop", {
   }),
   getters: {},
   actions: {
-    setCurrAddress(addressForm = {}) {
+    setCurrAddress(addressForm: { name: string; code: string }) {
       let { name, code } = addressForm;
       this.baseAddress = {
         name,
         code,
       };
     },
-    search(key = "") {
+    search(key: string = "") {
       key = key.trim();
-      let searchList = this.shopsList.filter(
+      return this.shopsList.filter(
         (item) =>
           item.shopsName.indexOf(key) > -1 &&
           item.addressCode == this.baseAddress.code
       );
-      return searchList;
     },
   },
   persist: true,
