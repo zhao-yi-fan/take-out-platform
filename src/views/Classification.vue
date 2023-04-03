@@ -1,24 +1,40 @@
-<!-- 分类页面 -->
 <template>
-  <div class="wsw-Classification">
-    <van-nav-bar :title="text" left-text="返回" left-arrow @click-left="onClickLeft" />
+  <div class="Classification">
+    <van-nav-bar
+      :title="text"
+      left-text="返回"
+      left-arrow
+      @click-left="onClickLeft"
+    />
     <van-dropdown-menu>
-      <van-dropdown-item v-model="value1" :options="option1" @change="changeType" />
-      <van-dropdown-item v-model="value2" :options="option2" @change="changeSort" />
+      <van-dropdown-item
+        v-model="value1"
+        :options="option1"
+        @change="changeType"
+      />
+      <van-dropdown-item
+        v-model="value2"
+        :options="option2"
+        @change="changeSort"
+      />
     </van-dropdown-menu>
-    <div class="wsw-Classification-list">
+    <div class="Classification-list">
       <van-empty description="暂无商铺" v-if="shopsList.length == 0" />
-      <div class="wsw-Classification-list-item wsw-clearfix" v-for="(item, index) in shopsList" :key="index" @click="toDetail(item.shopsId)">
-        <img :src="item.shopsImage" alt="" srcset="" class="wsw-l" />
-        <div class="wsw-l">
-          <p class="wsw-clearfix">
-            <span class="wsw-l wsw-fb">{{ item.shopsName }}</span>
-            
+      <div
+        class="Classification-list-item clearfix"
+        v-for="(item, index) in shopsList"
+        :key="index"
+        @click="toDetail(item.shopsId)"
+      >
+        <img :src="item.shopsImage" alt="" srcset="" class="l" />
+        <div class="l">
+          <p class="clearfix">
+            <span class="l fb">{{ item.shopsName }}</span>
           </p>
-          <p class="wsw-clearfix">
-            <span class="wsw-l wsw-f12">起送：{{ item.shopsStart }}</span>
-            <span class="wsw-l wsw-f12">运费：{{ item.freight }}</span>
-            <span class="wsw-r wsw-f12 wsw-red wsw-fb">{{ item.score }}</span>
+          <p class="clearfix">
+            <span class="l f12">起送：{{ item.shopsStart }}</span>
+            <span class="l f12">运费：{{ item.freight }}</span>
+            <span class="r f12 red fb">{{ item.score }}</span>
           </p>
         </div>
       </div>
@@ -29,40 +45,35 @@
 <script>
 import { useStore } from "vuex";
 import { reactive, toRefs, computed, onMounted } from "vue";
-import { Notify, Toast } from "vant";
+import {
+  Notify,
+  showToast,
+  showSuccessToast,
+  showLoadingToast,
+  closeToast,
+} from "vant";
 import { useRouter, useRoute } from "vue-router";
 export default {
   name: "",
   components: {},
 
-  setup (propes, { root }) {
+  setup(propes, { root }) {
     const route = useRoute();
     const router = useRouter();
     const store = useStore();
     const model = reactive({
       value1: 0,
       value2: 0,
-      text: '',
+      text: "",
       classificationId: route.query.classificationId || null,
       shopsList: [],
-      districtCode:computed(()=>{
+      districtCode: computed(() => {
         return store.state.baseAddress.code;
-      })
-      // computed(() => {
-      //   console.log(store.state.shopsList, "store.state.shopsList===");
-      //   var arr = [];
-      //   store.state.shopsList.forEach((item, index) => {
-      //     if (model.classificationId == item.classificationType) {
-      //       arr.push(item);
-      //     }
-      //   });
-      //   console.log(arr, "arr===");
-      //   return arr;
-      // }),
+      }),
     });
     onMounted(() => {
       changeType(model.classificationId);
-    })
+    });
     const option1 = [
       { text: "全部", value: 0 },
       { text: "美食", value: 1 },
@@ -95,9 +106,9 @@ export default {
       let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
       shopsList = shopsList.filter((item, index) => {
         return item.addressCode == model.districtCode;
-      })
+      });
       if (!value) {
-        console.log('a', model.shopsList);
+        console.log("a", model.shopsList);
         arr = shopsList;
       } else {
         shopsList.forEach((item, index) => {
@@ -110,31 +121,31 @@ export default {
       model.value1 = Number(value);
       model.text = option1[value].text;
       model.shopsList = arr;
-    }
+    };
 
     const changeSort = (value) => {
-      console.log(value, '排序');
+      console.log(value, "排序");
       let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
       shopsList = shopsList.filter((item, index) => {
         return item.addressCode == model.districtCode;
-      })
-      if(model.value1){
+      });
+      if (model.value1) {
         shopsList = shopsList.filter((item, index) => {
-          return item.classificationType == model.value1
-        })
+          return item.classificationType == model.value1;
+        });
       }
       if (value == 1) {
         shopsList.sort((a, b) => {
           return b.score - a.score;
-        })
+        });
       } else if (value == 2) {
         shopsList.sort((a, b) => {
           return a.freight - b.freight;
-        })
+        });
       }
 
       model.shopsList = shopsList;
-    }
+    };
     return {
       ...toRefs(model),
       option1,
@@ -142,13 +153,13 @@ export default {
       onClickLeft,
       toDetail,
       changeType,
-      changeSort
+      changeSort,
     };
   },
 };
 </script>
 <style lang="scss" scoped>
-.wsw-Classification {
+.Classification {
   position: relative;
   width: 100%;
   height: calc(100% - 50px);
@@ -170,12 +181,12 @@ export default {
   :deep(.van-dropdown-menu) {
     width: 100%;
   }
-  .wsw-Classification-list {
+  .Classification-list {
     width: 90%;
     padding: 0 5%;
     height: calc(100% - 95px);
     overflow: auto;
-    .wsw-Classification-list-item {
+    .Classification-list-item {
       width: 95%;
       padding: 10px 2.5%;
       margin: 10px 0;

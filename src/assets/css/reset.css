@@ -40,35 +40,35 @@ p {
 }
 
 /* 公共样式 */
-.wsw-clearfix:after{
+.clearfix:after{
   display:block;
   clear:both;
   content:"";
   visibility:hidden; 
   height:0;
 } 
-.wsw-clearfix{zoom:1}
-.wsw-l{
+.clearfix{zoom:1}
+.l{
     float: left;
 }
-.wsw-r{
+.r{
     float: right;
 }
-.wsw-f14{
+.f14{
   font-size: 14px;
 }
-.wsw-f16{
+.f16{
   font-size: 16px;
 }
-.wsw-color{
+.color{
   color:#ed9428;
 }
-.wsw-red{
+.red{
   color: red;;
 }
-.wsw-f12{
+.f12{
   font-size: 12px;
 }
-.wsw-fb{
+.fb{
   font-weight: bolder;
 }

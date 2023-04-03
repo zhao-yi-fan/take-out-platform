@@ -1,7 +1,7 @@
-<!-- 我的页面 -->
+
 <template>
-  <div class="wsw-top-User">
-    <div class="wsw-top-User-top wsw-clearfix">
+  <div class="top-User">
+    <div class="top-User-top clearfix">
       <img
         src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg"
         alt=""
@@ -12,7 +12,7 @@
           <router-link to="/newLogin">登录</router-link>
           /
           <router-link to="/newRegister">注册</router-link>
-          </p>
+        </p>
         <p>填满了肚子，人就不会空虚</p>
       </div>
     </div>
@@ -66,58 +66,39 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { Dialog, Toast } from "vant";
 import { useRouter, useRoute } from "vue-router";
-import { useStore } from "vuex";
-export default {
-  name: "",
-  components: {},
-  setup(propes, { root }) {
-    const router = useRouter();
-    const store = useStore();
-    const activeNames = ref(["1"]);
-    const model = reactive({
-      currCollectionShops: [],
-      currEvaluateList: [],
-      loginInfo: computed(() => store.state.loginInfo),
-    });
+import { useUserStore } from "@/store/userStore";
+const userStore = useUserStore();
+const router = useRouter();
+const loginInfo = computed(() => userStore.loginInfo);
 
-    const toOrder = () => {
-      router.push("/Home/Order");
-    };
-    const toComment = () => {
-      router.push("/Comment");
-    };
-    const toCollect = () => {
-      router.push("/Collect");
-    };
-    const toSetting = () => {
-      router.push("/Setting");
-    };
-    return {
-      ...toRefs(model),
-      activeNames,
-      toOrder,
-      toComment,
-      toCollect,
-      toSetting,
-    };
-  },
+
+const toOrder = () => {
+  router.push("/Home/Order");
+};
+const toComment = () => {
+  router.push("/Comment");
+};
+const toCollect = () => {
+  router.push("/Collect");
+};
+const toSetting = () => {
+  router.push("/Setting");
 };
 </script>
 
 <style lang="scss" scoped>
 $a: 100vh;
 $b: 390px;
-.wsw-top-User {
+.top-User {
   width: 100%;
   height: calc(100% - 50px);
   overflow: auto;
   background: #f8f8fa;
   position: relative;
-  .wsw-top-User-top {
+  .top-User-top {
     background: #ed9428;
     border-radius: 10px;
     position: relative;
@@ -134,7 +115,7 @@ $b: 390px;
         margin-top: 30px;
         font-size: 16px;
         font-weight: bolder;
-        a{
+        a {
           color: #000;
         }
       }

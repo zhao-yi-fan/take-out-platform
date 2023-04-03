@@ -1,6 +1,6 @@
 <!-- 首页 -->
 <template>
-  <div class="wsw-top-Home">
+  <div class="top-Home">
     <router-view></router-view>
     <prompt></prompt>
     <tab-bar></tab-bar>
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wsw-top-Home {
+.top-Home {
   width: 100%;
   height: 100%;
 }

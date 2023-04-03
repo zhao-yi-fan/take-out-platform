@@ -1,22 +1,19 @@
-<!-- 未登录的提示 -->
 <template>
-  <div class="wsw-component-prompt" v-if="!isLogin">
+  <div class="component-prompt" v-if="!store.isLogin">
     <span>还未登陆？</span>
-    <van-button type="warning" size="mini" class="wsw-r" to="/newLogin"
+    <van-button type="warning" size="mini" class="r" to="/newLogin"
       >马上登陆</van-button
     >
   </div>
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
-import { useStore } from "vuex";
-const store = useStore();
-const isLogin = ref(!!store.state.loginInfo);
+import { useUserStore } from "@/store/userStore";
+const store = useUserStore();
 </script>
 
 <style lang="scss" scoped>
-.wsw-component-prompt {
+.component-prompt {
   width: 100%;
   height: 50px;
   position: fixed;

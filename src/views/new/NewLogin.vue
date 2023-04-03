@@ -26,7 +26,7 @@
         />
         <div>
           <router-link to="/newRegister" tag="a">还没有注册？</router-link>
-          <router-link to="/newForgetPwd" tag="a" class="wsw-r"
+          <router-link to="/forgetPwd" tag="a" class="r"
             >忘记密码？</router-link
           >
         </div>
@@ -40,51 +40,37 @@
   </div>
 </template>
 
-<script>
-import { useStore } from "vuex";
-import { reactive, toRefs } from "vue";
-import { Notify, Toast } from "vant";
+<script setup>
+import { reactive, ref } from "vue";
+import { Notify, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/store/userStore";
 
-export default {
-  name: "",
-  components: {},
-  setup(propes, { root }) {
-    const router = useRouter();
-    const store = useStore();
-    const model = reactive({
-      username: "",
-      password: "",
-    });
-    const onClickLeft = () => {
-      router.go(-1);
-    };
-    const onSubmit = async (values) => {
-      console.log("submit", values);
-      let isExist = await store.dispatch("login", values);
-      Toast.loading({
-        message: "登录中...",
-        forbidClick: true,
+const userStore = useUserStore();
+const router = useRouter();
+const username = ref("");
+const password = ref("");
+const onClickLeft = () => {
+  router.go(-1);
+};
+const onSubmit = async (values) => {
+  console.log("submit", values);
+  let isExist = await userStore.login(values);
+  showLoadingToast({
+    message: "登录中...",
+    forbidClick: true,
+  });
+  setTimeout(() => {
+    closeToast();
+    if (isExist) {
+      showSuccessToast("登录成功");
+      router.push({
+        path: "/Home/Index",
       });
-      setTimeout(() => {
-        Toast.clear();
-        if (isExist) {
-          Toast.success("登录成功");
-          router.push({
-            path: "/Home/Index",
-          });
-        } else {
-          Toast.fail("用户名或密码错误，请重试后登录！");
-        }
-      }, 1000);
-    };
-
-    return {
-      ...toRefs(model),
-      onSubmit,
-      onClickLeft,
-    };
-  },
+    } else {
+      showToast.fail("用户名或密码错误，请重试后登录！");
+    }
+  }, 1000);
 };
 </script>
 <style lang="scss" scoped>

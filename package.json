@@ -11,12 +11,11 @@
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "dayjs": "^1.11.7",
-    "vant": "^3.0.0-rc.3",
+    "pinia": "^2.0.33",
+    "vant": "^4.1.2",
     "vite": "^4.2.1",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6",
-    "vuex": "^4.0.0-0",
-    "vuex-persistedstate": "^4.0.0-beta.1"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

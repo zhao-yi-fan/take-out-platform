@@ -1,67 +1,109 @@
 <!-- 商品详情 -->
 <template>
-  <div class="wsw-top-Commodity">
-    <van-nav-bar :title="currentShopInfo.shopsName" left-text="返回" left-arrow @click-left="onClickLeft" @click-right="onClickRight">
+  <div class="top-Commodity">
+    <van-nav-bar
+      :title="currentShopInfo.shopsName"
+      left-text="返回"
+      left-arrow
+      @click-left="onClickLeft"
+      @click-right="onClickRight"
+    >
       <template #right>
         <van-icon :name="collectionStatus ? 'star' : 'star-o'" size="18" />
         收藏
       </template>
     </van-nav-bar>
-    <div class="wsw-top-Commodity-shop">
+    <div class="top-Commodity-shop">
       <img :src="currentShopInfo.signImage" alt="" />
-      <div class="wsw-top-Commodity-shop-card">
+      <div class="top-Commodity-shop-card">
         <p>{{ currentShopInfo.shopsName }}</p>
         <div>
           评分：<span>{{ currentShopInfo.score }}</span>
         </div>
         <van-tag type="danger">优质商家</van-tag>
         <br />
-        <span class="wsw-top-Commodity-shop-card-address">地址：{{ currentShopInfo.address }}</span>
+        <span class="top-Commodity-shop-card-address"
+          >地址：{{ currentShopInfo.address }}</span
+        >
         <van-notice-bar scrollable :text="currentShopInfo.notice" />
       </div>
-      <div class="wsw-top-Commodity-list">
-        <van-tree-select v-model:active-id="activeId" v-model:main-active-index="activeIndex" :items="items">
+      <div class="top-Commodity-list">
+        <van-tree-select
+          v-model:active-id="activeId"
+          v-model:main-active-index="activeIndex"
+          :items="items"
+        >
           <template #content>
-            <van-card v-for="(item, index) in items[activeIndex].children" :key="index" :price="item.commodityMoney" :desc="item.commodityDescribe" :title="item.commodityName" :thumb="item.commodityImage">
+            <van-card
+              v-for="(item, index) in items[activeIndex].children"
+              :key="index"
+              :price="item.commodityMoney"
+              :desc="item.commodityDescribe"
+              :title="item.commodityName"
+              :thumb="item.commodityImage"
+            >
               <template #footer>
-                <van-button icon="minus" type="primary" size="mini" round plain @click="addShop('delect', item.num, index)" />
+                <van-button
+                  icon="minus"
+                  type="primary"
+                  size="mini"
+                  round
+                  plain
+                  @click="addShop('delect', item.num, index)"
+                />
                 <span>{{ item.num }}</span>
-                <van-button icon="plus" type="primary" size="mini" round @click="addShop('add', item.num, index)" />
+                <van-button
+                  icon="plus"
+                  type="primary"
+                  size="mini"
+                  round
+                  @click="addShop('add', item.num, index)"
+                />
               </template>
             </van-card>
           </template>
         </van-tree-select>
       </div>
-      <van-submit-bar :price="price" button-text="提交订单" @submit="onSubmit" />
+      <van-submit-bar
+        :price="price"
+        button-text="提交订单"
+        @submit="onSubmit"
+      />
     </div>
-    <wsw-prompt></wsw-prompt>
+    <prompt></prompt>
   </div>
 </template>
 
 <script>
 import { reactive, toRefs, computed, onMounted } from "vue";
-import { Dialog, Toast } from "vant";
+import { Dialog, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";
-import { useStore } from "vuex";
-import prompt from "@/components/prompt.vue"
+import prompt from "@/components/prompt.vue";
+import { useUserStore } from "@/store/userStore";
+import { useOrderStore } from "@/store/orderStore";
+import { useShopStore } from "@/store/shopStore";
+import { useCollectionStore } from "@/store/collectionStore";
 
 export default {
   name: "",
   components: {
-    "wsw-prompt": prompt
+    "prompt": prompt,
   },
-  setup (propes, { root }) {
-    const store = useStore();
+  setup(propes, { root }) {
+    const shopStore = useShopStore();
+    const orderStore = useOrderStore();
+    const userStore = useUserStore();
+    const collectionStore = useCollectionStore();
     const route = useRoute();
     const router = useRouter();
     const model = reactive({
       activeId: 1,
       activeIndex: 0,
       shopsList: computed(() => {
-        return store.state.shopsList;
+        return shopStore.shopsList;
       }),
       collectionList: computed(() => {
-        return store.state.collectionList;
+        return collectionStore.collectionList;
       }),
       currentShopInfo: null,
       items: null,
@@ -76,7 +118,7 @@ export default {
       //   message: "返回首页会清空购物车",
       // })
       //   .then(() => {
-          router.go(-1);
+      router.go(-1);
       //   })
       //   .catch(() => {
       //     // on cancel
@@ -84,10 +126,10 @@ export default {
     };
 
     const onSubmit = async () => {
-      if (!store.state.loginInfo) return Toast("您未登录");
+      if (!userStore.loginInfo) return showToast("您未登录");
       if (model.price == "0") {
         console.log(model.price);
-        return Toast.fail("请选择商品");
+        return showToast.fail("请选择商品");
       }
       let commodity = model.currentShopInfo.commodity;
       let foodArr = [];
@@ -108,30 +150,30 @@ export default {
       });
       var obj = {
         shopsId: model.shopsId,
-        userId: store.state.loginInfo ? store.state.loginInfo.userId : null,
+        userId: userStore.loginInfo ? userStore.loginInfo.userId : null,
         foodList: foodArr,
         money: model.price / 100,
       };
       console.log(model.currentShopInfo);
       console.log(obj, "obj====");
-      let resObj = await store.dispatch("setOrderInfo", obj);
-      Toast.loading({
+      let resObj = await orderStore.setOrderInfo(obj);
+      showLoadingToast({
         message: "订单提交中...",
         forbidClick: true,
       });
       setTimeout(() => {
-        Toast.clear();
+        closeToast();
         if (resObj.code) {
-          Toast.success("挑选成功");
+          showSuccessToast("挑选成功");
           router.push({
             path: "/Bill",
             query: {
               businessesId: resObj.businessesId,
             },
           });
-          console.log(store.state.orderList);
+          console.log(orderStore.orderList);
         } else {
-          Toast.fail("下单失败");
+          showToast.fail("下单失败");
         }
       }, 1000);
     };
@@ -158,8 +200,8 @@ export default {
       });
     });
     model.collectionList.forEach((item, index) => {
-      if (!store.state.loginInfo) return;
-      if (item.userId == store.state.loginInfo.userId) {
+      if (!userStore.loginInfo) return;
+      if (item.userId == userStore.loginInfo.userId) {
         item.shopsIds.forEach((el, inde) => {
           if (el == model.shopsId) {
             console.log(el);
@@ -169,45 +211,46 @@ export default {
       }
     });
     const onClickRight = () => {
-      if (!store.state.loginInfo) return Toast("您未登录");
+      if (!userStore.loginInfo) return showToast("您未登录");
       if (model.collectionStatus) {
         model.collectionList.forEach((item, index) => {
-          if (item.userId == store.state.loginInfo.userId) {
+          if (item.userId == userStore.loginInfo.userId) {
             item.shopsIds.forEach((el, inde) => {
               if (el == model.shopsId) {
                 console.log(el);
                 item.shopsIds.splice(inde, 1);
                 model.collectionStatus = false;
-                Toast("取消收藏");
+                showToast("取消收藏");
               }
             });
           }
         });
-        store.commit('SET_COLLECTION_LIST', model.collectionList);
+        collectionStore.setCollectionList(model.collectionList);
       } else {
         let isExist = false;
         for (let i = 0; i < model.collectionList.length; i++) {
           let item = model.collectionList[i];
-          if (item.userId == store.state.loginInfo.userId) {
+          if (item.userId == userStore.loginInfo.userId) {
             isExist = true;
             item.shopsIds.push(model.shopsId);
             model.collectionStatus = true;
-            store.commit('SET_COLLECTION_LIST', model.collectionList);
-            return Toast("收藏成功");
+            collectionStore.setCollectionList(model.collectionList);
+            return showToast("收藏成功");
           }
         }
         if (!isExist) {
-          let collectionId = model.collectionList[model.collectionList.length - 1].collectionId;
+          let collectionId =
+            model.collectionList[model.collectionList.length - 1].collectionId;
           collectionId++;
           let shopsIds = [];
           shopsIds.push(model.shopsId);
           model.collectionList.push({
             collectionId,
-            userId: store.state.loginInfo.userId,
-            shopsIds
-          })
-          store.commit('SET_COLLECTION_LIST', model.collectionList);
-          Toast("收藏成功");
+            userId: userStore.loginInfo.userId,
+            shopsIds,
+          });
+          collectionStore.setCollectionList(model.collectionList);
+          showToast("收藏成功");
         }
       }
     };
@@ -249,7 +292,7 @@ export default {
 <style lang="scss" scoped>
 $a: 100vh;
 $b: 390px;
-.wsw-top-Commodity {
+.top-Commodity {
   width: 100%;
   height: 100%;
   position: relative;
@@ -262,12 +305,12 @@ $b: 390px;
       color: #ed9428;
     }
   }
-  .wsw-top-Commodity-shop {
+  .top-Commodity-shop {
     img {
       width: 100%;
       height: 220px;
     }
-    .wsw-top-Commodity-shop-card {
+    .top-Commodity-shop-card {
       width: 80%;
       height: 150px;
       background: #fff;
@@ -290,13 +333,13 @@ $b: 390px;
           font-weight: bolder;
         }
       }
-      .wsw-top-Commodity-shop-card-address {
+      .top-Commodity-shop-card-address {
         font-size: 12px;
         color: #333;
       }
     }
   }
-  .wsw-top-Commodity-list {
+  .top-Commodity-list {
     margin-top: 45px;
     height: calc(#{$a} - #{$b});
     :deep(.van-tree-select) {

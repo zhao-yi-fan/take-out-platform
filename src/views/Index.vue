@@ -1,37 +1,47 @@
 <!-- 首页 -->
 <template>
-  <div class="wsw-top-home-logo">
-    <!-- <img src="../assets/images/Logo.png" width="130" /> -->
-    <!-- <span>饿了么</span> -->
-    <div class="wsw-top-home-address">
-      <van-icon name="location-o" color="#fff" size="24" class="wsw-l" />
-      <i class="wsw-l" @click="showArea = true">{{
+  <div class="top-home-logo">
+    <div class="top-home-address">
+      <van-icon name="location-o" color="#fff" size="24" class="l" />
+      <i class="l" @click="showArea = true">{{
         value || "请先选择收货地址"
       }}</i>
     </div>
-    <van-icon name="search" color="#fff" size="24" class="wsw-r" @click="toSearch" />
+    <van-icon
+      name="search"
+      color="#fff"
+      size="24"
+      class="r"
+      @click="toSearch"
+    />
   </div>
-  <div class="wsw-top-home">
-    <div class="wsw-top-home-top">
-      <van-swipe class="wsw-swipe" :autoplay="3000" indicator-color="white">
+  <div class="top-home">
+    <div class="top-home-top">
+      <van-swipe class="swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item>
-        <router-link to="/Commodity_details?shopsId=14">
-          <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4083615963,856728706&fm=11&gp=0.jpg" />
-        </router-link>
+          <router-link to="/Commodity_details?shopsId=14">
+            <img
+              src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4083615963,856728706&fm=11&gp=0.jpg"
+            />
+          </router-link>
         </van-swipe-item>
         <van-swipe-item>
-         <router-link to="/Commodity_details?shopsId=20">
-          <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1004056377,3540152604&fm=26&gp=0.jpg" />
-        </router-link>
+          <router-link to="/Commodity_details?shopsId=20">
+            <img
+              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1004056377,3540152604&fm=26&gp=0.jpg"
+            />
+          </router-link>
         </van-swipe-item>
         <van-swipe-item>
-         <router-link to="/Commodity_details?shopsId=13">
-          <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3487836899,16466550&fm=26&gp=0.jpg" />
-        </router-link>
+          <router-link to="/Commodity_details?shopsId=13">
+            <img
+              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3487836899,16466550&fm=26&gp=0.jpg"
+            />
+          </router-link>
         </van-swipe-item>
       </van-swipe>
     </div>
-    <div class="wsw-top-home-classification">
+    <div class="top-home-classification">
       <van-swipe class="classification-swipe" indicator-color="white">
         <van-swipe-item>
           <van-grid :gutter="10" square>
@@ -77,110 +87,105 @@
     </div>
     <!-- <van-tag type="warning">今日推荐</van-tag> -->
     <div style="text-align: center;">
-      <img src="../assets/images/jrtj.png" alt="" width="120" style="margin: 0 0 20px 0" />
+      <img
+        src="../assets/images/jrtj.png"
+        alt=""
+        width="120"
+        style="margin: 0 0 20px 0"
+      />
     </div>
     <van-empty description="该地区暂无商铺" v-if="shopsList.length == 0" />
-    <div class="wsw-top-home-List" v-else>
-      <div class="list-item" v-for="(item, index) in shopsList" :key="index" text="文字" @click="toDetail(item.shopsId)">
+    <div class="top-home-List" v-else>
+      <div
+        class="list-item"
+        v-for="(item, index) in shopsList"
+        :key="index"
+        text="文字"
+        @click="toDetail(item.shopsId)"
+      >
         <img :src="item.shopsImage" />
-        <div class="wsw-top-home-List-title">
-          <p class="wsw-clearfix">
-            <span class="wsw-l">{{ item.shopsName }}</span>
-            <span class="wsw-r wsw-red">{{ item.score }}</span>
+        <div class="top-home-List-title">
+          <p class="clearfix">
+            <span class="l">{{ item.shopsName }}</span>
+            <span class="r red">{{ item.score }}</span>
           </p>
-          <p class="wsw-clearfix">
-            <span class="wsw-l wsw-f14">起送：{{ item.shopsStart }}</span>
-            <span class="wsw-r wsw-f14">运费：{{ item.freight }}</span>
+          <p class="clearfix">
+            <span class="l f14">起送：{{ item.shopsStart }}</span>
+            <span class="r f14">运费：{{ item.freight }}</span>
           </p>
         </div>
       </div>
     </div>
   </div>
   <van-popup v-model:show="showArea" position="bottom">
-    <van-area :area-list="areaList" @confirm="onConfirm" @cancel="showArea = false" />
+    <van-area
+      :area-list="areaList"
+      @confirm="onConfirm"
+      @cancel="showArea = false"
+    />
   </van-popup>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive, toRefs, computed, onMounted } from "vue";
-import { Notify, Toast } from "vant";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
-import areaList from "@/mock/area.js";
+import areaJson from "@/mock/area.js";
+import { useShopStore } from "@/store/shopStore";
+const shopStore = useShopStore();
 
-export default {
-  name: "",
-  components: {},
-  setup (propes, { root }) {
-    const router = useRouter();
-    const store = useStore();
-    const model = reactive({
-      active: ref(0),
-      shopsList: [],
-      showArea: false,
-      value: computed(() => {
-        return store.state.baseAddress.name || "";
-      }),
-      areaList: computed(() => areaList),
-    });
-    onMounted(() => {
-      let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
-      var code = store.state.baseAddress.code
-      shopsList = shopsList.filter((item, index) => {
-        return item.addressCode == code;
-      })
-      model.shopsList = shopsList || [];
-    })
-    const toDetail = (shopsId) => {
-      router.push({
-        path: "/Commodity_details",
-        query: {
-          shopsId,
-        },
-      });
-    };
-    const toSearch = (shopsId) => {
-      router.push({
-        path: "/search",
-      });
-    };
-    const onConfirm = (values) => {
-      console.log(values, '2222');
-      let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
-      let districtCode = values[values.length - 1].code;
-      model.showArea = false;
-      let value = values
-        .filter((item) => !!item)
-        .map((item) => item.name)
-        .join("/");
-      store.dispatch("setCurrAddress", {
-        name: value,
-        code: districtCode
-      });
-      shopsList = shopsList.filter((item, index) => {
-        return item.addressCode == districtCode;
-      })
-      model.shopsList = shopsList || [];
-    };
-
-    return {
-      ...toRefs(model),
-      toDetail,
-      toSearch,
-      onConfirm,
-    };
-  },
+const router = useRouter();
+const showArea = ref(false);
+const shopsList = ref([]);
+const areaList = computed(() => areaJson);
+const value = computed(() => {
+  return shopStore.baseAddress.name || "";
+});
+onMounted(() => {
+  var code = shopStore.baseAddress.code;
+  shopsList.value = (shopStore.shopsList || []).filter((item, index) => {
+    return item.addressCode == code;
+  });
+});
+const toDetail = (shopsId) => {
+  router.push({
+    path: "/Commodity_details",
+    query: {
+      shopsId,
+    },
+  });
+};
+const toSearch = () => {
+  router.push({
+    path: "/search",
+  });
+};
+const onConfirm = (values) => {
+  let districtCode = values[values.length - 1].code;
+  showArea.value = false;
+  let value = values
+    .filter((item) => !!item)
+    .map((item) => item.name)
+    .join("/");
+  shopStore.setCurrAddress({
+    name: value,
+    code: districtCode,
+  });
+  shopsList.value = (
+    JSON.parse(JSON.stringify(shopStore.shopsList)) || []
+  ).filter((item, index) => {
+    return item.addressCode == districtCode;
+  });
 };
 </script>
 
 <style lang="scss" scoped>
-.wsw-top-home-logo {
+.top-home-logo {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   background-image: linear-gradient(to right, #fcba02, #fdaa05);
-  .wsw-top-home-address {
+  .top-home-address {
     height: 80px;
     line-height: 80px;
     display: inline-block;
@@ -207,17 +212,17 @@ export default {
     margin-right: 10px;
   }
 }
-.wsw-top-home {
+.top-home {
   width: 100%;
   height: calc(100% - 80px);
   background: #f8f8fa;
   overflow: auto;
-  .wsw-top-home-top {
+  .top-home-top {
     background: url("../assets/images/round.png");
     width: 100%;
     height: 200px;
     background-size: 100% 100%;
-    .wsw-swipe {
+    .swipe {
       margin: 0 auto;
       width: 90%;
       border-radius: 10px;
@@ -230,7 +235,7 @@ export default {
       }
     }
   }
-  .wsw-top-home-classification {
+  .top-home-classification {
     margin: 10px 0;
     :deep([class*="van-hairline"]::after) {
       border: none;
@@ -259,7 +264,7 @@ export default {
   .van-tag {
     margin: 10px;
   }
-  .wsw-top-home-List {
+  .top-home-List {
     width: 96%;
     margin: 0 auto;
     margin-bottom: 30px;
@@ -278,7 +283,7 @@ export default {
       img {
         width: 100%;
       }
-      .wsw-top-home-List-title {
+      .top-home-List-title {
         box-sizing: border-box;
         width: 100%;
         padding: 5px;
