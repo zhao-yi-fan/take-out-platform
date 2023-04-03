@@ -43,8 +43,8 @@ let list = reactive([
     title: "我的",
   },
 ]);
+const active = ref("index");
 const model = reactive({
-  active: "index",
   loginInfo: computed(() => {
     return userStore.loginInfo;
   }),
@@ -52,7 +52,7 @@ const model = reactive({
 
 const change = (name) => {
   if (!model.loginInfo) {
-    model.active = "index";
+    active.value = "index";
   }
 };
 const init = () => {
@@ -60,7 +60,7 @@ const init = () => {
     return route.path == item.path;
   });
   if (item) {
-    model.active = item.name;
+    active.value = item.name;
   }
 };
 init();

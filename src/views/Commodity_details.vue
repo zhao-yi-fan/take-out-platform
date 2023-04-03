@@ -1,4 +1,3 @@
-<!-- 商品详情 -->
 <template>
   <div class="top-Commodity">
     <van-nav-bar
@@ -76,7 +75,7 @@
 
 <script>
 import { reactive, toRefs, computed, onMounted } from "vue";
-import { Dialog, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
+import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 import prompt from "@/components/prompt.vue";
 import { useUserStore } from "@/store/userStore";
@@ -129,7 +128,7 @@ export default {
       if (!userStore.loginInfo) return showToast("您未登录");
       if (model.price == "0") {
         console.log(model.price);
-        return showToast.fail("请选择商品");
+        return showFailToast("请选择商品");
       }
       let commodity = model.currentShopInfo.commodity;
       let foodArr = [];
@@ -164,7 +163,7 @@ export default {
       setTimeout(() => {
         closeToast();
         if (resObj.code) {
-          showSuccessToast("挑选成功");
+          showSuccessToast, showFailToast("挑选成功");
           router.push({
             path: "/Bill",
             query: {
@@ -173,7 +172,7 @@ export default {
           });
           console.log(orderStore.orderList);
         } else {
-          showToast.fail("下单失败");
+          showFailToast("下单失败");
         }
       }, 1000);
     };

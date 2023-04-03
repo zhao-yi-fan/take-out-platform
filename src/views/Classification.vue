@@ -1,7 +1,7 @@
 <template>
-  <div class="Classification">
+  <div class="classification">
     <van-nav-bar
-      :title="text"
+      :title="title"
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"
@@ -18,10 +18,10 @@
         @change="changeSort"
       />
     </van-dropdown-menu>
-    <div class="Classification-list">
+    <div class="classification-list">
       <van-empty description="暂无商铺" v-if="shopsList.length == 0" />
       <div
-        class="Classification-list-item clearfix"
+        class="classification-list-item clearfix"
         v-for="(item, index) in shopsList"
         :key="index"
         @click="toDetail(item.shopsId)"
@@ -42,124 +42,89 @@
   </div>
 </template>
 
-<script>
-import { useStore } from "vuex";
-import { reactive, toRefs, computed, onMounted } from "vue";
-import {
-  Notify,
-  showToast,
-  showSuccessToast,
-  showLoadingToast,
-  closeToast,
-} from "vant";
+<script setup>
+import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-export default {
-  name: "",
-  components: {},
+import { useShopStore } from "@/store/shopStore";
+const shopStore = useShopStore();
+const route = useRoute();
+const router = useRouter();
+const districtCode = ref(shopStore.baseAddress.code);
+let shopsList = reactive([]);
+const title = ref("");
+const value1 = ref(0);
+const value2 = ref(0);
 
-  setup(propes, { root }) {
-    const route = useRoute();
-    const router = useRouter();
-    const store = useStore();
-    const model = reactive({
-      value1: 0,
-      value2: 0,
-      text: "",
-      classificationId: route.query.classificationId || null,
-      shopsList: [],
-      districtCode: computed(() => {
-        return store.state.baseAddress.code;
-      }),
+onMounted(() => {
+  changeType(route.query.classificationId);
+});
+const option1 = [
+  { text: "全部", value: 0 },
+  { text: "美食", value: 1 },
+  { text: "饮品", value: 2 },
+  { text: "甜品", value: 3 },
+  { text: "鲜花", value: 4 },
+  { text: "下午茶", value: 5 },
+  { text: "超市", value: 6 },
+  { text: "药品", value: 7 },
+  { text: "买菜", value: 8 },
+];
+const option2 = [
+  { text: "默认排序", value: 0 },
+  { text: "好评排序", value: 1 },
+  { text: "起送费排序", value: 2 },
+];
+const onClickLeft = () => {
+  router.go(-1);
+};
+const toDetail = (shopsId) => {
+  router.push({
+    path: "/Commodity_details",
+    query: {
+      shopsId,
+    },
+  });
+};
+const changeType = (value) => {
+  let list = shopStore.shopsList.filter((item, index) => {
+    return item.addressCode == districtCode;
+  });
+  value2.value = 0; // 初始化排序方式
+  value1.value = Number(value);
+  title.value = option1[value].text;
+  shopsList = value
+    ? list.filter((item, index) => {
+        return item.classificationType == value;
+      })
+    : list;
+};
+
+const changeSort = (value) => {
+  console.log(value, "排序");
+  let shopsList = JSON.parse(JSON.stringify(shopStore.shopsList));
+  shopsList = shopsList.filter((item, index) => {
+    return item.addressCode == districtCode;
+  });
+  if (value1) {
+    shopsList = shopsList.filter((item, index) => {
+      return item.classificationType == value1.value;
     });
-    onMounted(() => {
-      changeType(model.classificationId);
+  }
+  if (value == 1) {
+    shopsList.sort((a, b) => {
+      return b.score - a.score;
     });
-    const option1 = [
-      { text: "全部", value: 0 },
-      { text: "美食", value: 1 },
-      { text: "饮品", value: 2 },
-      { text: "甜品", value: 3 },
-      { text: "鲜花", value: 4 },
-      { text: "下午茶", value: 5 },
-      { text: "超市", value: 6 },
-      { text: "药品", value: 7 },
-      { text: "买菜", value: 8 },
-    ];
-    const option2 = [
-      { text: "默认排序", value: 0 },
-      { text: "好评排序", value: 1 },
-      { text: "起送费排序", value: 2 },
-    ];
-    const onClickLeft = () => {
-      router.go(-1);
-    };
-    const toDetail = (shopsId) => {
-      router.push({
-        path: "/Commodity_details",
-        query: {
-          shopsId,
-        },
-      });
-    };
-    const changeType = (value) => {
-      var arr = [];
-      let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
-      shopsList = shopsList.filter((item, index) => {
-        return item.addressCode == model.districtCode;
-      });
-      if (!value) {
-        console.log("a", model.shopsList);
-        arr = shopsList;
-      } else {
-        shopsList.forEach((item, index) => {
-          if (value == item.classificationType) {
-            arr.push(item);
-          }
-        });
-      }
-      model.value2 = 0; // 初始化排序方式
-      model.value1 = Number(value);
-      model.text = option1[value].text;
-      model.shopsList = arr;
-    };
+  } else if (value == 2) {
+    shopsList.sort((a, b) => {
+      return a.freight - b.freight;
+    });
+  }
 
-    const changeSort = (value) => {
-      console.log(value, "排序");
-      let shopsList = JSON.parse(JSON.stringify(store.state.shopsList));
-      shopsList = shopsList.filter((item, index) => {
-        return item.addressCode == model.districtCode;
-      });
-      if (model.value1) {
-        shopsList = shopsList.filter((item, index) => {
-          return item.classificationType == model.value1;
-        });
-      }
-      if (value == 1) {
-        shopsList.sort((a, b) => {
-          return b.score - a.score;
-        });
-      } else if (value == 2) {
-        shopsList.sort((a, b) => {
-          return a.freight - b.freight;
-        });
-      }
-
-      model.shopsList = shopsList;
-    };
-    return {
-      ...toRefs(model),
-      option1,
-      option2,
-      onClickLeft,
-      toDetail,
-      changeType,
-      changeSort,
-    };
-  },
+  shopsList = shopsList;
 };
 </script>
 <style lang="scss" scoped>
-.Classification {
+.classification {
   position: relative;
   width: 100%;
   height: calc(100% - 50px);
@@ -181,12 +146,12 @@ export default {
   :deep(.van-dropdown-menu) {
     width: 100%;
   }
-  .Classification-list {
+  .classification-list {
     width: 90%;
     padding: 0 5%;
     height: calc(100% - 95px);
     overflow: auto;
-    .Classification-list-item {
+    .classification-list-item {
       width: 95%;
       padding: 10px 2.5%;
       margin: 10px 0;

@@ -1,4 +1,3 @@
-<!-- 登录页面 -->
 <template>
   <div class="login">
     <router-link tag="span" to="/" class="login-title">饿了么</router-link>
@@ -20,7 +19,7 @@
 <script>
 import { useStore } from 'vuex'
 import { reactive, toRefs } from "vue";
-import { Notify, showToast, showSuccessToast, showLoadingToast, closeToast } from 'vant';
+import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from 'vant';
 import { useRouter } from 'vue-router'
 
 export default {
@@ -43,12 +42,12 @@ export default {
       setTimeout(() => {
         closeToast();
         if (isExist) {
-          showSuccessToast('登录成功');
+          showSuccessToast, showFailToast('登录成功');
           router.push({
             path: '/Home/Index'
           })
         } else {
-          showToast.fail('用户名或密码错误，请重试后登录！');
+          showFailToast('用户名或密码错误，请重试后登录！');
         }
       }, 1000);
     };

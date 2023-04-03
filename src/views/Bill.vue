@@ -1,4 +1,3 @@
-<!-- 付款页面 -->
 <template>
   <div class="top-bill">
     <div class="top-bill-return">
@@ -62,7 +61,7 @@
 
 <script setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { Dialog, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
+import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 import { useShopStore } from "@/store/shopStore";
 import { useOrderStore } from "../store/orderStore";
@@ -83,11 +82,11 @@ const form = reactive({
 });
 const onSubmit = async () => {
   if (!form.address) {
-    return showToast.fail("请填写收货地址");
+    return showFailToast("请填写收货地址");
   } else if (!form.people) {
-    return showToast.fail("请填写收货人");
+    return showFailToast("请填写收货人");
   } else if (!form.phone) {
-    return showToast.fail("请填写联系方式");
+    return showFailToast("请填写联系方式");
   }
   let code = await orderStore.setOrderStatus({
     address: form.baseAddress + "--" + form.address,
@@ -103,10 +102,10 @@ const onSubmit = async () => {
   setTimeout(() => {
     closeToast();
     if (code) {
-      showSuccessToast("支付成功");
+      showSuccessToast, showFailToast("支付成功");
       router.push("/Home/Index");
     } else {
-      showToast.fail("支付失败");
+      showFailToast("支付失败");
     }
   }, 2000);
 };

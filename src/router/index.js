@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import { useUserStore } from "../store/userStore";
-import { Notify, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
+import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 
 const routes = [
   {

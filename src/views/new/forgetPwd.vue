@@ -1,5 +1,3 @@
-<!-- 忘记密码页面 -->
-<!-- 注册页面 -->
 <template>
   <van-nav-bar
     title="忘记密码"
@@ -56,7 +54,7 @@
 
 <script setup>
 import { reactive, toRefs } from "vue";
-import { Notify, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
+import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/userStore";
 const userStore = useUserStore();
@@ -79,12 +77,12 @@ const onSubmit = async (values) => {
   setTimeout(() => {
     closeToast();
     if (resObj.code == 1) {
-      showSuccessToast("修改成功，请登录");
+      showSuccessToast, showFailToast("修改成功，请登录");
       router.push({
         path: "/newLogin",
       });
     } else {
-      showToast.fail(resObj.msg);
+      showFailToast(resObj.msg);
     }
   }, 1000);
 };

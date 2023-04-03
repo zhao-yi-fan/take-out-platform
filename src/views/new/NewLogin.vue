@@ -1,4 +1,3 @@
-<!-- 登录页面 -->
 <template>
   <van-nav-bar
     title="登录"
@@ -42,7 +41,7 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import { Notify, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
+import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/userStore";
 
@@ -63,12 +62,12 @@ const onSubmit = async (values) => {
   setTimeout(() => {
     closeToast();
     if (isExist) {
-      showSuccessToast("登录成功");
+      showSuccessToast, showFailToast("登录成功");
       router.push({
         path: "/Home/Index",
       });
     } else {
-      showToast.fail("用户名或密码错误，请重试后登录！");
+      showFailToast("用户名或密码错误，请重试后登录！");
     }
   }, 1000);
 };

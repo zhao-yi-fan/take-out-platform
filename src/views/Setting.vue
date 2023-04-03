@@ -69,7 +69,7 @@
 
 <script>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { Dialog, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
+import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 import { useUserStore } from "@/store/userStore";
 const userStore = useUserStore();

@@ -1,4 +1,3 @@
-<!-- 首页 -->
 <template>
   <div class="top-home-logo">
     <div class="top-home-address">
@@ -159,10 +158,10 @@ const toSearch = () => {
     path: "/search",
   });
 };
-const onConfirm = (values) => {
-  let districtCode = values[values.length - 1].code;
+const onConfirm = ({ selectedValues, selectedOptions }) => {
+  let districtCode = selectedValues[selectedValues.length - 1].code;
   showArea.value = false;
-  let value = values
+  let value = selectedValues
     .filter((item) => !!item)
     .map((item) => item.name)
     .join("/");

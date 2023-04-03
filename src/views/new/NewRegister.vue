@@ -57,7 +57,7 @@
 
 <script setup>
 import { reactive, toRefs } from "vue";
-import { Notify, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
+import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store/userStore.ts";
 const userStore = useUserStore();
@@ -80,12 +80,12 @@ const onSubmit = async (values) => {
   setTimeout(() => {
     closeToast();
     if (isSuccess) {
-      showSuccessToast("注册成功，请登录");
+      showSuccessToast, showFailToast("注册成功，请登录");
       router.push({
         path: "/newLogin",
       });
     } else {
-      showToast.fail("用户名已存在，请修改后重新提交！");
+      showFailToast("用户名已存在，请修改后重新提交！");
     }
   }, 1000);
 };

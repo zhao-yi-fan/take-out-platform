@@ -1,4 +1,3 @@
-<!-- 首页 -->
 <template>
   <div class="top-Home">
     <router-view></router-view>

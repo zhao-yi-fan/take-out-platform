@@ -43,7 +43,7 @@
 
 <script setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { Dialog, showToast, showSuccessToast, showLoadingToast, closeToast } from "vant";
+import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";
 import { useUserStore } from "@/store/userStore";
 const userStore = useUserStore();
@@ -74,11 +74,11 @@ const onSubmit = async (values) => {
   setTimeout(() => {
     closeToast();
     if (resObj.code == 1) {
-      showSuccessToast("修改密码成功，请您重新登录");
+      showSuccessToast, showFailToast("修改密码成功，请您重新登录");
       userStore.setLoginInfo(null);
       router.push("/Home/User");
     } else {
-      showToast.fail(resObj.msg);
+      showFailToast(resObj.msg);
     }
   }, 2000);
 };
