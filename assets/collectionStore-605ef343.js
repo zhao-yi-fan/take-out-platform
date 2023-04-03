@@ -1,0 +1,1 @@
+import{C as o}from"./index-8f0d27f9.js";const s=o("collection",{state:()=>({collectionList:[{collectionId:1,userId:1,shopsIds:["2","3"]}]}),getters:{},actions:{setCollectionList(t){this.collectionList=t}},persist:!0});export{s as u};
