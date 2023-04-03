@@ -118,7 +118,7 @@
   </div>
   <van-popup v-model:show="showArea" position="bottom">
     <van-area
-      :area-list="areaList"
+      :area-list="areaArr"
       @confirm="onConfirm"
       @cancel="showArea = false"
     />
@@ -128,14 +128,14 @@
 <script setup>
 import { ref, reactive, toRefs, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import areaJson from "@/mock/area.js";
+import { areaList } from '@vant/area-data';
 import { useShopStore } from "@/stores/shopStore";
 const shopStore = useShopStore();
 
 const router = useRouter();
 const showArea = ref(false);
 const shopsList = ref([]);
-const areaList = computed(() => areaJson);
+const areaArr = computed(() => areaList);
 const value = computed(() => {
   return shopStore.baseAddress.name || "";
 });
@@ -159,6 +159,7 @@ const toSearch = () => {
   });
 };
 const onConfirm = ({ selectedValues, selectedOptions }) => {
+  console.log(selectedValues, selectedOptions);
   let districtCode = selectedValues[selectedValues.length - 1].code;
   showArea.value = false;
   let value = selectedValues
