@@ -1,7 +1,36 @@
 import { defineStore } from "pinia";
 
 export const useShopStore = defineStore("shop", {
-  state: () => ({
+  state: (): {
+    baseAddress: {
+      name: string;
+      code: string;
+    };
+    shopsList: Array<{
+      shopsId: string;
+      shopsName: string;
+      classificationType: number;
+      addressCode: string;
+      shopsImage: string;
+      signImage: string;
+      shopsStart: string;
+      freight: string;
+      score: string;
+      address: string;
+      notice: string;
+      commodity: Array<{
+        classificationId: number;
+        text: string;
+        children: Array<{
+          commodityId: string;
+          commodityImage: string;
+          commodityName: string;
+          commodityMoney: string | number;
+          commodityDescribe: string;
+        }>;
+      }>;
+    }>;
+  } => ({
     baseAddress: {
       name: "北京市/北京市/东城区",
       code: "110101",

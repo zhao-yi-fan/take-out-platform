@@ -9,9 +9,7 @@
     "lib": ["esnext", "dom"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    },
-    "noUnusedLocals": true,
-    "noUnusedParameters": true
+      "@/*": ["./src/*"]
+    }
   }
 }

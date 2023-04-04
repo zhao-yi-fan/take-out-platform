@@ -19,6 +19,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@types/node": "^18.15.11",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "typescript": "^5.0.3"

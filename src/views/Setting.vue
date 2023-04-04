@@ -67,7 +67,7 @@
   </van-dialog>
 </template>
 
-<script>
+<script setup>
 import { reactive, toRefs, computed, onMounted, ref } from "vue";
 import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter, useRoute } from "vue-router";

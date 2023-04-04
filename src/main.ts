@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { createPinia } from "pinia";
-import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import { createPersistedState } from "pinia-plugin-persistedstate";
 
 import router from "./router";
 import Vant from "vant";
@@ -9,7 +9,11 @@ import "vant/lib/index.css";
 import "@/assets/css/reset.css";
 
 const pinia = createPinia();
-pinia.use(piniaPluginPersistedstate);
+pinia.use(
+  createPersistedState({
+    key: (id) => `__persisted__${id}`,
+  })
+);
 
 const app = createApp(App);
 app.use(router);
