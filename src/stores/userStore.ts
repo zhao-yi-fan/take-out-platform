@@ -4,6 +4,15 @@ interface State {
   userList: Array<any>;
   loginInfo: Object | null;
 }
+type loginData = {
+  username: string;
+  password: string;
+};
+
+type RegisterData = Pick<loginData, 'username' | 'password'> & {
+  secret: string;
+}
+
 export const useUserStore = defineStore("user", {
   state: (): State => ({
     userList: [
@@ -31,7 +40,7 @@ export const useUserStore = defineStore("user", {
     setLoginInfo(loginInfo: Object) {
       this.loginInfo = loginInfo;
     },
-    login(loginData = {}) {
+    login(loginData: loginData) {
       let { username, password } = loginData;
       let userInfo = this.userList.find((item) => {
         return item.password === password && item.username === username;
@@ -43,7 +52,7 @@ export const useUserStore = defineStore("user", {
         return false;
       }
     },
-    register(registerData = {}) {
+    register(registerData: RegisterData) {
       let { username, password, secret } = registerData;
       let lastId = this.userList[this.userList.length - 1].userId;
       lastId++;
@@ -64,7 +73,7 @@ export const useUserStore = defineStore("user", {
     setUserList(userList = []) {
       this.userList = userList;
     },
-    forgetPwd(forgetPwd = {}) {
+    forgetPwd(forgetPwd: RegisterData) {
       let { username, password, secret } = forgetPwd;
       let userList = this.userList;
       let userItem = userList.find((item) => {
@@ -91,7 +100,12 @@ export const useUserStore = defineStore("user", {
         };
       }
     },
-    setPwd(setPwdForm = {}) {
+    setPwd(setPwdForm: {
+      userId: number;
+      rawPassword: string;
+      password: string;
+      rePassword: string;
+    }) {
       let { userId, rawPassword, password, rePassword } = setPwdForm;
       if (password !== rePassword) {
         return {
