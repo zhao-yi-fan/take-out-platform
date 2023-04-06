@@ -11,31 +11,31 @@ const routes = [
     path: "/Home",
     name: "Home",
     component: () =>
-      import("../views/Home.vue"),
+      import("../views/Home"),
     children: [
       {
         path: "/Home/Index",
         name: "Index",
         component: () =>
-          import("../views/Index.vue"),
+          import("../views/Index"),
       },
       {
         path: "/Home/Order",
         name: "Order",
         component: () =>
-          import("../views/Order.vue"),
+          import("../views/Order"),
       },
       {
         path: "/Home/User",
         name: "User",
         component: () =>
-          import("../views/User.vue"),
+          import("../views/User"),
       },
       {
         path: "/Home/Classification",
         name: "Classification",
         component: () =>
-          import("../views/Classification.vue"),
+          import("../views/Classification"),
       },
     ],
   },
@@ -43,63 +43,66 @@ const routes = [
     path: "/Commodity_details",
     name: "Commodity_details",
     component: () =>
-      import("../views/Commodity_details.vue"),
+      import("../views/Commodity_details"),
   },
   {
     path: "/Bill",
     name: "Bill",
     component: () =>
-      import("../views/Bill.vue"),
+      import("../views/Bill"),
   },
   {
     path: "/Comment",
     name: "Comment",
     component: () =>
-      import("../views/Comment.vue"),
+      import("../views/Comment"),
   },
   {
     path: "/Collect",
     name: "Collect",
     component: () =>
-      import("../views/Collect.vue"),
+      import("../views/Collect"),
   },
   {
     path: "/Setting",
     name: "Setting",
     component: () =>
-      import("../views/Setting.vue"),
+      import("../views/Setting"),
   },
   {
     path: "/SetPwd",
     name: "SetPwd",
     component: () =>
-      import("../views/SetPwd.vue"),
+      import("../views/SetPwd"),
   },
   {
     path: "/search",
     name: "Search",
     component: () =>
-      import("../views/Search.vue"),
+      import("../views/Search"),
+    meta: {
+      keepAlive: true
+    }
   },
   {
     path: "/newLogin",
     name: "Login",
     component: () =>
-      import("../views/new/NewLogin.vue"),
+      import("../views/new/NewLogin"),
   },
   {
     path: "/newRegister",
     name: "Register",
     component: () =>
       import(
-        "../views/new/NewRegister.vue"
+        "../views/new/NewRegister"
       ),
   },
   {
     path: "/forgetPwd",
     name: "ForgetPwd",
     component: () =>
-      import("../views/new/forgetPwd.vue"),
+      import("../views/new/forgetPwd"),
   },
 ];
 

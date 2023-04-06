@@ -274,6 +274,7 @@ const onConfirm = ({ selectedValues, selectedOptions }) => {
       margin-bottom: 10px;
       -webkit-column-break-inside: avoid;
       img {
+        min-height: 50px;
         width: 100%;
       }
       .top-home-List-title {

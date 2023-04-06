@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <van-search
-      v-model="key"
+      v-model="keyWord"
       show-action
       background="#ffb04d"
       placeholder="请输入搜索关键词"
@@ -11,7 +11,7 @@
         <div @click="onSearch()">搜索</div>
       </template>
     </van-search>
-    <van-empty description="无对应搜索商铺" v-if="searchList.length == 0" />
+    <van-empty description="无对应搜索商铺" v-if="!searchList.length" />
     <div class="search-list" v-else>
       <div
         class="list-item"
@@ -28,43 +28,27 @@
   </div>
   <tab-bar></tab-bar>
 </template>
-<script>
+<script setup>
 import { ref, reactive, toRefs, defineComponent } from "vue";
 import TabBar from "./TabBar";
 import { useRouter } from "vue-router";
 import { useShopStore } from "@/stores/shopStore";
 
-export default defineComponent({
-  name: "Search",
-  components: {
-    TabBar,
-  },
-  setup(propes, { root }) {
-    const shopStore = useShopStore();
-    const router = useRouter();
-    const model = reactive({
-      key: "",
-      searchList: [],
-    });
-    const onSearch = async () => {
-      model.searchList = await shopStore.search(model.key);
-      console.log(model.searchList, " model.searchList====");
-    };
-    const toDetail = (shopsId) => {
-      router.push({
-        path: "/Commodity_details",
-        query: {
-          shopsId,
-        },
-      });
-    };
-    return {
-      ...toRefs(model),
-      onSearch,
-      toDetail,
-    };
-  },
-});
+const shopStore = useShopStore();
+const router = useRouter();
+const keyWord = ref("");
+const searchList = ref([]);
+const onSearch = async () => {
+  searchList.value = await shopStore.search(keyWord.value);
+};
+const toDetail = (shopsId) => {
+  router.push({
+    path: "/Commodity_details",
+    query: {
+      shopsId,
+    },
+  });
+};
 </script>
 
 <style lang="scss" scoped>

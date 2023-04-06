@@ -6,24 +6,10 @@
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
-import prompt from "@/components/prompt.vue"
-import TabBar from './TabBar.vue';
-
-export default {
-  name: '',
-  components: {
-    prompt,
-    TabBar
-  },
-  TabBaretup (propes, { root }) {
-
-    return {
-      
-    }
-  }
-}
+<script setup>
+import { ref } from "vue";
+import prompt from "@/components/prompt";
+import TabBar from "./TabBar";
 </script>
 
 <style lang="scss" scoped>
