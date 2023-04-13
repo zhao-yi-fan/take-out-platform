@@ -1,4 +1,3 @@
-
 <template>
   <div class="top-User">
     <div class="top-User-top clearfix">
@@ -67,13 +66,12 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 const userStore = useUserStore();
 const router = useRouter();
 const loginInfo = computed(() => userStore.loginInfo);
-
 
 const toOrder = () => {
   router.push("/Home/Order");
