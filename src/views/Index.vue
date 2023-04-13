@@ -18,21 +18,21 @@
     <div class="top-home-top">
       <van-swipe class="swipe" :autoplay="3000" indicator-color="white">
         <van-swipe-item>
-          <router-link to="/Commodity_details?shopsId=14">
+          <router-link to="/commodityDetail?shopsId=14">
             <img
               src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4083615963,856728706&fm=11&gp=0.jpg"
             />
           </router-link>
         </van-swipe-item>
         <van-swipe-item>
-          <router-link to="/Commodity_details?shopsId=20">
+          <router-link to="/commodityDetail?shopsId=20">
             <img
               src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1004056377,3540152604&fm=26&gp=0.jpg"
             />
           </router-link>
         </van-swipe-item>
         <van-swipe-item>
-          <router-link to="/Commodity_details?shopsId=13">
+          <router-link to="/commodityDetail?shopsId=13">
             <img
               src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3487836899,16466550&fm=26&gp=0.jpg"
             />
@@ -44,19 +44,19 @@
       <van-swipe class="classification-swipe" indicator-color="white">
         <van-swipe-item>
           <van-grid :gutter="10" square>
-            <van-grid-item to="/Home/Classification?classificationId=1">
+            <van-grid-item to="/Home/classifica?classificationId=1">
               <img src="../assets/images/cf1.png" alt="" srcset="" />
               美食
             </van-grid-item>
-            <van-grid-item to="/Home/Classification?classificationId=2">
+            <van-grid-item to="/Home/classifica?classificationId=2">
               <img src="../assets/images/cf2.png" alt="" srcset="" />
               饮品
             </van-grid-item>
-            <van-grid-item to="/Home/Classification?classificationId=3">
+            <van-grid-item to="/Home/classifica?classificationId=3">
               <img src="../assets/images/cf3.png" alt="" srcset="" />
               甜品
             </van-grid-item>
-            <van-grid-item to="/Home/Classification?classificationId=4">
+            <van-grid-item to="/Home/classifica?classificationId=4">
               <img src="../assets/images/cf4.png" alt="" srcset="" />
               鲜花
             </van-grid-item>
@@ -64,19 +64,19 @@
         </van-swipe-item>
         <van-swipe-item>
           <van-grid :gutter="10" square>
-            <van-grid-item to="/Home/Classification?classificationId=5">
+            <van-grid-item to="/Home/classifica?classificationId=5">
               <img src="../assets/images/cf5.png" alt="" srcset="" />
               下午茶
             </van-grid-item>
-            <van-grid-item to="/Home/Classification?classificationId=6">
+            <van-grid-item to="/Home/classifica?classificationId=6">
               <img src="../assets/images/cf6.png" alt="" srcset="" />
               超市
             </van-grid-item>
-            <van-grid-item to="/Home/Classification?classificationId=7">
+            <van-grid-item to="/Home/classifica?classificationId=7">
               <img src="../assets/images/cf7.png" alt="" srcset="" />
               药品
             </van-grid-item>
-            <van-grid-item to="/Home/Classification?classificationId=8">
+            <van-grid-item to="/Home/classifica?classificationId=8">
               <img src="../assets/images/cf8.png" alt="" srcset="" />
               买菜
             </van-grid-item>
@@ -147,7 +147,7 @@ onMounted(() => {
 });
 const toDetail = (shopsId) => {
   router.push({
-    path: "/Commodity_details",
+    path: "/commodityDetail",
     query: {
       shopsId,
     },

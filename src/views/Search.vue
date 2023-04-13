@@ -43,7 +43,7 @@ const onSearch = async () => {
 };
 const toDetail = (shopsId) => {
   router.push({
-    path: "/Commodity_details",
+    path: "/commodityDetail",
     query: {
       shopsId,
     },

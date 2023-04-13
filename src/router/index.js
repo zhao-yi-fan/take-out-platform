@@ -32,24 +32,24 @@ const routes = [
           import("../views/User"),
       },
       {
-        path: "/Home/Classification",
-        name: "Classification",
+        path: "/Home/classifica",
+        name: "classifica",
         component: () =>
-          import("../views/Classification"),
+          import("../views/classifica"),
       },
     ],
   },
   {
-    path: "/Commodity_details",
-    name: "Commodity_details",
+    path: "/commodityDetail",
+    name: "commodityDetail",
     component: () =>
-      import("../views/Commodity_details"),
+      import("../views/commodityDetail"),
   },
   {
-    path: "/Bill",
-    name: "Bill",
+    path: "/billDetail",
+    name: "billDetail",
     component: () =>
-      import("../views/Bill"),
+      import("../views/billDetail"),
   },
   {
     path: "/Comment",
