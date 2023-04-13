@@ -74,9 +74,8 @@
 </template>
 
 <script setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
+import { reactive, computed, ref } from "vue";
 import {
-  Dialog,
   showToast,
   showSuccessToast,
   showFailToast,
@@ -101,13 +100,11 @@ const activeIndex = ref(0);
 const shopsList = computed(() => {
   return shopStore.shopsList;
 });
-const currentShopInfo = computed(() => {
-  return shopStore.currentShopInfo;
-});
+const currentShopInfo = ref(null);
 const collectionList = computed(() => {
   return collectionStore.collectionList;
 });
-const items = reactive(null);
+const items = ref({});
 const shopsId = ref("");
 const price = ref(0);
 const collectionStatus = ref(false);
@@ -121,8 +118,8 @@ const onSubmit = async () => {
   if (price.value == "0") {
     return showFailToast("请选择商品");
   }
-  let commodity = currentShopInfo.value.commodity;
-  let foodArr = [];
+  const commodity = currentShopInfo.value.commodity;
+  const foodArr = [];
   commodity.forEach((item, index) => {
     if (Array.isArray(item.children) && item.children.length > 0) {
       item.children.forEach((sonItem, sonIndex) => {
@@ -138,13 +135,13 @@ const onSubmit = async () => {
       });
     }
   });
-  var obj = {
+  const obj = {
     shopsId: shopsId.value,
     userId: userStore.loginInfo ? userStore.loginInfo.userId : null,
     foodList: foodArr,
     money: price.value / 100,
   };
-  let resObj = await orderStore.setOrderInfo(obj);
+  const resObj = await orderStore.setOrderInfo(obj);
   showLoadingToast({
     message: "订单提交中...",
     forbidClick: true,
@@ -165,10 +162,10 @@ const onSubmit = async () => {
   }, 1000);
 };
 const init = (shopsId) => {
-  let shop = shopsList.value.find((item) => item.shopsId === shopsId);
+  const shop = shopsList.value.find((item) => item.shopsId === shopsId);
   if (shop) {
     currentShopInfo.value = shop;
-    items = currentShopInfo.value.commodity;
+    items.value = currentShopInfo.value.commodity;
   }
 };
 shopsId.value = route.query.shopsId;
@@ -206,7 +203,7 @@ const onClickRight = () => {
   } else {
     let isExist = false;
     for (let i = 0; i < collectionList.value.length; i++) {
-      let item = collectionList.value[i];
+      const item = collectionList.value[i];
       if (item.userId == userStore.loginInfo.userId) {
         isExist = true;
         item.shopsIds.push(shopsId.value);
@@ -219,7 +216,7 @@ const onClickRight = () => {
       let collectionId =
         collectionList.value[collectionList.value.length - 1].collectionId;
       collectionId++;
-      let shopsIds = [];
+      const shopsIds = [];
       shopsIds.push(shopsId.value);
       collectionList.value.push({
         collectionId,
@@ -241,12 +238,12 @@ const addShop = (status, num, i) => {
     currentShopInfo.value.commodity[activeIndex.value].children[i].num =
       num + 1;
   }
-  let commodity = currentShopInfo.value.commodity;
+  const commodity = currentShopInfo.value.commodity;
   let sum = 0;
   commodity.forEach((item, index) => {
     if (Array.isArray(item.children) && item.children.length > 0) {
       item.children.forEach((sonItem, sonIndex) => {
-        if (typeof sonItem.num == "number") {
+        if (typeof sonItem.num === "number") {
           sum += sonItem.num * Number(sonItem.commodityMoney);
         }
       });

@@ -57,9 +57,8 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
+import { reactive, ref } from "vue";
 import {
-  showToast,
   showSuccessToast,
   showFailToast,
   showLoadingToast,
@@ -76,11 +75,11 @@ const router = useRouter();
 const baseAddress = ref(shopStore.baseAddress.name);
 const currentOrderInfo = ref<{
   foodList: {
-    foodId: string;
-    foodName: string;
-    foodMoney: number;
-    foodNum: number;
-    foodImageUrl: string;
+    foodId: string,
+    foodName: string,
+    foodMoney: number,
+    foodNum: number,
+    foodImageUrl: string
     commodityDescribe: string;
   }[];
   money: number;
