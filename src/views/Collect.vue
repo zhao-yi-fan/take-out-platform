@@ -1,4 +1,3 @@
-
 <template>
   <van-nav-bar
     title="全部收藏"
@@ -8,15 +7,15 @@
   />
   <div class="collect">
     <van-empty
-      description="无收藏的商家"
       v-if="currCollectionShops.length == 0"
+      description="无收藏的商家"
     />
     <div
-      class="collect-item clearfix"
+      v-else
       v-for="item in currCollectionShops"
+      class="collect-item clearfix"
       :key="item.shopsId"
       @click="toDetail(item.shopsId)"
-      v-else
     >
       <img class="l" :src="item.shopsImage" alt="" srcset="" width="50" />
       <span class="r">{{ item.shopsName }}</span>
@@ -25,8 +24,8 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 import { useShopStore } from "@/stores/shopStore";
 import { useCollectionStore } from "@/stores/collectionStore";
@@ -49,7 +48,6 @@ const init = () => {
       currCollectionShops.push(item);
     }
   });
-  console.log(currCollectionShops, "currCollectionShops===");
 };
 init();
 const onClickLeft = () => {

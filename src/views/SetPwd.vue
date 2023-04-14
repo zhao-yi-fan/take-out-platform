@@ -42,9 +42,9 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
-import { useRouter, useRoute } from "vue-router";
+import { reactive } from "vue";
+import { showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
+import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 const userStore = useUserStore();
 const router = useRouter();
@@ -58,15 +58,15 @@ const onClickLeft = () => {
 };
 const onSubmit = async (values) => {
   console.log("submit", values);
-  let { rawPassword, password, rePassword } = values;
-  let setPwdForm = {
+  const { rawPassword, password, rePassword } = values;
+  const setPwdForm = {
     userId: userStore.loginInfo.userId,
     rawPassword,
     password,
     rePassword,
   };
 
-  let resObj = await userStore.setPwd(setPwdForm);
+  const resObj = await userStore.setPwd(setPwdForm);
   showLoadingToast({
     message: "正在修改密码请稍候...",
     forbidClick: true,

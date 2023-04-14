@@ -6,13 +6,13 @@
     @click-left="onClickLeft"
   />
   <div class="top-User">
-    <van-empty description="无历史评价" v-if="currEvaluateList.length == 0" />
+    <van-empty v-if="currEvaluateList.length == 0" description="无历史评价" />
     <van-collapse v-model="activeNames">
       <van-collapse-item
-        :title="item.shopsName"
-        :name="item.businessesId"
         v-for="item in currEvaluateList"
         :key="item.businessesId"
+        :title="item.shopsName"
+        :name="item.businessesId"
       >
         <template #title>
           <div>
@@ -29,11 +29,10 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 import { useShopStore } from "@/stores/shopStore";
-import { useCollectionStore } from "@/stores/collectionStore";
 import { useOrderStore } from "@/stores/orderStore";
 
 const shopStore = useShopStore();
@@ -44,7 +43,7 @@ const router = useRouter();
 const activeNames = ref(["1"]);
 const currEvaluateList = ref([]);
 const init = () => {
-  let userId = userStore.loginInfo.userId;
+  const userId = userStore.loginInfo.userId;
 
   orderStore.orderList.forEach((item, index) => {
     if (item.userId == userId && item.evaluate.content) {

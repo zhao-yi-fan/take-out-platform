@@ -93,12 +93,12 @@
         style="margin: 0 0 20px 0"
       />
     </div>
-    <van-empty description="该地区暂无商铺" v-if="shopsList.length == 0" />
-    <div class="top-home-List" v-else>
+    <van-empty v-if="shopsList.length == 0" description="该地区暂无商铺" />
+    <div v-else class="top-home-List">
       <div
-        class="list-item"
         v-for="(item, index) in shopsList"
         :key="index"
+        class="list-item"
         text="文字"
         @click="toDetail(item.shopsId)"
       >
@@ -140,8 +140,8 @@ const value = computed(() => {
   return shopStore.baseAddress.name || "";
 });
 onMounted(() => {
-  var code = shopStore.baseAddress.code;
-  shopsList.value = (shopStore.shopsList || []).filter((item, index) => {
+  const code = shopStore.baseAddress.code;
+  shopsList.value = (shopStore.shopsList || []).filter((item) => {
     return item.addressCode == code;
   });
 });
@@ -158,8 +158,8 @@ const toSearch = () => {
     path: "/search",
   });
 };
-const onConfirm = ({ selectedValues, selectedOptions }) => {
-  let districtCode = selectedOptions[selectedOptions.length - 1].value;
+const onConfirm = ({ selectedOptions }) => {
+  const districtCode = selectedOptions[selectedOptions.length - 1].value;
   showArea.value = false;
   shopStore.setCurrAddress({
     name: selectedOptions.map((item) => item.text).join("/"),

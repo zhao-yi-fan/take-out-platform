@@ -6,24 +6,24 @@
     @change="change"
   >
     <van-tabbar-item
+      v-for="(item, index) in list"
+      :key="index"
       :icon="item.icon"
       :name="item.name"
       :to="item.path"
-      v-for="(item, index) in list"
-      :key="index"
       >{{ item.title }}</van-tabbar-item
     >
   </van-tabbar>
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, toRefs, onMounted, computed } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { ref, reactive, computed } from "vue";
+import { useRoute } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 const userStore = useUserStore();
 
 const route = useRoute();
-let list = reactive([
+const list = reactive([
   {
     name: "index",
     icon: "wap-home",
@@ -50,13 +50,13 @@ const model = reactive({
   }),
 });
 
-const change = (name) => {
+const change = () => {
   if (!model.loginInfo) {
     active.value = "index";
   }
 };
 const init = () => {
-  let item = list.find((item) => {
+  const item = list.find((item) => {
     return route.path == item.path;
   });
   if (item) {

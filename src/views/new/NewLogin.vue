@@ -40,8 +40,13 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
-import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
+import { ref } from "vue";
+import {
+  showSuccessToast,
+  showFailToast,
+  showLoadingToast,
+  closeToast,
+} from "vant";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 
@@ -54,7 +59,7 @@ const onClickLeft = () => {
 };
 const onSubmit = async (values) => {
   console.log("submit", values);
-  let isExist = await userStore.login(values);
+  const isExist = await userStore.login(values);
   showLoadingToast({
     message: "登录中...",
     forbidClick: true,

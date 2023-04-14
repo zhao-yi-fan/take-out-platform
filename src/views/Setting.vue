@@ -34,8 +34,8 @@
     </div>
   </div>
   <van-dialog
-    style="text-align:center;"
     v-model:show="pfShow"
+    style="text-align: center"
     title="评分"
     show-cancel-button
     :before-close="pfbeforeClose"
@@ -67,10 +67,13 @@
   </van-dialog>
 </template>
 
-<script setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
-import { useRouter, useRoute } from "vue-router";
+<script lang="ts" setup>
+import { ref } from "vue";
+import {
+  Dialog,
+  showToast,
+} from "vant";
+import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 const userStore = useUserStore();
 const router = useRouter();
@@ -106,7 +109,7 @@ const aboutUs = () => {
 // 评分
 const pfbeforeClose = (action, done) => {
   console.log(action);
-  if (action == "confirm") {
+  if (action === "confirm") {
     score.value = 5;
     showToast("评分成功");
     return true;
@@ -117,8 +120,8 @@ const pfbeforeClose = (action, done) => {
 // 反馈
 const beforeClose = (action, done) => {
   console.log(action);
-  if (action == "confirm") {
-    if (fkmsg) {
+  if (action === "confirm") {
+    if (fkmsg.value) {
       fkmsg.value = "";
       showToast("反馈成功");
       return true;

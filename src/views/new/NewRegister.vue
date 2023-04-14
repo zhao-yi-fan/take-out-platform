@@ -1,4 +1,3 @@
-
 <template>
   <van-nav-bar
     title="注册"
@@ -56,8 +55,13 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs } from "vue";
-import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
+import { reactive } from "vue";
+import {
+  showSuccessToast,
+  showFailToast,
+  showLoadingToast,
+  closeToast,
+} from "vant";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore.ts";
 const userStore = useUserStore();
@@ -71,7 +75,12 @@ const form = reactive({
 const onClickLeft = () => {
   router.go(-1);
 };
-const onSubmit = async (values) => {
+const onSubmit = async (
+  values: Pick<
+    { username: string; password: string },
+    "username" | "password"
+  > & { secret: string }
+) => {
   let isSuccess = await userStore.register(values);
   showLoadingToast({
     message: "注册中...",
@@ -89,7 +98,7 @@ const onSubmit = async (values) => {
     }
   }, 1000);
 };
-const Validator = (val) => {
+const Validator = (val: string) => {
   return val == form.password;
 };
 </script>

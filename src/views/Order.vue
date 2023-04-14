@@ -5,14 +5,14 @@
       <van-tabs>
         <van-tab title="全部订单">
           <van-empty
-            description="无订单？赶快去下单吧"
             v-if="myOrderList.length == 0"
+            description="无订单？赶快去下单吧"
           />
-          <van-collapse v-model="activeNames" v-else>
+          <van-collapse v-else v-model="activeNames">
             <van-collapse-item
-              :name="item.businessesId"
               v-for="item in myOrderList"
               :key="item.businessesId"
+              :name="item.businessesId"
             >
               <template #title>
                 <div class="top-Order-list-collapse">
@@ -36,12 +36,12 @@
                   <span> x{{ foodItem.foodNum || 0 }} </span>
                 </p>
                 <van-button
+                  v-if="!item.evaluate.content"
                   class="r"
                   color="linear-gradient(to right, #ff6034, #ee0a24)"
                   size="small"
                   round
                   @click="evaluation(item.businessesId)"
-                  v-if="item.evaluate.content == ''"
                 >
                   评价
                 </van-button>
@@ -79,8 +79,8 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
-import { Dialog, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
+import { reactive, ref } from "vue";
+import { showToast } from "vant";
 import { useUserStore } from "@/stores/userStore";
 import { useOrderStore } from "@/stores/orderStore";
 const userStore = useUserStore();
@@ -97,23 +97,19 @@ const evaluation = (id) => {
   businessesId.value = id;
 };
 
-const init = async (userId) => {
-  myOrderList = await orderStore.getMyOrder(userId);
+const init = async () => {
+  if (!userStore.loginInfo) return;
+  myOrderList = await orderStore.getMyOrder(userStore.loginInfo.userId);
 };
 
-onMounted(() => {
-  if (!userStore.loginInfo) return;
-  let userId = userStore.loginInfo.userId;
-  init(userId);
-});
-const beforeClose = (action, done) => {
-  console.log(action);
-  if (action == "confirm") {
-    if (message) {
-      let orderList = orderStore.orderList;
-      orderList.forEach((item, index) => {
-        if (item.businessesId == businessesId) {
-          item.evaluate.content = message;
+init();
+const beforeClose = (action) => {
+  if (action === "confirm") {
+    if (message.value) {
+      const orderList = orderStore.orderList;
+      orderList.forEach((item) => {
+        if (item.businessesId === businessesId.value) {
+          item.evaluate.content = message.value;
           item.evaluate.score = score;
         }
       });
@@ -186,19 +182,6 @@ const beforeClose = (action, done) => {
     }
   }
 
-  // .top-Order-list::after {
-  //   content: "";
-  //   background-image: url("../assets/images/hb.png");
-  //   background-size: 200px;
-  //   background-color: #ffffe9;
-  //   opacity: 0.2;
-  //   top: 0;
-  //   left: 0;
-  //   bottom: 0;
-  //   right: 0;
-  //   position: absolute;
-  //   z-index: -1;
-  // }
   :deep(.van-dialog__content) {
     text-align: center;
     .van-rate {

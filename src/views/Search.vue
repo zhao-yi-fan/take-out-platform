@@ -11,12 +11,12 @@
         <div @click="onSearch()">搜索</div>
       </template>
     </van-search>
-    <van-empty description="无对应搜索商铺" v-if="!searchList.length" />
-    <div class="search-list" v-else>
+    <van-empty v-if="!searchList.length" description="无对应搜索商铺" />
+    <div v-else class="search-list">
       <div
-        class="list-item"
         v-for="item in searchList"
         :key="item.shopsId"
+        class="list-item"
         @click="toDetail(item.shopsId)"
       >
         <span>{{ item.shopsName }}</span>
@@ -26,10 +26,10 @@
       </div>
     </div>
   </div>
-  <tab-bar></tab-bar>
+  <tab-bar />
 </template>
 <script setup>
-import { ref, reactive, toRefs, defineComponent } from "vue";
+import { ref } from "vue";
 import TabBar from "./TabBar";
 import { useRouter } from "vue-router";
 import { useShopStore } from "@/stores/shopStore";

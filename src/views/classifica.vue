@@ -19,11 +19,11 @@
       />
     </van-dropdown-menu>
     <div class="classification-list">
-      <van-empty description="暂无商铺" v-if="shopsList.length == 0" />
+      <van-empty v-if="shopsList.length == 0" description="暂无商铺" />
       <div
-        class="classification-list-item clearfix"
         v-for="(item, index) in shopsList"
         :key="index"
+        class="classification-list-item clearfix"
         @click="toDetail(item.shopsId)"
       >
         <img :src="item.shopsImage" alt="" srcset="" class="l" />
@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs, computed, onMounted, ref } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useShopStore } from "@/stores/shopStore";
 const shopStore = useShopStore();
@@ -86,8 +86,8 @@ const toDetail = (shopsId) => {
   });
 };
 const changeType = (value) => {
-  let list = shopStore.shopsList.filter((item, index) => {
-    return item.addressCode == districtCode;
+  const list = shopStore.shopsList.filter((item, index) => {
+    return item.addressCode == districtCode.value;
   });
   value2.value = 0; // 初始化排序方式
   value1.value = Number(value);
@@ -103,9 +103,9 @@ const changeSort = (value) => {
   console.log(value, "排序");
   let shopsList = JSON.parse(JSON.stringify(shopStore.shopsList));
   shopsList = shopsList.filter((item, index) => {
-    return item.addressCode == districtCode;
+    return item.addressCode == districtCode.value;
   });
-  if (value1) {
+  if (value1.value) {
     shopsList = shopsList.filter((item, index) => {
       return item.classificationType == value1.value;
     });

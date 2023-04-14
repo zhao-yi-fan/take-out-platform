@@ -53,8 +53,8 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, toRefs } from "vue";
-import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
+import { reactive } from "vue";
+import { showSuccessToast, showFailToast, showLoadingToast, closeToast } from "vant";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 const userStore = useUserStore();
@@ -69,7 +69,7 @@ const onClickLeft = () => {
   router.go(-1);
 };
 const onSubmit = async (values) => {
-  let resObj = await userStore.forgetPwd(values);
+  const resObj = await userStore.forgetPwd(values);
   showLoadingToast({
     message: "修改密码中...",
     forbidClick: true,

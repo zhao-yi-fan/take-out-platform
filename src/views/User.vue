@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <div class="setting" @click="toSetting" v-if="loginInfo">
+    <div v-if="loginInfo" class="setting" @click="toSetting">
       <div class="setting-left">
         <van-icon name="setting-o" color="#fff" size="24" />
         <span>设置</span>
