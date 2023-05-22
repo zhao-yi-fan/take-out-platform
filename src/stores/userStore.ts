@@ -1,20 +1,8 @@
+import { RegisterData, UserState, loginData, loginInfo } from "@/types/user";
 import { defineStore } from "pinia";
 
-interface State {
-  userList: Array<any>;
-  loginInfo: Object | null;
-}
-type loginData = {
-  username: string;
-  password: string;
-};
-
-type RegisterData = Pick<loginData, 'username' | 'password'> & {
-  secret: string;
-}
-
 export const useUserStore = defineStore("user", {
-  state: (): State => ({
+  state: (): UserState => ({
     userList: [
       {
         userId: 1,
@@ -37,7 +25,7 @@ export const useUserStore = defineStore("user", {
     },
   },
   actions: {
-    setLoginInfo(loginInfo: Object) {
+    setLoginInfo(loginInfo: loginInfo) {
       this.loginInfo = loginInfo;
     },
     login(loginData: loginData) {

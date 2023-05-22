@@ -1,43 +1,16 @@
+import { ShopState } from "@/types/shop";
 import { defineStore } from "pinia";
 
+
 export const useShopStore = defineStore("shop", {
-  state: (): {
-    baseAddress: {
-      name: string;
-      code: string;
-    };
-    shopsList: Array<{
-      shopsId: string;
-      shopsName: string;
-      classificationType: number;
-      addressCode: string;
-      shopsImage: string;
-      signImage: string;
-      shopsStart: string;
-      freight: string;
-      score: string;
-      address: string;
-      notice: string;
-      commodity: Array<{
-        classificationId: number;
-        text: string;
-        children: Array<{
-          commodityId: string;
-          commodityImage: string;
-          commodityName: string;
-          commodityMoney: string | number;
-          commodityDescribe: string;
-        }>;
-      }>;
-    }>;
-  } => ({
+  state: (): ShopState => ({
     baseAddress: {
       name: "北京市/北京市/东城区",
       code: "110101",
     },
     shopsList: [
       {
-        shopsId: "1",
+        shopsId: 1,
         shopsName: "华莱士(北京东城店)",
         classificationType: 1,
         addressCode: "110101",
@@ -178,7 +151,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "2",
+        shopsId: 2,
         shopsName: "汉堡王(北京通州店)",
         classificationType: 1,
         addressCode: "110101",
@@ -312,7 +285,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "3",
+        shopsId: 3,
         shopsName: "肯德基(北京东城店)",
         classificationType: 1,
         addressCode: "110101",
@@ -478,7 +451,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "4",
+        shopsId: 4,
         shopsName: "张亮麻辣烫(北京东城店)",
         classificationType: 1,
         addressCode: "110101",
@@ -642,7 +615,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "5",
+        shopsId: 5,
         shopsName: "必胜客(北京东城店)",
         classificationType: 1,
         addressCode: "110101",
@@ -876,7 +849,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "6",
+        shopsId: 6,
         shopsName: "家常菜馆",
         classificationType: 1,
         addressCode: "110101",
@@ -1077,7 +1050,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "7",
+        shopsId: 7,
         shopsName: "麦当劳(北京朝阳店)",
         classificationType: 1,
         addressCode: "110101",
@@ -1203,7 +1176,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "8",
+        shopsId: 8,
         shopsName: "土大力(北京东城店)",
         classificationType: 1,
         addressCode: "110101",
@@ -1329,7 +1302,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "9",
+        shopsId: 9,
         shopsName: "沪上阿姨(北京丰台店)",
         classificationType: 2,
         addressCode: "110101",
@@ -1447,7 +1420,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "10",
+        shopsId: 10,
         shopsName: "好利来(北京昌平店)",
         classificationType: 3,
         addressCode: "110101",
@@ -1610,7 +1583,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "11",
+        shopsId: 11,
         shopsName: "柳州螺蛳粉",
         classificationType: 1,
         addressCode: "430104",
@@ -1749,7 +1722,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "12",
+        shopsId: 12,
         shopsName: "华莱士(长沙岳麓区店)",
         classificationType: 1,
         addressCode: "430104",
@@ -1890,7 +1863,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "13",
+        shopsId: 13,
         shopsName: "汉堡王(长沙岳麓区店)",
         classificationType: 1,
         addressCode: "430104",
@@ -2024,7 +1997,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "14",
+        shopsId: 14,
         shopsName: "肯德基(长沙岳麓区店)",
         classificationType: 1,
         addressCode: "430104",
@@ -2190,7 +2163,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "15",
+        shopsId: 15,
         shopsName: "张亮麻辣烫(长沙岳麓区店)",
         classificationType: 1,
         addressCode: "430104",
@@ -2354,7 +2327,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "16",
+        shopsId: 16,
         shopsName: "必胜客(长沙岳麓区店)",
         classificationType: 1,
         addressCode: "430104",
@@ -2588,7 +2561,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "17",
+        shopsId: 17,
         shopsName: "沪上阿姨(长沙岳麓区店)",
         classificationType: 2,
         addressCode: "430104",
@@ -2706,7 +2679,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "18",
+        shopsId: 18,
         shopsName: "好利来(长沙岳麓区店)",
         classificationType: 3,
         addressCode: "430104",
@@ -2869,7 +2842,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "19",
+        shopsId: 19,
         shopsName: "喜茶(长沙岳麓区店)",
         classificationType: 2,
         addressCode: "430104",
@@ -2935,7 +2908,7 @@ export const useShopStore = defineStore("shop", {
         ],
       },
       {
-        shopsId: "20",
+        shopsId: 20,
         shopsName: "麦当劳(长沙岳麓区店)",
         classificationType: 1,
         addressCode: "430104",

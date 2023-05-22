@@ -1,5 +1,5 @@
 <template>
-  <div class="top-Commodity">
+  <div class="top-commodity">
     <van-nav-bar
       :title="currentShopInfo.shopsName"
       left-text="返回"
@@ -12,21 +12,21 @@
         收藏
       </template>
     </van-nav-bar>
-    <div class="top-Commodity-shop">
+    <div class="top-commodity-shop">
       <img :src="currentShopInfo.signImage" alt="" />
-      <div class="top-Commodity-shop-card">
+      <div class="top-commodity-shop-card">
         <p>{{ currentShopInfo.shopsName }}</p>
         <div>
           评分：<span>{{ currentShopInfo.score }}</span>
         </div>
         <van-tag type="danger">优质商家</van-tag>
         <br />
-        <span class="top-Commodity-shop-card-address"
+        <span class="top-commodity-shop-card-address"
           >地址：{{ currentShopInfo.address }}</span
         >
         <van-notice-bar scrollable :text="currentShopInfo.notice" />
       </div>
-      <div class="top-Commodity-list">
+      <div class="top-commodity-list">
         <van-tree-select
           v-model:active-id="activeId"
           v-model:main-active-index="activeIndex"
@@ -82,12 +82,13 @@ import {
   showLoadingToast,
   closeToast,
 } from "vant";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter, useRoute, LocationQueryValue } from "vue-router";
 import prompt from "@/components/prompt";
 import { useUserStore } from "@/stores/userStore";
 import { useOrderStore } from "@/stores/orderStore";
 import { useShopStore } from "@/stores/shopStore";
 import { useCollectionStore } from "@/stores/collectionStore";
+import { ShopsList, Shop } from "@/types/shop";
 
 const shopStore = useShopStore();
 const orderStore = useOrderStore();
@@ -100,12 +101,12 @@ const activeIndex = ref(0);
 const shopsList = computed(() => {
   return shopStore.shopsList;
 });
-const currentShopInfo = ref(null);
+const currentShopInfo = ref<Shop>(null);
 const collectionList = computed(() => {
   return collectionStore.collectionList;
 });
 const items = ref({});
-const shopsId = ref("");
+const shopsId = ref<number | null>(+route.query.shopsId);
 const price = ref(0);
 const collectionStatus = ref(false);
 
@@ -135,13 +136,26 @@ const onSubmit = async () => {
       });
     }
   });
-  const obj = {
+  const resObj = await orderStore.setOrderInfo({
     shopsId: shopsId.value,
-    userId: userStore.loginInfo ? userStore.loginInfo.userId : null,
-    foodList: foodArr,
+    userId: userStore.loginInfo?.userId || null,
+    foodList: currentShopInfo.value.commodity.reduce((prev, cur) => {
+      return prev.concat(
+        cur.children
+          .filter((item) => item.num && item.num > 0)
+          .map((item) => {
+            return {
+              foodId: cur.classificationId + "_" + item.commodityId,
+              foodNum: item.num,
+              foodMoney: item.commodityMoney,
+              foodName: item.commodityName,
+              foodImageUrl: item.commodityImage,
+            };
+          })
+      );
+    }, []),
     money: price.value / 100,
-  };
-  const resObj = await orderStore.setOrderInfo(obj);
+  });
   showLoadingToast({
     message: "订单提交中...",
     forbidClick: true,
@@ -161,35 +175,35 @@ const onSubmit = async () => {
     }
   }, 1000);
 };
-const init = (shopsId) => {
-  const shop = shopsList.value.find((item) => item.shopsId === shopsId);
+const init = () => {
+  const shop = shopsList.value.find((item) => item.shopsId === shopsId.value);
   if (shop) {
     currentShopInfo.value = shop;
     items.value = currentShopInfo.value.commodity;
   }
 };
-shopsId.value = route.query.shopsId;
-init(shopsId.value);
+init();
 currentShopInfo.value.commodity.forEach((item, index) => {
   item.children.forEach((son, i) => {
     son.num = 0;
   });
 });
-collectionList.value.forEach((item, index) => {
-  if (!userStore.loginInfo) return;
-  if (item.userId == userStore.loginInfo.userId) {
-    item.shopsIds.forEach((el, inde) => {
-      if (el == shopsId.value) {
-        collectionStatus.value = true;
-      }
-    });
-  }
-});
+if (userStore.loginInfo) {
+  collectionList.value.forEach((item, index) => {
+    if (item.userId == userStore.loginInfo?.userId) {
+      item.shopsIds.forEach((el, inde) => {
+        if (el == shopsId.value) {
+          collectionStatus.value = true;
+        }
+      });
+    }
+  });
+}
 const onClickRight = () => {
   if (!userStore.loginInfo) return showToast("您未登录");
   if (collectionStatus.value) {
     collectionList.value.forEach((item, index) => {
-      if (item.userId == userStore.loginInfo.userId) {
+      if (item.userId == userStore.loginInfo?.userId) {
         item.shopsIds.forEach((el, inde) => {
           if (el == shopsId.value) {
             item.shopsIds.splice(inde, 1);
@@ -204,7 +218,7 @@ const onClickRight = () => {
     let isExist = false;
     for (let i = 0; i < collectionList.value.length; i++) {
       const item = collectionList.value[i];
-      if (item.userId == userStore.loginInfo.userId) {
+      if (item.userId == userStore.loginInfo?.userId) {
         isExist = true;
         item.shopsIds.push(shopsId.value);
         collectionStatus.value = true;
@@ -220,7 +234,7 @@ const onClickRight = () => {
       shopsIds.push(shopsId.value);
       collectionList.value.push({
         collectionId,
-        userId: userStore.loginInfo.userId,
+        userId: userStore.loginInfo?.userId,
         shopsIds,
       });
       collectionStore.setCollectionList(collectionList.value);
@@ -256,7 +270,7 @@ const addShop = (status, num, i) => {
 <style lang="scss" scoped>
 $a: 100vh;
 $b: 390px;
-.top-Commodity {
+.top-commodity {
   width: 100%;
   height: 100%;
   position: relative;
@@ -269,12 +283,12 @@ $b: 390px;
       color: #ed9428;
     }
   }
-  .top-Commodity-shop {
+  .top-commodity-shop {
     img {
       width: 100%;
       height: 220px;
     }
-    .top-Commodity-shop-card {
+    .top-commodity-shop-card {
       width: 80%;
       height: 150px;
       background: #fff;
@@ -297,13 +311,13 @@ $b: 390px;
           font-weight: bolder;
         }
       }
-      .top-Commodity-shop-card-address {
+      .top-commodity-shop-card-address {
         font-size: 12px;
         color: #333;
       }
     }
   }
-  .top-Commodity-list {
+  .top-commodity-list {
     margin-top: 45px;
     height: calc(#{$a} - #{$b});
     :deep(.van-tree-select) {

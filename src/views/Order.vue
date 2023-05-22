@@ -1,7 +1,7 @@
 <template>
-  <div class="top-Order">
-    <div class="top-Order-title">我的订单</div>
-    <div class="top-Order-list">
+  <div class="top-order">
+    <div class="top-order-title">我的订单</div>
+    <div class="top-order-list">
       <van-tabs>
         <van-tab title="全部订单">
           <van-empty
@@ -15,16 +15,16 @@
               :name="item.businessesId"
             >
               <template #title>
-                <div class="top-Order-list-collapse">
+                <div class="top-order-list-collapse">
                   <img :src="item.shopsInfo.shopsImage" alt="" width="75" />
                   <span>{{ item.shopsInfo.shopsName }}</span>
                 </div>
-                <div class="top-Order-list-money">
+                <div class="top-order-list-money">
                   <span class="l">已送达</span>
                   <span class="r">共计：{{ item.money }}元</span>
                 </div>
               </template>
-              <div class="top-Order-list-orderList clearfix">
+              <div class="top-order-list-orderList clearfix">
                 <p>收货地址：{{ item.address }}</p>
                 <p>收货人　：{{ item.people }}</p>
                 <p>联系方式：{{ item.phone }}</p>
@@ -127,24 +127,24 @@ const beforeClose = (action) => {
 </script>
 
 <style lang="scss" scoped>
-.top-Order {
+.top-order {
   width: 100%;
   height: calc(100% - 50px);
   background: #f8f8fa;
-  .top-Order-title {
+  .top-order-title {
     font-size: 18px;
     padding-left: 5%;
     line-height: 50px;
     color: #fff;
     background-image: linear-gradient(to right, #f1b815, #efa71c);
   }
-  .top-Order-list {
+  .top-order-list {
     height: calc(100% - 50px);
     overflow: auto;
     // position: relative;
     // opacity: 0.99;
     .van-tabs {
-      .top-Order-list-collapse {
+      .top-order-list-collapse {
         img {
           border-radius: 50%;
           border: 1px solid #ccc;
@@ -155,10 +155,10 @@ const beforeClose = (action) => {
           font-weight: bolder;
         }
       }
-      .top-Order-list-money {
+      .top-order-list-money {
         padding: 20px 0;
       }
-      .top-Order-list-orderList {
+      .top-order-list-orderList {
         padding: 5px 0;
         p {
           line-height: 24px;

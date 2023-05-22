@@ -1,38 +1,41 @@
 import { defineStore } from "pinia";
 import { useShopStore } from "./shopStore";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
+import { orderForm } from "@/types/order";
 
 export const useOrderStore = defineStore("order", {
-  state: () => ({
-    orderList: [
-      {
-        businessesId: 1,
-        shopsId: 13,
-        userId: 1,
-        status: "success",
-        address: "长沙湖南工业职业技术学院",
-        people: "xxx",
-        phone: "18974868294",
-        foodList: [
-          {
-            foodId: "1_1",
-            foodMoney: 12.5,
-            foodName: "汉堡",
-            foodNum: 3,
-            foodImageUrl:
-              "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3285227120,3432336058&fm=26&gp=0.jpg",
+  state: (): OrderState => {
+    return {
+      orderList: [
+        {
+          businessesId: 1,
+          shopsId: 13,
+          userId: 1,
+          status: "success",
+          address: "长沙湖南工业职业技术学院",
+          people: "xxx",
+          phone: "18974868294",
+          foodList: [
+            {
+              foodId: "1_1",
+              foodMoney: 12.5,
+              foodName: "汉堡",
+              foodNum: 3,
+              foodImageUrl:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3285227120,3432336058&fm=26&gp=0.jpg",
+            },
+          ],
+          money: "37.5",
+          evaluate: {
+            content: "唉呀妈呀相当好吃",
+            score: 4.5,
           },
-        ],
-        money: "37.5",
-        evaluate: {
-          content: "唉呀妈呀相当好吃",
-          score: "4.5",
+          createDate: "2021-01-06 08:41:39",
+          sendDate: "2021-01-06 08:56:39",
         },
-        createDate: "2021-01-06 08:41:39",
-        sendDate: "2021-01-06 08:56:39",
-      },
-    ],
-  }),
+      ],
+    };
+  },
   getters: {},
   actions: {
     setOrderList(orderList: Array<any>) {
@@ -40,32 +43,26 @@ export const useOrderStore = defineStore("order", {
     },
     getMyOrder(userId = {}) {
       const shopStore = useShopStore();
-      let myOrderList = [];
-      this.orderList.forEach((item, index) => {
-        console.log(index, this.orderList);
-        if (item.userId == userId && item.status == "success") {
-          myOrderList.push(item);
-        }
-      });
-      console.log(myOrderList, "myOrderList");
+      let myOrderList = this.orderList.filter(
+        (item) => item.userId == userId && item.status == "success"
+      );
+
       // 增加商品信息
-      myOrderList.map((currentItem, index) => {
-        for (let i = 0; i < shopStore.shopsList.length; i++) {
-          if (currentItem.shopsId == shopStore.shopsList[i].shopsId) {
-            let shopsInfo = shopStore.shopsList[i];
-            currentItem.shopsInfo = shopsInfo;
-          }
-        }
-        return currentItem;
+      return myOrderList.map((currentItem, index) => {
+        const shopsInfo = shopStore.shopsList.find(
+          (item) => item.shopsId == currentItem.shopsId
+        );
+        return {
+          ...currentItem,
+          shopsInfo: shopsInfo || {},
+        };
       });
-      return myOrderList;
     },
-    setOrderInfo(orderForm = {}) {
+    setOrderInfo(orderForm: orderForm) {
       let { userId, shopsId, money, foodList } = orderForm;
-      let orderList = this.orderList;
-      let businessesId = orderList[orderList.length - 1].businessesId;
+      let businessesId = this.orderList[this.orderList.length - 1].businessesId;
       businessesId++;
-      orderList.push({
+      this.orderList.push({
         businessesId,
         shopsId,
         userId,
@@ -77,8 +74,11 @@ export const useOrderStore = defineStore("order", {
           score: null,
         },
         address: "",
+        people: "",
+        phone: "",
+        createDate: "",
+        sendDate: "",
       });
-      this.setOrderList(orderList);
       return {
         code: 1,
         businessesId,
