@@ -1,12 +1,14 @@
-type FoodList = Array<{
+export type Food = {
   foodId: string;
   foodMoney: number;
   foodName: string;
   foodNum: number;
   foodImageUrl: string;
-}>;
+};
 
-type OrderState = {
+export type FoodList = Food[];
+
+export type OrderState = {
   orderList: Array<{
     businessesId: number;
     shopsId: number;
@@ -16,7 +18,7 @@ type OrderState = {
     people: string;
     phone: string;
     foodList: FoodList;
-    money: string;
+    money: number;
     evaluate: {
       content: string;
       score: number | null;
@@ -25,9 +27,9 @@ type OrderState = {
     sendDate: string;
   }>;
 };
-type orderForm = {
+export type orderForm = {
   userId: number;
   shopsId: number;
-  money: string;
+  money: number;
   foodList: FoodList;
 };

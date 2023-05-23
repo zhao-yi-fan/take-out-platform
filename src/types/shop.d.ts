@@ -1,3 +1,16 @@
+export type commodity = {
+  classificationId: number;
+  text: string;
+  children: Array<{
+    commodityId: string;
+    commodityImage: string;
+    commodityName: string;
+    commodityMoney: string | number;
+    commodityDescribe: string;
+    count?: number;
+  }>;
+};
+
 export type Shop = {
   shopsId: number;
   shopsName: string;
@@ -10,17 +23,7 @@ export type Shop = {
   score: string;
   address: string;
   notice: string;
-  commodity: Array<{
-    classificationId: number;
-    text: string;
-    children: Array<{
-      commodityId: string;
-      commodityImage: string;
-      commodityName: string;
-      commodityMoney: string | number;
-      commodityDescribe: string;
-    }>;
-  }>;
+  commodity: Array<commodity>;
 };
 export type ShopsList = Array<Shop>;
 export type ShopState = {

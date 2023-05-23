@@ -1,7 +1,7 @@
 <template>
   <div class="top-commodity">
     <van-nav-bar
-      :title="currentShopInfo?.shopsName"
+      :title="currentShopInfo.shopsName"
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"
@@ -48,15 +48,15 @@
                   size="mini"
                   round
                   plain
-                  @click="addShop('delect', item.num, index)"
+                  @click="addShop('delect', item.count, index)"
                 />
-                <span>{{ item.num }}</span>
+                <span>{{ item.count }}</span>
                 <van-button
                   icon="plus"
                   type="primary"
                   size="mini"
                   round
-                  @click="addShop('add', item.num, index)"
+                  @click="addShop('add', item.count, index)"
                 />
               </template>
             </van-card>
@@ -81,6 +81,7 @@ import {
   showFailToast,
   showLoadingToast,
   closeToast,
+  TreeSelectItem,
 } from "vant";
 import { useRouter, useRoute, LocationQueryValue } from "vue-router";
 import prompt from "@/components/prompt";
@@ -88,7 +89,8 @@ import { useUserStore } from "@/stores/userStore";
 import { useOrderStore } from "@/stores/orderStore";
 import { useShopStore } from "@/stores/shopStore";
 import { useCollectionStore } from "@/stores/collectionStore";
-import { Shop } from "@/types/shop";
+import { Shop, commodity } from "@/types/shop";
+import { FoodList } from "@/types/order";
 
 const shopStore = useShopStore();
 const orderStore = useOrderStore();
@@ -99,14 +101,33 @@ const router = useRouter();
 const activeId = ref(1);
 const activeIndex = ref(0);
 const shopsList = computed(() => shopStore.shopsList);
-const currentShopInfo = ref<Shop | null>(null);
-const items = ref({});
+const currentShopInfo = computed(
+  () => shopsList.value.find((item) => item.shopsId === shopsId.value) as Shop
+);
+const items = ref<commodity[]>([]);
 const shopsId = ref(Number(route.query.shopsId as LocationQueryValue));
 
 const price = ref(0);
 const collectionStatus = computed(() => {
   return collectionStore.isCollection(shopsId.value);
 });
+
+const init = () => {
+  if (currentShopInfo) {
+    items.value = (currentShopInfo.value.commodity || []).map((item, index) => {
+      return {
+        ...item,
+        children: item.children.map((son, i) => {
+          return {
+            ...son,
+            count: 0,
+          };
+        }),
+      };
+    });
+  }
+};
+init();
 
 const onClickLeft = () => {
   router.go(-1);
@@ -117,17 +138,17 @@ const onSubmit = async () => {
   if (price.value === 0) {
     return showFailToast("请选择商品");
   }
-  const resObj = await orderStore.setOrderInfo({
+  const resObj = orderStore.setOrderInfo({
     shopsId: shopsId.value,
-    userId: userStore.loginInfo?.userId || null,
-    foodList: currentShopInfo.value.commodity.reduce((prev, cur) => {
+    userId: userStore.loginInfo.userId,
+    foodList: items.value.reduce((prev: FoodList, cur: commodity) => {
       return prev.concat(
         cur.children
-          .filter((item) => item.num && item.num > 0)
+          .filter((item) => item.count && item.count > 0)
           .map((item) => {
             return {
               foodId: cur.classificationId + "_" + item.commodityId,
-              foodNum: item.num,
+              foodNum: item.count,
               foodMoney: item.commodityMoney,
               foodName: item.commodityName,
               foodImageUrl: item.commodityImage,
@@ -156,47 +177,28 @@ const onSubmit = async () => {
     }
   }, 1000);
 };
-const init = () => {
-  const shop = shopsList.value.find((item) => item.shopsId === shopsId.value);
-  if (shop) {
-    currentShopInfo.value = shop;
-    items.value = (currentShopInfo.value.commodity || []).map((item, index) => {
-      return {
-        ...item,
-        children: item.children.map((son, i) => {
-          return {
-            ...son,
-            num: 0,
-          };
-        }),
-      };
-    });
-  }
-};
-init();
 
 const onClickRight = () => {
   collectionStore.addCollection({
     shopId: shopsId.value,
   });
 };
-const addShop = (status, num, i) => {
+const addShop = (status, count, i) => {
   if (status == "delect") {
-    if (num - 1 >= 0) {
-      currentShopInfo.value.commodity[activeIndex.value].children[i].num =
-        num - 1;
+    if (count - 1 >= 0) {
+      currentShopInfo.value.commodity[activeIndex.value].children[i].count =
+        count - 1;
     }
   } else {
-    currentShopInfo.value.commodity[activeIndex.value].children[i].num =
-      num + 1;
+    currentShopInfo.value.commodity[activeIndex.value].children[i].count =
+      count + 1;
   }
-  const commodity = currentShopInfo.value.commodity;
   let sum = 0;
-  commodity.forEach((item, index) => {
+  currentShopInfo.value.commodity.forEach((item, index) => {
     if (Array.isArray(item.children) && item.children.length > 0) {
       item.children.forEach((sonItem, sonIndex) => {
-        if (typeof sonItem.num === "number") {
-          sum += sonItem.num * Number(sonItem.commodityMoney);
+        if (typeof sonItem.count === "number") {
+          sum += sonItem.count * Number(sonItem.commodityMoney);
         }
       });
     }

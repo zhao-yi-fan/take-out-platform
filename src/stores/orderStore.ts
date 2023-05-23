@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useShopStore } from "./shopStore";
 import dayjs from "dayjs";
-import { orderForm } from "@/types/order";
+import { orderForm, OrderState } from "@/types/order";
 
 export const useOrderStore = defineStore("order", {
   state: (): OrderState => {
@@ -25,7 +25,7 @@ export const useOrderStore = defineStore("order", {
                 "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3285227120,3432336058&fm=26&gp=0.jpg",
             },
           ],
-          money: "37.5",
+          money: 37.5,
           evaluate: {
             content: "唉呀妈呀相当好吃",
             score: 4.5,
@@ -104,11 +104,7 @@ export const useOrderStore = defineStore("order", {
         isExist = true;
       }
       this.setOrderList(orderList);
-      if (isExist) {
-        return true; // 下单成功
-      } else {
-        return false; // 下单失败
-      }
+      return isExist;
     },
   },
   persist: true,
