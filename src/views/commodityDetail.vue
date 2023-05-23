@@ -1,7 +1,7 @@
 <template>
   <div class="top-commodity">
     <van-nav-bar
-      :title="currentShopInfo.shopsName"
+      :title="currentShopInfo?.shopsName"
       left-text="返回"
       left-arrow
       @click-left="onClickLeft"
@@ -88,7 +88,7 @@ import { useUserStore } from "@/stores/userStore";
 import { useOrderStore } from "@/stores/orderStore";
 import { useShopStore } from "@/stores/shopStore";
 import { useCollectionStore } from "@/stores/collectionStore";
-import { ShopsList, Shop } from "@/types/shop";
+import { Shop } from "@/types/shop";
 
 const shopStore = useShopStore();
 const orderStore = useOrderStore();
@@ -98,17 +98,15 @@ const route = useRoute();
 const router = useRouter();
 const activeId = ref(1);
 const activeIndex = ref(0);
-const shopsList = computed(() => {
-  return shopStore.shopsList;
-});
-const currentShopInfo = ref<Shop>(null);
-const collectionList = computed(() => {
-  return collectionStore.collectionList;
-});
+const shopsList = computed(() => shopStore.shopsList);
+const currentShopInfo = ref<Shop | null>(null);
 const items = ref({});
-const shopsId = ref<number | null>(+route.query.shopsId);
+const shopsId = ref(Number(route.query.shopsId as LocationQueryValue));
+
 const price = ref(0);
-const collectionStatus = ref(false);
+const collectionStatus = computed(() => {
+  return collectionStore.isCollection(shopsId.value);
+});
 
 const onClickLeft = () => {
   router.go(-1);
@@ -116,26 +114,9 @@ const onClickLeft = () => {
 
 const onSubmit = async () => {
   if (!userStore.loginInfo) return showToast("您未登录");
-  if (price.value == "0") {
+  if (price.value === 0) {
     return showFailToast("请选择商品");
   }
-  const commodity = currentShopInfo.value.commodity;
-  const foodArr = [];
-  commodity.forEach((item, index) => {
-    if (Array.isArray(item.children) && item.children.length > 0) {
-      item.children.forEach((sonItem, sonIndex) => {
-        if (sonItem.num && sonItem.num > 0) {
-          foodArr.push({
-            foodId: item.classificationId + "_" + sonItem.commodityId,
-            foodNum: sonItem.num,
-            foodMoney: sonItem.commodityMoney,
-            foodName: sonItem.commodityName,
-            foodImageUrl: sonItem.commodityImage,
-          });
-        }
-      });
-    }
-  });
   const resObj = await orderStore.setOrderInfo({
     shopsId: shopsId.value,
     userId: userStore.loginInfo?.userId || null,
@@ -179,68 +160,25 @@ const init = () => {
   const shop = shopsList.value.find((item) => item.shopsId === shopsId.value);
   if (shop) {
     currentShopInfo.value = shop;
-    items.value = currentShopInfo.value.commodity;
+    items.value = (currentShopInfo.value.commodity || []).map((item, index) => {
+      return {
+        ...item,
+        children: item.children.map((son, i) => {
+          return {
+            ...son,
+            num: 0,
+          };
+        }),
+      };
+    });
   }
 };
 init();
-currentShopInfo.value.commodity.forEach((item, index) => {
-  item.children.forEach((son, i) => {
-    son.num = 0;
-  });
-});
-if (userStore.loginInfo) {
-  collectionList.value.forEach((item, index) => {
-    if (item.userId == userStore.loginInfo?.userId) {
-      item.shopsIds.forEach((el, inde) => {
-        if (el == shopsId.value) {
-          collectionStatus.value = true;
-        }
-      });
-    }
-  });
-}
+
 const onClickRight = () => {
-  if (!userStore.loginInfo) return showToast("您未登录");
-  if (collectionStatus.value) {
-    collectionList.value.forEach((item, index) => {
-      if (item.userId == userStore.loginInfo?.userId) {
-        item.shopsIds.forEach((el, inde) => {
-          if (el == shopsId.value) {
-            item.shopsIds.splice(inde, 1);
-            collectionStatus.value = false;
-            showToast("取消收藏");
-          }
-        });
-      }
-    });
-    collectionStore.setCollectionList(collectionList.value);
-  } else {
-    let isExist = false;
-    for (let i = 0; i < collectionList.value.length; i++) {
-      const item = collectionList.value[i];
-      if (item.userId == userStore.loginInfo?.userId) {
-        isExist = true;
-        item.shopsIds.push(shopsId.value);
-        collectionStatus.value = true;
-        collectionStore.setCollectionList(collectionList.value);
-        return showToast("收藏成功");
-      }
-    }
-    if (!isExist) {
-      let collectionId =
-        collectionList.value[collectionList.value.length - 1].collectionId;
-      collectionId++;
-      const shopsIds = [];
-      shopsIds.push(shopsId.value);
-      collectionList.value.push({
-        collectionId,
-        userId: userStore.loginInfo?.userId,
-        shopsIds,
-      });
-      collectionStore.setCollectionList(collectionList.value);
-      showToast("收藏成功");
-    }
-  }
+  collectionStore.addCollection({
+    shopId: shopsId.value,
+  });
 };
 const addShop = (status, num, i) => {
   if (status == "delect") {
