@@ -1,8 +1,8 @@
-import { RegisterData, UserState, loginData, loginInfo } from "@/types/user";
+import { IRegisterData, IuserState, IloginData, loginInfo } from "@/types/user";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
-  state: (): UserState => ({
+  state: (): IuserState => ({
     userList: [
       {
         userId: 1,
@@ -28,7 +28,7 @@ export const useUserStore = defineStore("user", {
     setLoginInfo(loginInfo: loginInfo) {
       this.loginInfo = loginInfo;
     },
-    login(loginData: loginData) {
+    login(loginData: IloginData) {
       let { username, password } = loginData;
       let userInfo = this.userList.find((item) => {
         return item.password === password && item.username === username;
@@ -40,7 +40,7 @@ export const useUserStore = defineStore("user", {
         return false;
       }
     },
-    register(registerData: RegisterData) {
+    register(registerData: IRegisterData) {
       let { username, password, secret } = registerData;
       let lastId = this.userList[this.userList.length - 1].userId;
       lastId++;
@@ -61,7 +61,7 @@ export const useUserStore = defineStore("user", {
     setUserList(userList = []) {
       this.userList = userList;
     },
-    forgetPwd(forgetPwd: RegisterData) {
+    forgetPwd(forgetPwd: IRegisterData) {
       let { username, password, secret } = forgetPwd;
       let userList = this.userList;
       let userItem = userList.find((item) => {

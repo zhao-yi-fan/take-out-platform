@@ -2,15 +2,15 @@ export type loginInfo = {
   userId: number;
 } | null;
 
-export interface UserState {
+export interface IuserState {
   userList: Array<any>;
   loginInfo: loginInfo;
 }
-export type loginData = {
+export interface IloginData {
   username: string;
   password: string;
-};
+}
 
-export type RegisterData = Pick<loginData, "username" | "password"> & {
+export type IRegisterData = Pick<IloginData, "username" | "password"> & {
   secret: string;
 };

@@ -1,4 +1,4 @@
-export type commodity = {
+export interface commodity {
   classificationId: number;
   text: string;
   children: Array<{
@@ -9,9 +9,9 @@ export type commodity = {
     commodityDescribe: string;
     count?: number;
   }>;
-};
+}
 
-export type Shop = {
+export interface Shop {
   shopsId: number;
   shopsName: string;
   classificationType: number;
@@ -24,12 +24,13 @@ export type Shop = {
   address: string;
   notice: string;
   commodity: Array<commodity>;
-};
+}
+
 export type ShopsList = Array<Shop>;
-export type ShopState = {
+export interface ShopState {
   baseAddress: {
     name: string;
     code: string;
   };
   shopsList: ShopsList;
-};
+}

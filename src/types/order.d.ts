@@ -1,14 +1,14 @@
-export type Food = {
+export interface Food {
   foodId: string;
   foodMoney: number;
   foodName: string;
   foodNum: number;
   foodImageUrl: string;
-};
+}
 
 export type FoodList = Food[];
 
-export type OrderState = {
+export interface OrderState {
   orderList: Array<{
     businessesId: number;
     shopsId: number;
@@ -26,10 +26,10 @@ export type OrderState = {
     createDate: string;
     sendDate: string;
   }>;
-};
-export type orderForm = {
+}
+export interface orderForm {
   userId: number;
   shopsId: number;
   money: number;
   foodList: FoodList;
-};
+}

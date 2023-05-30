@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 import { useUserStore } from "./userStore";
 import { showToast } from "vant";
-import { CollectionState } from "@/types/collection";
+import { IcollectionState } from "@/types/collection";
 
 export const useCollectionStore = defineStore("collection", {
-  state: (): CollectionState => ({
+  state: (): IcollectionState => ({
     collectionList: [
       {
         collectionId: 1,
