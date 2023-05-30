@@ -141,7 +141,7 @@ const onSubmit = async () => {
   const resObj = orderStore.setOrderInfo({
     shopsId: shopsId.value,
     userId: userStore.loginInfo.userId,
-    foodList: items.value.reduce((prev: FoodList, cur: commodity) => {
+    foodList: items.value.reduce((prev: any, cur: commodity) => {
       return prev.concat(
         cur.children
           .filter((item) => item.count && item.count > 0)
@@ -183,7 +183,7 @@ const onClickRight = () => {
     shopId: shopsId.value,
   });
 };
-const addShop = (status, count, i) => {
+const addShop = (status: string, count: number, i: number) => {
   if (status == "delect") {
     if (count - 1 >= 0) {
       currentShopInfo.value.commodity[activeIndex.value].children[i].count =

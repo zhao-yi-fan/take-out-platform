@@ -29,32 +29,31 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 import { useShopStore } from "@/stores/shopStore";
 import { useCollectionStore } from "@/stores/collectionStore";
+import { Shop } from "@/types/shop";
 const shopStore = useShopStore();
 const userStore = useUserStore();
 const collectionStore = useCollectionStore();
 
 const router = useRouter();
-let currCollectionShops = reactive([]);
+const currCollectionShops = reactive<Shop[]>([]);
 const init = () => {
-  let userId = userStore.loginInfo.userId;
-  let shopsIds = [];
-  collectionStore.collectionList.forEach((item, index) => {
-    if (item.userId == userId) {
-      shopsIds = item.shopsIds;
-    }
-  });
-  shopStore.shopsList.forEach((item, index) => {
-    if (shopsIds.includes(item.shopsId)) {
-      currCollectionShops.push(item);
-    }
-  });
+  const userId = userStore.loginInfo?.userId;
+  const shopsIds =
+    collectionStore.collectionList.find((item) => item.userId === userId)
+      ?.shopsIds || [];
+  const filterArr = shopStore.shopsList.filter((item) =>
+    shopsIds.includes(item.shopsId)
+  );
+  if (filterArr.length) {
+    currCollectionShops.concat(filterArr);
+  }
 };
 init();
 const onClickLeft = () => {
   router.go(-1);
 };
 
-const toDetail = (shopsId) => {
+const toDetail = (shopsId: any) => {
   router.push({
     path: "/commodityDetail",
     query: {
