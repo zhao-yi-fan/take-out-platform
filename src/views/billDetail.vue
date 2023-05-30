@@ -96,7 +96,7 @@ const form = reactive<{
   address: "",
   people: "",
   phone: "",
-  businessesId: "",
+  businessesId: route.query.businessesId,
 });
 const onSubmit = async () => {
   if (!form.address) {
@@ -131,7 +131,6 @@ const returnGo = () => {
   router.go(-1);
 };
 const init = () => {
-  form.businessesId = route.query.businessesId;
   const item = orderStore.orderList.find(
     (item) => item.businessesId == form.businessesId && item.status == "apply"
   );

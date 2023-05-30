@@ -7,7 +7,7 @@ export interface commodity {
     commodityName: string;
     commodityMoney: string | number;
     commodityDescribe: string;
-    count?: number;
+    [propName: string]: any;
   }>;
 }
 

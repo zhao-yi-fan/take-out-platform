@@ -8,7 +8,7 @@
       @click-right="onClickRight"
     >
       <template #right>
-        <van-icon :name="collectionStatus ? 'star' : 'star-o'" size="18" />
+        <van-icon :name="isCollection ? 'star' : 'star-o'" size="18" />
         收藏
       </template>
     </van-nav-bar>
@@ -107,10 +107,21 @@ const currentShopInfo = computed(
 const items = ref<commodity[]>([]);
 const shopsId = ref(Number(route.query.shopsId as LocationQueryValue));
 
-const price = ref(0);
-const collectionStatus = computed(() => {
-  return collectionStore.isCollection(shopsId.value);
+const price = computed(() => {
+  return (
+    items.value.reduce((prev, cur) => {
+      return (
+        prev +
+        cur.children.reduce((prev, cur) => {
+          return prev + (cur.count || 0) * +cur.commodityMoney;
+        }, 0)
+      );
+    }, 0) * 100
+  );
 });
+const isCollection = computed(() =>
+  collectionStore.isCollection(shopsId.value)
+);
 
 const init = () => {
   if (currentShopInfo) {
@@ -185,25 +196,12 @@ const onClickRight = () => {
 };
 const addShop = (status: string, count: number, i: number) => {
   if (status == "delect") {
-    if (count - 1 >= 0) {
-      currentShopInfo.value.commodity[activeIndex.value].children[i].count =
-        count - 1;
+    if (count > 0) {
+      items.value[activeIndex.value].children[i].count = count - 1;
     }
   } else {
-    currentShopInfo.value.commodity[activeIndex.value].children[i].count =
-      count + 1;
+    items.value[activeIndex.value].children[i].count = count + 1;
   }
-  let sum = 0;
-  currentShopInfo.value.commodity.forEach((item, index) => {
-    if (Array.isArray(item.children) && item.children.length > 0) {
-      item.children.forEach((sonItem, sonIndex) => {
-        if (typeof sonItem.count === "number") {
-          sum += sonItem.count * Number(sonItem.commodityMoney);
-        }
-      });
-    }
-  });
-  price.value = sum * 100;
 };
 </script>
 
