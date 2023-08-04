@@ -10,14 +10,12 @@ const routes = [
   {
     path: "/home",
     name: "home",
-    component: () =>
-      import("../views/home"),
+    component: () => import("../views/home"),
     children: [
       {
         path: "/home/Index",
         name: "Index",
-        component: () =>
-          import("../views/Index"),
+        component: () => import("../views/Index"),
       },
       {
         path: "/home/order",
@@ -77,9 +75,9 @@ const routes = [
   },
   {
     path: "/search",
-    name: "search",
+    name: "Search",
     component: () =>
-      import("../views/search"),
+      import("../views/Search"),
     meta: {
       keepAlive: true
     }
