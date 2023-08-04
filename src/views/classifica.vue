@@ -4,7 +4,7 @@
       :title="title"
       left-text="返回"
       left-arrow
-      @click-left="onClickLeft"
+      @click-left="router.go(-1)"
     />
     <van-dropdown-menu>
       <van-dropdown-item
@@ -46,14 +46,21 @@
 import { reactive, onMounted, ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useShopStore } from "@/stores/shopStore";
+import { computed } from "vue";
+defineOptions({
+  name: "classification",
+});
 const shopStore = useShopStore();
 const route = useRoute();
 const router = useRouter();
 const districtCode = ref(shopStore.baseAddress.code);
-let shopsList = reactive([]);
-const title = ref("");
+const shopsList = ref([]);
 const value1 = ref(0);
 const value2 = ref(0);
+
+const title = computed(() => {
+  return option1.find((item) => item.value == value1.value)?.text;
+});
 
 onMounted(() => {
   changeType(route.query.classificationId);
@@ -74,9 +81,6 @@ const option2 = [
   { text: "好评排序", value: 1 },
   { text: "起送费排序", value: 2 },
 ];
-const onClickLeft = () => {
-  router.go(-1);
-};
 const toDetail = (shopsId) => {
   router.push({
     path: "/Commodity_details",
@@ -86,41 +90,39 @@ const toDetail = (shopsId) => {
   });
 };
 const changeType = (value) => {
-  const list = shopStore.shopsList.filter((item, index) => {
-    return item.addressCode == districtCode.value;
-  });
+  console.log(typeof value, "分类");
   value2.value = 0; // 初始化排序方式
-  value1.value = Number(value);
-  title.value = option1[value].text;
-  shopsList = value
-    ? list.filter((item, index) => {
-        return item.classificationType == value;
-      })
-    : list;
+  shopsList.value = (shopStore.shopsList || []).filter((item, index) => {
+    return (
+      item.addressCode == districtCode.value && item.classificationType == value
+    );
+  });
 };
 
-const changeSort = (value) => {
+const changeSort = (value: number) => {
   console.log(value, "排序");
-  let shopsList = JSON.parse(JSON.stringify(shopStore.shopsList));
-  shopsList = shopsList.filter((item, index) => {
+  let shopsList1 = JSON.parse(JSON.stringify(shopStore.shopsList));
+  shopsList1 = shopsList1.filter((item, index) => {
     return item.addressCode == districtCode.value;
   });
   if (value1.value) {
-    shopsList = shopsList.filter((item, index) => {
+    shopsList1 = shopsList1.filter((item, index) => {
       return item.classificationType == value1.value;
     });
   }
   if (value == 1) {
-    shopsList.sort((a, b) => {
+    console.log(shopsList1, "shopsList1===");
+
+    shopsList1.sort((a, b) => {
       return b.score - a.score;
     });
   } else if (value == 2) {
-    shopsList.sort((a, b) => {
+    shopsList1.sort((a, b) => {
       return a.freight - b.freight;
     });
   }
 
-  shopsList = shopsList;
+  shopsList.value = shopsList1;
 };
 </script>
 <style lang="scss" scoped>

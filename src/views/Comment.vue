@@ -5,7 +5,7 @@
     left-arrow
     @click-left="onClickLeft"
   />
-  <div class="top-User">
+  <div class="top-user">
     <van-empty v-if="currEvaluateList.length == 0" description="无历史评价" />
     <van-collapse v-model="activeNames">
       <van-collapse-item
@@ -65,7 +65,7 @@ const onClickLeft = () => {
 <style lang="scss" scoped>
 $a: 100vh;
 $b: 390px;
-.top-User {
+.top-user {
   width: 100%;
   height: calc(100% - 46px);
   overflow: auto;

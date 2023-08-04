@@ -1,6 +1,6 @@
 <template>
-  <div class="top-User">
-    <div class="top-User-top clearfix">
+  <div class="top-user">
+    <div class="top-user-top clearfix">
       <img
         src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg"
         alt=""
@@ -74,29 +74,29 @@ const router = useRouter();
 const loginInfo = computed(() => userStore.loginInfo);
 
 const toOrder = () => {
-  router.push("/Home/Order");
+  router.push("/home/order");
 };
 const toComment = () => {
-  router.push("/Comment");
+  router.push("/comment");
 };
 const toCollect = () => {
-  router.push("/Collect");
+  router.push("/collect");
 };
 const toSetting = () => {
-  router.push("/Setting");
+  router.push("/setting");
 };
 </script>
 
 <style lang="scss" scoped>
 $a: 100vh;
 $b: 390px;
-.top-User {
+.top-user {
   width: 100%;
   height: calc(100% - 50px);
   overflow: auto;
   background: #f8f8fa;
   position: relative;
-  .top-User-top {
+  .top-user-top {
     background: #ed9428;
     border-radius: 10px;
     position: relative;

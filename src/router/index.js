@@ -5,34 +5,34 @@ import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, c
 const routes = [
   {
     path: "/",
-    redirect: "/Home/Index",
+    redirect: "/home/Index",
   },
   {
-    path: "/Home",
-    name: "Home",
+    path: "/home",
+    name: "home",
     component: () =>
-      import("../views/Home"),
+      import("../views/home"),
     children: [
       {
-        path: "/Home/Index",
+        path: "/home/Index",
         name: "Index",
         component: () =>
           import("../views/Index"),
       },
       {
-        path: "/Home/Order",
-        name: "Order",
+        path: "/home/order",
+        name: "order",
         component: () =>
-          import("../views/Order"),
+          import("../views/order"),
       },
       {
-        path: "/Home/User",
-        name: "User",
+        path: "/home/user",
+        name: "user",
         component: () =>
-          import("../views/User"),
+          import("../views/user"),
       },
       {
-        path: "/Home/classifica",
+        path: "/home/classifica",
         name: "classifica",
         component: () =>
           import("../views/classifica"),
@@ -52,34 +52,34 @@ const routes = [
       import("../views/billDetail"),
   },
   {
-    path: "/Comment",
-    name: "Comment",
+    path: "/comment",
+    name: "comment",
     component: () =>
-      import("../views/Comment"),
+      import("../views/comment"),
   },
   {
-    path: "/Collect",
-    name: "Collect",
+    path: "/collect",
+    name: "collect",
     component: () =>
-      import("../views/Collect"),
+      import("../views/collect"),
   },
   {
-    path: "/Setting",
-    name: "Setting",
+    path: "/setting",
+    name: "setting",
     component: () =>
-      import("../views/Setting"),
+      import("../views/setting"),
   },
   {
-    path: "/SetPwd",
-    name: "SetPwd",
+    path: "/setPwd",
+    name: "setPwd",
     component: () =>
-      import("../views/SetPwd"),
+      import("../views/setPwd"),
   },
   {
     path: "/search",
-    name: "Search",
+    name: "search",
     component: () =>
-      import("../views/Search"),
+      import("../views/search"),
     meta: {
       keepAlive: true
     }

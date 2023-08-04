@@ -44,19 +44,19 @@
       <van-swipe class="classification-swipe" indicator-color="white">
         <van-swipe-item>
           <van-grid :gutter="10" square>
-            <van-grid-item to="/Home/classifica?classificationId=1">
+            <van-grid-item to="/home/classifica?classificationId=1">
               <img src="../assets/images/cf1.png" alt="" srcset="" />
               美食
             </van-grid-item>
-            <van-grid-item to="/Home/classifica?classificationId=2">
+            <van-grid-item to="/home/classifica?classificationId=2">
               <img src="../assets/images/cf2.png" alt="" srcset="" />
               饮品
             </van-grid-item>
-            <van-grid-item to="/Home/classifica?classificationId=3">
+            <van-grid-item to="/home/classifica?classificationId=3">
               <img src="../assets/images/cf3.png" alt="" srcset="" />
               甜品
             </van-grid-item>
-            <van-grid-item to="/Home/classifica?classificationId=4">
+            <van-grid-item to="/home/classifica?classificationId=4">
               <img src="../assets/images/cf4.png" alt="" srcset="" />
               鲜花
             </van-grid-item>
@@ -64,19 +64,19 @@
         </van-swipe-item>
         <van-swipe-item>
           <van-grid :gutter="10" square>
-            <van-grid-item to="/Home/classifica?classificationId=5">
+            <van-grid-item to="/home/classifica?classificationId=5">
               <img src="../assets/images/cf5.png" alt="" srcset="" />
               下午茶
             </van-grid-item>
-            <van-grid-item to="/Home/classifica?classificationId=6">
+            <van-grid-item to="/home/classifica?classificationId=6">
               <img src="../assets/images/cf6.png" alt="" srcset="" />
               超市
             </van-grid-item>
-            <van-grid-item to="/Home/classifica?classificationId=7">
+            <van-grid-item to="/home/classifica?classificationId=7">
               <img src="../assets/images/cf7.png" alt="" srcset="" />
               药品
             </van-grid-item>
-            <van-grid-item to="/Home/classifica?classificationId=8">
+            <van-grid-item to="/home/classifica?classificationId=8">
               <img src="../assets/images/cf8.png" alt="" srcset="" />
               买菜
             </van-grid-item>

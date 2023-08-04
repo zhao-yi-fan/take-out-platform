@@ -19,11 +19,11 @@
         <span>意见反馈</span>
         <van-icon name="arrow" color="#ccc" size="24" />
       </div>
-      <div class="setting-btn" @click="tips('请联系 xxx')">
+      <div class="setting-btn" @click="showToast('请联系 xxx')">
         <span>联系客服</span>
         <van-icon name="arrow" color="#ccc" size="24" />
       </div>
-      <div class="setting-btn" @click="aboutUs()">
+      <div class="setting-btn" @click="aboutUs">
         <span>关于我们</span>
         <van-icon name="arrow" color="#ccc" size="24" />
       </div>
@@ -70,7 +70,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import {
-  Dialog,
+  showDialog,
+  showConfirmDialog,
   showToast,
 } from "vant";
 import { useRouter } from "vue-router";
@@ -84,30 +85,23 @@ const score = ref(5);
 const onClickLeft = () => {
   router.go(-1);
 };
-const outLogin = () => {
-  Dialog.confirm({
+const outLogin = async () => {
+  await showConfirmDialog({
     title: "退出登录",
     message: "",
-  })
-    .then(() => {
-      userStore.setLoginInfo(null);
-      router.push("/Home/Index");
-    })
-    .catch(() => {
-      // on cancel
-    });
+  });
+  userStore.setLoginInfo(null);
+  router.push("/home/Index");
 };
 const aboutUs = () => {
-  Dialog.alert({
+  showDialog({
     title: "关于我们",
     confirmButtonColor: "#0570db",
     message: `Copyright © xxx`,
-  }).then(() => {
-    // on close
   });
 };
 // 评分
-const pfbeforeClose = (action, done) => {
+const pfbeforeClose = (action: string, done: any) => {
   console.log(action);
   if (action === "confirm") {
     score.value = 5;
@@ -118,28 +112,21 @@ const pfbeforeClose = (action, done) => {
   }
 };
 // 反馈
-const beforeClose = (action, done) => {
-  console.log(action);
-  if (action === "confirm") {
-    if (fkmsg.value) {
-      fkmsg.value = "";
-      showToast("反馈成功");
-      return true;
-    } else {
-      showToast("反馈内容不能为空");
-      return false;
-    }
-  } else {
+const beforeClose = (action: string) => {
+  if (action !== "confirm") {
     return true;
+  }
+  if (fkmsg.value) {
+    fkmsg.value = "";
+    showToast("反馈成功");
+  } else {
+    showToast("反馈内容不能为空");
+    return false;
   }
 };
 
 const toSetPwd = () => {
-  router.push("/SetPwd");
-};
-
-const tips = (msg) => {
-  showToast(msg);
+  router.push("/setPwd");
 };
 </script>
 

@@ -69,7 +69,7 @@ const onSubmit = async (values) => {
     if (isExist) {
       showSuccessToast("登录成功");
       router.push({
-        path: "/Home/Index",
+        path: "/home/Index",
       });
     } else {
       showFailToast("用户名或密码错误，请重试后登录！");

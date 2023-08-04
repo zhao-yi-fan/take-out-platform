@@ -27,19 +27,19 @@ const list = reactive([
   {
     name: "index",
     icon: "wap-home",
-    path: "/Home/Index",
+    path: "/home/Index",
     title: "首页",
   },
   {
     name: "order",
     icon: "shopping-cart",
-    path: "/Home/Order",
+    path: "/home/order",
     title: "订单",
   },
   {
     name: "user",
     icon: "manager",
-    path: "/Home/User",
+    path: "/home/user",
     title: "我的",
   },
 ]);

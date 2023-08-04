@@ -30,7 +30,7 @@
 </template>
 <script setup>
 import { ref } from "vue";
-import TabBar from "./TabBar";
+import TabBar from "@/components/TabBar";
 import { useRouter } from "vue-router";
 import { useShopStore } from "@/stores/shopStore";
 

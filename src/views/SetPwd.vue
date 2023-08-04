@@ -76,7 +76,7 @@ const onSubmit = async (values) => {
     if (resObj.code == 1) {
       showSuccessToast("修改密码成功，请您重新登录");
       userStore.setLoginInfo(null);
-      router.push("/Home/User");
+      router.push("/home/user");
     } else {
       showFailToast(resObj.msg);
     }

@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 import { useShopStore } from "@/stores/shopStore";
@@ -35,7 +35,7 @@ const userStore = useUserStore();
 const collectionStore = useCollectionStore();
 
 const router = useRouter();
-const currCollectionShops = reactive<Shop[]>([]);
+const currCollectionShops = ref<Shop[]>([]);
 const init = () => {
   const userId = userStore.loginInfo?.userId;
   const shopsIds =
@@ -45,7 +45,7 @@ const init = () => {
     shopsIds.includes(item.shopsId)
   );
   if (filterArr.length) {
-    currCollectionShops.concat(filterArr);
+    currCollectionShops.value = currCollectionShops.value.concat(filterArr);
   }
 };
 init();
