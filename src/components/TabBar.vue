@@ -27,7 +27,7 @@ const list = reactive([
   {
     name: "index",
     icon: "wap-home",
-    path: "/home/Index",
+    path: "/home/index",
     title: "首页",
   },
   {

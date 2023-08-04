@@ -121,7 +121,7 @@ const onSubmit = async () => {
     closeToast();
     if (code) {
       showSuccessToast("支付成功");
-      router.push("/home/Index");
+      router.push("/home/index");
     } else {
       showFailToast("支付失败");
     }

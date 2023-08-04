@@ -91,7 +91,7 @@ const outLogin = async () => {
     message: "",
   });
   userStore.setLoginInfo(null);
-  router.push("/home/Index");
+  router.push("/home/index");
 };
 const aboutUs = () => {
   showDialog({

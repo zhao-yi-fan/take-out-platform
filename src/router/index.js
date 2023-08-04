@@ -5,7 +5,7 @@ import { Notify, showToast, showSuccessToast, showFailToast, showLoadingToast, c
 const routes = [
   {
     path: "/",
-    redirect: "/home/Index",
+    redirect: "/home/index",
   },
   {
     path: "/home",
@@ -13,9 +13,9 @@ const routes = [
     component: () => import("../views/home"),
     children: [
       {
-        path: "/home/Index",
-        name: "Index",
-        component: () => import("../views/Index"),
+        path: "/home/index",
+        name: "index",
+        component: () => import("../views/index"),
       },
       {
         path: "/home/order",
@@ -116,7 +116,7 @@ router.beforeEach(async (to, from) => {
   let isLogin = userStore.isLogin;
   if (!isLogin) {
     if (
-      ["Index", "Login", "Register", "ForgetPwd",].includes(to.name)
+      ["index", "Login", "Register", "ForgetPwd",].includes(to.name)
     ) {
       // user login
       return true;
