@@ -13,12 +13,12 @@
     <div
       v-else
       v-for="item in currCollectionShops"
-      class="collect-item clearfix"
+      class="collect-item flex items-center justify-between"
       :key="item.shopsId"
       @click="toDetail(item.shopsId)"
     >
-      <img class="l" :src="item.shopsImage" alt="" srcset="" width="50" />
-      <span class="r">{{ item.shopsName }}</span>
+      <img :src="item.shopsImage" alt="" srcset="" width="50" />
+      <span>{{ item.shopsName }}</span>
     </div>
   </div>
 </template>

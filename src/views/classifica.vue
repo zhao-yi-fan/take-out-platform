@@ -23,18 +23,18 @@
       <div
         v-for="(item, index) in shopsList"
         :key="index"
-        class="classification-list-item clearfix"
+        class="classification-list-item flex gap-4"
         @click="toDetail(item.shopsId)"
       >
-        <img :src="item.shopsImage" alt="" srcset="" class="l" />
-        <div class="l">
-          <p class="clearfix">
-            <span class="l fb">{{ item.shopsName }}</span>
+        <img :src="item.shopsImage" alt="" srcset="" class="w-1/3 min-h-[80px] rounded-[10px]" />
+        <div class="flex flex-1 flex-col justify-between">
+          <p class="flex items-center justify-between">
+            <span class="font-bold">{{ item.shopsName }}</span>
+            <span class="text-xs text-red-500 font-bold">{{ item.score }}</span>
           </p>
-          <p class="clearfix">
-            <span class="l f12">起送：{{ item.shopsStart }}</span>
-            <span class="l f12">运费：{{ item.freight }}</span>
-            <span class="r f12 red fb">{{ item.score }}</span>
+          <p class="mt-1 flex flex-wrap gap-4 text-xs text-gray-600">
+            <span>起送：{{ item.shopsStart }}</span>
+            <span>运费：{{ item.freight }}</span>
           </p>
         </div>
       </div>
@@ -161,21 +161,15 @@ const changeSort = (value: number) => {
       background: #fff;
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
       img {
-        width: 30%;
         border-radius: 10px;
-        min-height: 80px;
       }
       div {
         width: 65%;
-        height: 40px;
         p {
           width: 100%;
           line-height: 30px;
-          &:last-child {
-            line-height: 40px;
-          }
           span {
-            margin: 5px;
+            margin: 5px 0;
             display: inline-block;
           }
         }

@@ -1,9 +1,9 @@
 <template>
   <div class="top-user">
-    <div class="top-user-top clearfix">
+    <div class="top-user-top">
       <img
-        src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1077445954,4130602423&fm=26&gp=0.jpg"
-        alt=""
+        src="https://api.dicebear.com/7.x/avataaars/svg?seed=DefaultUser&backgroundColor=b6e3f4"
+        alt="用户头像"
       />
       <div class="user-cont">
         <p v-if="loginInfo">{{ loginInfo.username }}</p>
@@ -97,6 +97,9 @@ $b: 390px;
   background: #f8f8fa;
   position: relative;
   .top-user-top {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
     background: #ed9428;
     border-radius: 10px;
     position: relative;
@@ -104,7 +107,6 @@ $b: 390px;
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      margin: 20px;
       vertical-align: top;
     }
     .user-cont {

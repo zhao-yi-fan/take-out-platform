@@ -32,9 +32,9 @@
         placeholder="联系方式"
         :rules="[{ required: true, message: '请填写联系方式' }]"
       />
-      <p>
+      <p class="flex items-center justify-between">
         <span>立即送出</span>
-        <span class="r">大概15分钟后抵达</span>
+        <span>大概15分钟后抵达</span>
       </p>
     </div>
     <div class="top-bill-shopList">

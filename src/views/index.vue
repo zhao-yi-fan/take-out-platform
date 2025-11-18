@@ -1,18 +1,10 @@
 <template>
   <div class="top-home-logo">
-    <div class="top-home-address">
-      <van-icon name="location-o" color="#fff" size="24" class="l" />
-      <i class="l" @click="showArea = true">{{
-        value || "请先选择收货地址"
-      }}</i>
+    <div class="top-home-address flex items-center gap-2">
+      <van-icon name="location-o" color="#fff" size="24" />
+      <i @click="showArea = true">{{ value || "请先选择收货地址" }}</i>
     </div>
-    <van-icon
-      name="search"
-      color="#fff"
-      size="24"
-      class="r"
-      @click="toSearch"
-    />
+    <van-icon name="search" color="#fff" size="24" @click="toSearch" />
   </div>
   <div class="top-home">
     <div class="top-home-top">
@@ -20,21 +12,21 @@
         <van-swipe-item>
           <router-link to="/commodityDetail?shopsId=14">
             <img
-              src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4083615963,856728706&fm=11&gp=0.jpg"
+              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80"
             />
           </router-link>
         </van-swipe-item>
         <van-swipe-item>
           <router-link to="/commodityDetail?shopsId=20">
             <img
-              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1004056377,3540152604&fm=26&gp=0.jpg"
+              src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80"
             />
           </router-link>
         </van-swipe-item>
         <van-swipe-item>
           <router-link to="/commodityDetail?shopsId=13">
             <img
-              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3487836899,16466550&fm=26&gp=0.jpg"
+              src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80"
             />
           </router-link>
         </van-swipe-item>
@@ -104,13 +96,13 @@
       >
         <img :src="item.shopsImage" />
         <div class="top-home-List-title">
-          <p class="clearfix">
-            <span class="l">{{ item.shopsName }}</span>
-            <span class="r red">{{ item.score }}</span>
+          <p class="flex items-center justify-between">
+            <span>{{ item.shopsName }}</span>
+            <span class="text-red-500">{{ item.score }}</span>
           </p>
-          <p class="clearfix">
-            <span class="l f14">起送：{{ item.shopsStart }}</span>
-            <span class="r f14">运费：{{ item.freight }}</span>
+          <p class="mt-1 flex items-center justify-between text-sm text-gray-600">
+            <span>起送：{{ item.shopsStart }}</span>
+            <span>运费：{{ item.freight }}</span>
           </p>
         </div>
       </div>

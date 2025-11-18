@@ -1,8 +1,17 @@
-import { IRegisterData, IuserState, IloginData, loginInfo } from "@/types/user";
+import {
+  IRegisterData,
+  IUserState,
+  ILoginData,
+  LoginInfo,
+  IUser,
+  IResponse,
+  ILoginResponse,
+  IRegisterResponse,
+} from "@/types/user";
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
-  state: (): IuserState => ({
+  state: (): IUserState => ({
     userList: [
       {
         userId: 1,
@@ -17,121 +26,168 @@ export const useUserStore = defineStore("user", {
         secret: "",
       },
     ],
-    loginInfo: null, // 登录后的信息,
+    loginInfo: null, // 登录后的信息
   }),
+
   getters: {
     isLogin(): boolean {
       return !!this.loginInfo;
     },
   },
+
   actions: {
-    setLoginInfo(loginInfo: loginInfo) {
+    /**
+     * 私有方法：根据用户名查找用户
+     */
+    _findUserByUsername(username: string): IUser | undefined {
+      return this.userList.find((item) => item.username === username);
+    },
+
+    /**
+     * 私有方法：根据用户ID查找用户
+     */
+    _findUserById(userId: number): IUser | undefined {
+      return this.userList.find((item) => item.userId === userId);
+    },
+
+    /**
+     * 私有方法：生成新用户ID（处理边界情况）
+     */
+    _generateNewUserId(): number {
+      if (this.userList.length === 0) {
+        return 1;
+      }
+      return this.userList[this.userList.length - 1].userId + 1;
+    },
+
+    /**
+     * 设置登录信息
+     */
+    setLoginInfo(loginInfo: LoginInfo) {
       this.loginInfo = loginInfo;
     },
-    login(loginData: IloginData) {
-      let { username, password } = loginData;
-      let userInfo = this.userList.find((item) => {
-        return item.password === password && item.username === username;
-      });
-      if (userInfo) {
-        this.loginInfo = userInfo;
-        return true; // 登录成功
-      } else {
-        return false;
+
+    /**
+     * 用户登录
+     */
+    login(loginData: ILoginData): ILoginResponse {
+      const { username, password } = loginData;
+      const userInfo = this._findUserByUsername(username);
+
+      if (!userInfo) {
+        return { success: false, msg: "用户不存在" };
       }
+
+      if (userInfo.password !== password) {
+        return { success: false, msg: "密码错误" };
+      }
+
+      this.loginInfo = userInfo;
+      return { success: true };
     },
-    register(registerData: IRegisterData) {
-      let { username, password, secret } = registerData;
-      let lastId = this.userList[this.userList.length - 1].userId;
-      lastId++;
-      let isExist = this.userList.some((item) => {
-        return item.username === username;
-      });
-      if (isExist) {
-        return false; // 用户已存在
+
+    /**
+     * 用户注册
+     */
+    register(registerData: IRegisterData): IRegisterResponse {
+      const { username, password, secret } = registerData;
+
+      // 检查用户是否已存在
+      if (this._findUserByUsername(username)) {
+        return { success: false, msg: "用户名已存在" };
       }
+
+      // 安全地生成新ID
+      const newUserId = this._generateNewUserId();
+
       this.userList.push({
-        userId: lastId,
+        userId: newUserId,
         username,
         password,
         secret,
       });
-      return true; // 注册成功
+
+      return { success: true, msg: "注册成功" };
     },
-    setUserList(userList = []) {
+
+    /**
+     * 设置用户列表
+     */
+    setUserList(userList: IUser[] = []) {
       this.userList = userList;
     },
-    forgetPwd(forgetPwd: IRegisterData) {
-      let { username, password, secret } = forgetPwd;
-      let userList = this.userList;
-      let userItem = userList.find((item) => {
-        return item.username === username;
-      });
-      if (userItem) {
-        if (userItem.secret === secret) {
-          userItem.password = password;
-          this.setUserList(userList);
-          return {
-            code: 1,
-            msg: "修改成功！",
-          };
-        } else {
-          return {
-            code: 2,
-            msg: "修改失败，暗号错误！",
-          };
-        }
-      } else {
-        return {
-          code: 3,
-          msg: "修改失败，用户名不存在！",
-        };
+
+    /**
+     * 忘记密码（通过暗号重置密码）
+     */
+    forgetPwd(forgetPwd: IRegisterData): IResponse {
+      const { username, password, secret } = forgetPwd;
+      const userItem = this._findUserByUsername(username);
+
+      if (!userItem) {
+        return { code: 3, msg: "修改失败，用户名不存在！" };
       }
+
+      if (userItem.secret !== secret) {
+        return { code: 2, msg: "修改失败，暗号错误！" };
+      }
+
+      userItem.password = password;
+      return { code: 1, msg: "修改成功！" };
     },
+
+    /**
+     * 修改密码
+     */
     setPwd(setPwdForm: {
       userId: number;
       rawPassword: string;
       password: string;
       rePassword: string;
-    }) {
-      let { userId, rawPassword, password, rePassword } = setPwdForm;
+    }): IResponse {
+      const { userId, rawPassword, password, rePassword } = setPwdForm;
+
+      // 验证：两次密码是否一致
       if (password !== rePassword) {
         return {
           code: 2,
           msg: "两次密码输入不一致，请检查后重新提交！",
         };
       }
-      let userList = this.userList;
-      // 使用find代替for循环
-      let userItem = userList.find((item) => {
-        return item.userId === userId;
-      });
-      if (userItem) {
-        if (userItem.password !== rawPassword) {
-          return {
-            code: 2,
-            msg: "原密码输入错误，请检查后重新提交！",
-          };
-        } else if (userItem.password === password) {
-          return {
-            code: 2,
-            msg: "原密码和新密码不能一样！",
-          };
-        } else {
-          userItem.password = password;
-          this.setUserList(userList);
-          return {
-            code: 1,
-            msg: "修改成功！",
-          };
-        }
+
+      // 查找用户
+      const userItem = this._findUserById(userId);
+      if (!userItem) {
+        return {
+          code: 2,
+          msg: "用户不存在，非法操作！",
+        };
       }
 
+      // 验证：原密码是否正确
+      if (userItem.password !== rawPassword) {
+        return {
+          code: 2,
+          msg: "原密码输入错误，请检查后重新提交！",
+        };
+      }
+
+      // 验证：新旧密码不能相同
+      if (userItem.password === password) {
+        return {
+          code: 2,
+          msg: "原密码和新密码不能一样！",
+        };
+      }
+
+      // 更新密码
+      userItem.password = password;
       return {
-        code: 2,
-        msg: "用户不存在，非法操作！",
+        code: 1,
+        msg: "修改成功！",
       };
     },
   },
+
   persist: true,
 });

@@ -19,9 +19,9 @@
                   <img :src="item.shopsInfo.shopsImage" alt="" width="75" />
                   <span>{{ item.shopsInfo.shopsName }}</span>
                 </div>
-                <div class="top-order-list-money">
-                  <span class="l">已送达</span>
-                  <span class="r">共计：{{ item.money }}元</span>
+                <div class="top-order-list-money flex justify-between">
+                  <span>已送达</span>
+                  <span>共计：{{ item.money }}元</span>
                 </div>
               </template>
               <div class="top-order-list-orderList clearfix">
@@ -37,7 +37,7 @@
                 </p>
                 <van-button
                   v-if="!item.evaluate.content"
-                  class="r"
+                  class="self-end"
                   color="linear-gradient(to right, #ff6034, #ee0a24)"
                   size="small"
                   round

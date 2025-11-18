@@ -23,14 +23,16 @@
           placeholder="密码"
           :rules="[{ required: true, message: '请填写密码' }]"
         />
-        <div>
-          <router-link to="/newRegister" tag="a">还没有注册？</router-link>
-          <router-link to="/forgetPwd" tag="a" class="r"
-            >忘记密码？</router-link
-          >
+        <div class="mt-2 flex items-center justify-between text-sm text-gray-600">
+          <router-link to="/newRegister" custom v-slot="{ navigate }">
+            <a @click="navigate">还没有注册？</a>
+          </router-link>
+          <router-link to="/forgetPwd" custom v-slot="{ navigate }">
+            <a @click="navigate">忘记密码？</a>
+          </router-link>
         </div>
         <div style="margin: 16px">
-          <van-button round block type="info" native-type="submit"
+          <van-button round block type="primary" native-type="submit"
             >登录</van-button
           >
         </div>
@@ -52,12 +54,12 @@ import { useUserStore } from "@/stores/userStore";
 
 const userStore = useUserStore();
 const router = useRouter();
-const username = ref("");
-const password = ref("");
+const username = ref("admin");
+const password = ref("123456");
 const onClickLeft = () => {
   router.go(-1);
 };
-const onSubmit = async (values) => {
+const onSubmit = async (values: any) => {
   console.log("submit", values);
   const isExist = await userStore.login(values);
   showLoadingToast({

@@ -15,11 +15,11 @@
         :name="item.businessesId"
       >
         <template #title>
-          <div>
-            <van-icon name="smile" size="20" color="#ed9428" />{{
-              item.shopsName
-            }}
-            <span class="r">{{ item.evaluate.score }}</span>
+          <div class="flex items-center justify-between">
+            <span>
+              <van-icon name="smile" size="20" color="#ed9428" />{{ item.shopsName }}
+            </span>
+            <span>{{ item.evaluate.score }}</span>
           </div>
         </template>
         {{ item.evaluate.content }}
