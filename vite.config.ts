@@ -2,23 +2,52 @@ import path from "path";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { createHtmlPlugin } from "vite-plugin-html";
+import importToCDN from "vite-plugin-cdn-import";
 // import legacy from '@vitejs/plugin-legacy'
 // import requireTransform from 'vite-plugin-require-transform'
 // import vitePluginRequire from "vite-plugin-require";
 
 export default defineConfig(({ mode }) => {
   const isProd = mode !== "development";
+
   return {
     base: "./",
     plugins: [
       vue(),
+
+      // 自动注入 CDN（仅生产环境）
+      importToCDN({
+        modules: isProd
+          ? [
+              {
+                name: "vue",
+                var: "Vue",
+                path: "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.global.prod.js",
+              },
+              {
+                name: "vue-router",
+                var: "VueRouter",
+                path: "https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.global.prod.js",
+              },
+              {
+                name: "pinia",
+                var: "Pinia",
+                path: "https://cdn.jsdelivr.net/npm/pinia@2/dist/pinia.iife.prod.js",
+              },
+              {
+                name: "vant",
+                var: "vant",
+                path: "https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js",
+                css: "https://cdn.jsdelivr.net/npm/vant@4/lib/index.css", // 自动注入 CSS
+              },
+            ]
+          : [],
+      }),
+
       createHtmlPlugin({
         minify: true,
         inject: {
           data: {
-            vueCdn: isProd
-              ? `https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.global.js`
-              : "",
             loadingHtml: `
                 <style>
                   .loading-container {
@@ -35,7 +64,7 @@ export default defineConfig(({ mode }) => {
                     width: 48px;
                     height: 48px;
                     border: 4px solid #e5e7eb;
-                    border-top-color: #3b82f6; /* 蓝色，更高级，可换 */
+                    border-top-color: #3b82f6;
                     border-radius: 50%;
                     animation: spin 0.8s linear infinite;
                   }
@@ -78,25 +107,29 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        // 排除 vue 和 vant，使用 CDN 引入（仅在构建时生效）
-        // vue-router 不使用 CDN，继续打包
-        external: ["vue"], // 不打包 vue
+        external: isProd ? ["vue", "vue-router", "pinia", "vant"] : [],
         output: {
-          // 全局变量名，用于 CDN 引入
           globals: {
             vue: "Vue",
+            "vue-router": "VueRouter",
+            pinia: "Pinia",
+            vant: "vant",
           },
-          // 手动拆分代码块，将 node_modules 中的依赖拆分到单独的 chunk
+          /**
+           * 🔥 manualChunks — 保留，将 node_modules 拆成 vendor.js
+           * 只要排除 Vue、Pinia、Router、Vant，它们已经采用 CDN。
+           */
           manualChunks(id) {
-            // 将 node_modules 中的依赖拆分到单独的 chunk
             if (id.includes("node_modules")) {
-              // 排除 vue 和 vant（它们通过 CDN 引入，不应该被打包）
-              // vue-router 会被打包
-              if (id.includes("vue")) {
-                return;
+              if (
+                id.includes("vue") ||
+                id.includes("vue-router") ||
+                id.includes("pinia") ||
+                id.includes("vant")
+              ) {
+                return; // CDN 的不打包
               }
-              // 将其他 node_modules 依赖拆分到 vendor chunk
-              return "vendor";
+              return "vendor"; // 其余依赖全部打到 vendor.js
             }
           },
         },

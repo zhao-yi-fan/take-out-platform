@@ -1,12 +1,3 @@
-// 声明全局变量（由 CDN 提供，仅在生产环境）
-declare global {
-  interface Window {
-    Vue?: {
-      createApp: any;
-    };
-    vant?: any;
-  }
-}
 import { createApp } from "vue";
 import App from "./App.vue";
 import { createPinia } from "pinia";

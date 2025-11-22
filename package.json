@@ -41,6 +41,7 @@
     "sass": "^1.26.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.0.3",
+    "vite-plugin-cdn-import": "^1.0.1",
     "vite-plugin-html": "^3.2.2"
   },
   "browserslist": [
