@@ -55,7 +55,6 @@ export default defineConfig(({ mode }) => {
               : "",
             cdnScripts: isProd
               ? `
-              <script src="https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.global.prod.js"></script>
               <script src="https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.global.prod.js"></script>
               <script src="https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
             `
@@ -87,10 +86,9 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        external: isProd ? ["vue", "vue-router", "vant"] : [],
+        external: isProd ? ["vue-router", "vant"] : [],
         output: {
           globals: {
-            vue: "Vue",
             "vue-router": "VueRouter",
             vant: "vant",
           },
