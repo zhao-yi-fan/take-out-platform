@@ -6,6 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="icon" href="./favicon.ico">
+  
+  <!-- CDN 样式 -->
+  <% if (cdnStyles) { %>
+    <%- cdnStyles %>
+  <% } %>
 </head>
 
 <body>
@@ -14,6 +19,12 @@
       <%- loadingHtml %>
     <% } %>
   </div>
+  
+  <!-- CDN 脚本 -->
+  <% if (cdnScripts) { %>
+    <%- cdnScripts %>
+  <% } %>
+  
   <script defer type="module" src="/src/main"></script>
   <!-- built files will be auto injected -->
 </body>
