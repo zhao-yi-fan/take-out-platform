@@ -15,30 +15,6 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
 
-      // 自动注入 CDN（仅生产环境）
-      importToCDN({
-        modules: isProd
-          ? [
-              {
-                name: "vue",
-                var: "Vue",
-                path: "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.global.prod.js",
-              },
-              {
-                name: "vue-router",
-                var: "VueRouter",
-                path: "https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.global.prod.js",
-              },
-              {
-                name: "vant",
-                var: "vant",
-                path: "https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js",
-                css: "https://cdn.jsdelivr.net/npm/vant@4/lib/index.css", // 自动注入 CSS
-              },
-            ]
-          : [],
-      }),
-
       createHtmlPlugin({
         minify: true,
         inject: {
@@ -77,6 +53,29 @@ export default defineConfig(({ mode }) => {
               `,
           },
         },
+      }),
+      // 自动注入 CDN（仅生产环境）
+      importToCDN({
+        modules: isProd
+          ? [
+              {
+                name: "vue",
+                var: "Vue",
+                path: "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.global.prod.js",
+              },
+              {
+                name: "vue-router",
+                var: "VueRouter",
+                path: "https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.global.prod.js",
+              },
+              {
+                name: "vant",
+                var: "vant",
+                path: "https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js",
+                css: "https://cdn.jsdelivr.net/npm/vant@4/lib/index.css", // 自动注入 CSS
+              },
+            ]
+          : [],
       }),
       // requireTransform({
       //   // fileRegex: /.js$|.vue$/
