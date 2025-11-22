@@ -60,7 +60,7 @@ export default defineConfig(({ mode }) => {
                 "imports": {
                   "vue": "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.esm-browser.prod.js",
                   "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.esm-browser.js",
-                  "vant": "https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.mjs"
+                  "vant": "https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js"
                 }
               }
               </script>
