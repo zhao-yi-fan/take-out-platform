@@ -30,11 +30,6 @@ export default defineConfig(({ mode }) => {
                 path: "https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.global.prod.js",
               },
               {
-                name: "pinia",
-                var: "Pinia",
-                path: "https://cdn.jsdelivr.net/npm/pinia@2/dist/pinia.iife.prod.js",
-              },
-              {
                 name: "vant",
                 var: "vant",
                 path: "https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js",
@@ -107,12 +102,11 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        external: isProd ? ["vue", "vue-router", "pinia", "vant"] : [],
+        external: isProd ? ["vue", "vue-router", "vant"] : [],
         output: {
           globals: {
             vue: "Vue",
             "vue-router": "VueRouter",
-            pinia: "Pinia",
             vant: "vant",
           },
           /**
@@ -124,7 +118,6 @@ export default defineConfig(({ mode }) => {
               if (
                 id.includes("vue") ||
                 id.includes("vue-router") ||
-                id.includes("pinia") ||
                 id.includes("vant")
               ) {
                 return; // CDN 的不打包
