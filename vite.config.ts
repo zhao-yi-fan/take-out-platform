@@ -58,7 +58,6 @@ export default defineConfig(({ mode }) => {
                 {
                   "imports": {
                     "vue": "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.esm-browser.prod.js",
-                    "vant": "https://cdn.jsdelivr.net/npm/vant@4/es/index.mjs"
                   }
                 }
                 </script>`
@@ -89,11 +88,10 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        external: isProd ? ["vue", "vant"] : [],
+        external: isProd ? ["vue"] : [],
         output: {
           globals: {
             vue: "Vue",
-            vant: "vant",
           },
           /**
            * 🔥 manualChunks — 保留，将 node_modules 拆成 vendor.js
