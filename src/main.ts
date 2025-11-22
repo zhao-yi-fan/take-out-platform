@@ -5,7 +5,10 @@ import { createPersistedState } from "pinia-plugin-persistedstate";
 
 import router from "./router/index";
 import Vant from "vant";
-import "vant/lib/index.css";
+// 开发环境导入 Vant CSS，生产环境通过 CDN 加载
+if (import.meta.env.DEV) {
+  import("vant/lib/index.css");
+}
 import "@/assets/css/tailwind.css";
 import { releaseInspect } from "web-release-detector";
 

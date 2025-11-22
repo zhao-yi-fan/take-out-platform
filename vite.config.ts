@@ -55,8 +55,15 @@ export default defineConfig(({ mode }) => {
               : "",
             cdnScripts: isProd
               ? `
-              <script src="https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.global.prod.js"></script>
-              <script src="https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
+              <script type="importmap">
+              {
+                "imports": {
+                  "vue": "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.esm-browser.prod.js",
+                  "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.esm-browser.js",
+                  "vant": "https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.mjs"
+                }
+              }
+              </script>
             `
               : "",
           },
@@ -86,9 +93,10 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        external: isProd ? [] : [],
+        external: isProd ? ["vue", "vue-router", "vant"] : [],
         output: {
           globals: {
+            vue: "Vue",
             "vue-router": "VueRouter",
             vant: "vant",
           },
@@ -96,18 +104,19 @@ export default defineConfig(({ mode }) => {
            * 🔥 manualChunks — 保留，将 node_modules 拆成 vendor.js
            * 只要排除 Vue、Pinia、Router、Vant，它们已经采用 CDN。
            */
-          // manualChunks(id) {
-          //   if (id.includes("node_modules")) {
-          //     if (
-          //       id.includes("vue") ||
-          //       id.includes("vue-router") ||
-          //       id.includes("vant")
-          //     ) {
-          //       return false; // CDN 的不打包
-          //     }
-          //     return "vendor"; // 其余依赖全部打到 vendor.js
-          //   }
-          // },
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              // CDN 的包不打包，通过 external 排除
+              if (
+                id.includes("vue") ||
+                id.includes("vue-router") ||
+                id.includes("vant")
+              ) {
+                return; // 返回 undefined，让 external 处理
+              }
+              return "vendor"; // 其余依赖全部打到 vendor.js
+            }
+          },
         },
       },
     },
