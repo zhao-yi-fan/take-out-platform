@@ -86,7 +86,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        external: isProd ? ["vue", /^@vue\//, "vue-router", "vant"] : [],
+        external: isProd ? ["vue", "vue-router", "vant"] : [],
         output: {
           globals: {
             vue: "Vue",
@@ -99,14 +99,6 @@ export default defineConfig(({ mode }) => {
            */
           manualChunks(id) {
             if (id.includes("node_modules")) {
-              if (
-                (id.includes("vue") && !id.includes("@vue")) ||
-                id.includes("vue-router") ||
-                id.includes("vant")
-              ) {
-                console.log(id);
-                return; // CDN 的不打包
-              }
               return "vendor";
             }
           },
