@@ -57,7 +57,7 @@ export default defineConfig(({ mode }) => {
               ? `<script type="importmap">
                 {
                   "imports": {
-                    "vue": "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.esm-browser.prod.js",
+                    "vue": "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.esm-browser.prod.js"
                   }
                 }
                 </script>`
