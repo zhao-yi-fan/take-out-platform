@@ -55,15 +55,9 @@ export default defineConfig(({ mode }) => {
               : "",
             cdnScripts: isProd
               ? `
-              <script type="importmap">
-              {
-                "imports": {
-                  "vue": "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.esm-browser.prod.js",
-                  "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.esm-browser.js",
-                  "vant": "https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js"
-                }
-              }
-              </script>
+              <script src="https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.global.prod.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.global.prod.js"></script>
+              <script src="https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
             `
               : "",
           },
@@ -106,15 +100,14 @@ export default defineConfig(({ mode }) => {
            */
           manualChunks(id) {
             if (id.includes("node_modules")) {
-              // CDN 的包不打包，通过 external 排除
               if (
-                id.includes("vue") ||
-                id.includes("vue-router") ||
-                id.includes("vant")
+                /^vue$/.test(id) ||
+                /^vue-router$/.test(id) ||
+                /^vant$/.test(id)
               ) {
-                return; // 返回 undefined，让 external 处理
+                return;
               }
-              return "vendor"; // 其余依赖全部打到 vendor.js
+              return "vendor";
             }
           },
         },
