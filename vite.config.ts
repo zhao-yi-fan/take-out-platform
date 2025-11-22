@@ -80,7 +80,6 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        "~": path.resolve(__dirname, "./"),
         "@": path.resolve(__dirname, "src"),
       },
       extensions: [".js", ".ts", ".jsx", ".tsx", ".json", ".vue", ".mjs"],
@@ -101,11 +100,12 @@ export default defineConfig(({ mode }) => {
           manualChunks(id) {
             if (id.includes("node_modules")) {
               if (
-                /^vue$/.test(id) ||
-                /^vue-router$/.test(id) ||
-                /^vant$/.test(id)
+                (id.includes("vue") && !id.includes("@vue")) ||
+                id.includes("vue-router") ||
+                id.includes("vant")
               ) {
-                return;
+                console.log(id);
+                return; // CDN 的不打包
               }
               return "vendor";
             }
