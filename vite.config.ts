@@ -54,11 +54,15 @@ export default defineConfig(({ mode }) => {
               ? `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@4/lib/index.css">`
               : "",
             cdnScripts: isProd
-              ? `
-              <script src="https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.global.prod.js"></script>
-              <script src="https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.global.prod.js"></script>
-              <script src="https://cdn.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
-            `
+              ? `<script type="importmap">
+                {
+                  "imports": {
+                    "vue": "https://cdn.jsdelivr.net/npm/vue@3.4.0/dist/vue.esm-browser.prod.js",
+                    "vue-router": "https://cdn.jsdelivr.net/npm/vue-router@4/dist/vue-router.esm-browser.js",
+                    "vant": "https://cdn.jsdelivr.net/npm/vant@4/es/index.mjs"
+                  }
+                }
+                </script>`
               : "",
           },
         },
