@@ -1,8 +1,11 @@
-declare module '*.vue' {
-  import { defineComponent } from 'vue'
-  const Component: ReturnType<typeof defineComponent>
-  export default Component
+/// <reference types="vite/client" />
+
+declare module "*.vue" {
+  import { defineComponent } from "vue";
+  const Component: ReturnType<typeof defineComponent>;
+  export default Component;
 }
 
-declare module "@/components/prompt"
-declare module "@/components/TabBar"
+declare module "@/components/prompt";
+declare module "@/components/TabBar";
+declare module "web-release-detector";
