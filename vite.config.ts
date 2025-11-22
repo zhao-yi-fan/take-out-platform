@@ -98,18 +98,18 @@ export default defineConfig(({ mode }) => {
            * 🔥 manualChunks — 保留，将 node_modules 拆成 vendor.js
            * 只要排除 Vue、Pinia、Router、Vant，它们已经采用 CDN。
            */
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              if (
-                id.includes("vue") ||
-                id.includes("vue-router") ||
-                id.includes("vant")
-              ) {
-                return; // CDN 的不打包
-              }
-              return "vendor"; // 其余依赖全部打到 vendor.js
-            }
-          },
+          // manualChunks(id) {
+          //   if (id.includes("node_modules")) {
+          //     if (
+          //       id.includes("vue") ||
+          //       id.includes("vue-router") ||
+          //       id.includes("vant")
+          //     ) {
+          //       return false; // CDN 的不打包
+          //     }
+          //     return "vendor"; // 其余依赖全部打到 vendor.js
+          //   }
+          // },
         },
       },
     },
