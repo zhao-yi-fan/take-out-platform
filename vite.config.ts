@@ -86,7 +86,7 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       rollupOptions: {
-        external: isProd ? ["vue-router", "vant"] : [],
+        external: isProd ? [] : [],
         output: {
           globals: {
             "vue-router": "VueRouter",
