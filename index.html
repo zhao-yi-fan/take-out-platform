@@ -11,6 +11,11 @@
   <% if (cdnStyles) { %>
     <%- cdnStyles %>
   <% } %>
+  
+  <!-- CDN 脚本必须在 head 中先加载 -->
+  <% if (cdnScripts) { %>
+    <%- cdnScripts %>
+  <% } %>
 </head>
 
 <body>
@@ -19,11 +24,6 @@
       <%- loadingHtml %>
     <% } %>
   </div>
-  
-  <!-- CDN 脚本 -->
-  <% if (cdnScripts) { %>
-    <%- cdnScripts %>
-  <% } %>
   
   <script defer type="module" src="/src/main"></script>
   <!-- built files will be auto injected -->
