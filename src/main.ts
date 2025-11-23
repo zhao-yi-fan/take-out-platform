@@ -11,7 +11,7 @@ if (import.meta.env.DEV) {
 }
 import "@/assets/css/tailwind.css";
 import { releaseInspect } from "web-release-detector";
-import ImgError from "@/assets/images/imgError.png";
+import ImgError from "@/assets/images/img-error.png";
 
 // 创建全局数组（不存在则初始化）
 window.__imgErrorList__ = window.__imgErrorList__ || [];
