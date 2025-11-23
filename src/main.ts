@@ -11,6 +11,39 @@ if (import.meta.env.DEV) {
 }
 import "@/assets/css/tailwind.css";
 import { releaseInspect } from "web-release-detector";
+import ImgError from "@/assets/images/imgError.png";
+
+// 创建全局数组（不存在则初始化）
+window.__imgErrorList__ = window.__imgErrorList__ || [];
+// 全局捕获 IMG 加载失败
+window.addEventListener(
+  "error",
+  (e) => {
+    const target = e.target as HTMLElement;
+    if (target && target.tagName === "IMG") {
+      const img = target as HTMLImageElement;
+
+      console.error("图片加载失败：", img.src);
+
+      // 自动替换 fallback 图（可选）
+      img.src = ImgError;
+
+      // 记录失败的 url
+      window.__imgErrorList__.push({
+        src: img.src,
+        time: Date.now(),
+        element: img,
+      });
+
+      // 上报（可选）
+      // fetch("/api/log", {
+      //   method: "POST",
+      //   body: JSON.stringify({ src: img.src, time: Date.now() })
+      // });
+    }
+  },
+  true // 捕获阶段监听资源加载失败
+);
 
 const pinia = createPinia();
 pinia.use(

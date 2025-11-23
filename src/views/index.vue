@@ -82,7 +82,7 @@
         src="../assets/images/jrtj.png"
         alt=""
         width="120"
-        style="margin: 0 0 20px 0"
+        style="margin: 0 auto 20px"
       />
     </div>
     <van-empty v-if="shopsList.length == 0" description="该地区暂无商铺" />
