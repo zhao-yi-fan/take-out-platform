@@ -25,15 +25,15 @@ window.addEventListener(
 
       console.error("图片加载失败：", img.src);
 
-      // 自动替换 fallback 图（可选）
-      img.src = ImgError;
-
       // 记录失败的 url
       window.__imgErrorList__.push({
         src: img.src,
         time: Date.now(),
         element: img,
       });
+
+      // 自动替换 fallback 图（可选）
+      img.src = ImgError;
 
       // 上报（可选）
       // fetch("/api/log", {
