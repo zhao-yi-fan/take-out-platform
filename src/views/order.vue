@@ -16,7 +16,7 @@
             >
               <template #title>
                 <div class="top-order-list-collapse">
-                  <img :src="item.shopsInfo.shopsImage" alt="" width="75" />
+                  <img v-lazy="item.shopsInfo.shopsImage" alt="" width="75" />
                   <span>{{ item.shopsInfo.shopsName }}</span>
                 </div>
                 <div class="top-order-list-money flex justify-between">

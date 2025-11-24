@@ -12,6 +12,8 @@ if (import.meta.env.DEV) {
 import "@/assets/css/tailwind.css";
 import { releaseInspect } from "web-release-detector";
 import ImgError from "@/assets/images/img-error.png";
+import ImgLoading from "@/assets/images/loading.gif";
+import VueLazyload from "vue-lazyload";
 
 // 创建全局数组（不存在则初始化）
 window.__imgErrorList__ = window.__imgErrorList__ || [];
@@ -56,6 +58,10 @@ const app = createApp(App);
 app.use(router);
 app.use(Vant);
 app.use(pinia);
+app.use(VueLazyload, {
+  loading: ImgLoading, // 加载中显示的图片
+  error: ImgError, // 加载失败显示的图片
+});
 app.mount("#app");
 
 // 初始化版本更新检测功能

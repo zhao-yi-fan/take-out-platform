@@ -94,13 +94,15 @@
         text="文字"
         @click="toDetail(item.shopsId)"
       >
-        <img :src="item.shopsImage" />
+        <img v-lazy="item.shopsImage" :src="item.shopsImage"/>
         <div class="top-home-List-title">
           <p class="flex items-center justify-between">
             <span>{{ item.shopsName }}</span>
             <span class="text-red-500">{{ item.score }}</span>
           </p>
-          <p class="mt-1 flex items-center justify-between text-sm text-gray-600">
+          <p
+            class="mt-1 flex items-center justify-between text-sm text-gray-600"
+          >
             <span>起送：{{ item.shopsStart }}</span>
             <span>运费：{{ item.freight }}</span>
           </p>
